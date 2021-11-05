@@ -37,11 +37,13 @@ public class BoomerangShooter : MonoBehaviour
       if (isFirstClick)
       {
         firstClickPos = mousePos;
+        SetTrajectoryPointStatus(true);
       }
       else
       {
         secondClickPos = mousePos;
         Shoot();
+        SetTrajectoryPointStatus(false);
       }
       isFirstClick = !isFirstClick;
     }
@@ -56,6 +58,14 @@ public class BoomerangShooter : MonoBehaviour
     BoomerangBehavior bb = newProjectile.AddComponent<BoomerangBehavior>();
     bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
     bb.SetLifespan(5f * multiplier);
+  }
+
+  void SetTrajectoryPointStatus(bool isOn)
+  {
+    for (int i = 0; i < trajectoryPointCount; i++)
+    {
+      trajectoryPoints[i].SetActive(isOn);
+    }
   }
 
   // find the largest distance
