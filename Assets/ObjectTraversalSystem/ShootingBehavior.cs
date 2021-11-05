@@ -8,9 +8,10 @@ public class ShootingBehavior : MonoBehaviour
   public GameObject projectilePrefab = null;
   public GameObject trajectoryPointPrefab = null;
   public Transform projectileSpawnPoint = null;
+  public GameObject powerBar = null;
   private GameObject[] trajectoryPoints;
-  private int trajectoryPointCount = 7;
-  private float trajectoryPointSpace = 0.25f;
+  private int trajectoryPointCount = 20;
+  private float trajectoryPointSpace = 0.0625f;
   // mouse settings
   private bool isAiming = false;
   // shooting settings
@@ -31,6 +32,7 @@ public class ShootingBehavior : MonoBehaviour
     for (int i = 0; i < trajectoryPointCount; i++)
     {
       trajectoryPoints[i] = Instantiate(trajectoryPointPrefab, projectileSpawnPoint.position, Quaternion.identity);
+      trajectoryPoints[i].GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, (trajectoryPointCount - i) / (float)trajectoryPointCount);
     }
   }
 
@@ -63,6 +65,7 @@ public class ShootingBehavior : MonoBehaviour
   {
     if (!isAiming) return;
     CalculateShootSettings();
+    SetPowerBar(dragStrength);
     for (int i = 0; i < trajectoryPointCount; i++)
     {
       trajectoryPoints[i].transform.position = TrajectoryPointPosition(i * trajectoryPointSpace);
@@ -96,5 +99,10 @@ public class ShootingBehavior : MonoBehaviour
   {
     Vector2 pos = (Vector2)projectileSpawnPoint.position + ((Vector2)direction * shootStrength * dragStrength * time) + 0.5f * Physics2D.gravity * (time * time);
     return pos;
+  }
+
+  void SetPowerBar(float s)
+  {
+    powerBar.transform.localScale = new Vector3(s, 1, 1);
   }
 }
