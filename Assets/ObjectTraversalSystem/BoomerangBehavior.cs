@@ -40,7 +40,7 @@ public class BoomerangBehavior : MonoBehaviour
   }
 
   // Calculates the boomerang position based on the cubic bezier curves formula
-  public Vector3 CalculatePosition(float completionPercent)
+  private Vector3 CalculatePosition(float completionPercent)
   {
     // (1 - t)^3 * P0
     Vector3 part1 = Mathf.Pow(1 - completionPercent, 3) * start;
