@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-
     public Text timerEcho;
     public BattleSystem battleSystem;
     float secRemaining;
     bool timerEnded = false;
     bool timerStarted = false;
     bool gameStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,11 +79,13 @@ public class Timer : MonoBehaviour
 
     }
 
+    // Completes state and goes to next
     public void finishState()
     {
         nextState();
     }
-
+    
+    // Moves current state to next state
     public void nextState()
     {
         timerEnded = true;

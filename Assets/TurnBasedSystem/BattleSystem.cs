@@ -24,6 +24,7 @@ public class BattleSystem : MonoBehaviour
     void SetupBattle()
     {
         //Instantiate(humanPrefab, humanBattleStation);
+        //Instantiate(alienPrefab, alienBattleStation);
     }
 
     private void LateUpdate()
@@ -49,5 +50,4 @@ public class BattleSystem : MonoBehaviour
         {
             this.state = setState;
         }
-    
 }
