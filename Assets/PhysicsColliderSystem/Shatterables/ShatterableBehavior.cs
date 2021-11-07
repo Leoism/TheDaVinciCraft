@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class ShatterableBehavior : MonoBehaviour
 {
-  public float threshhold = 15f;
-  public int maxShards = 100;
+  public float minImpactPerct = 15f; // the percentage of the impact speed relative to the objects area
+  public float threshhold = 100f; // the max velocity that the object can take
+  public int maxShards = 100; // the amount of shattered materials to make
   public GameObject tilePrefab = null;
   private Vector2 spriteDimensions;
+  private float minImpactVel = 0f; // the minimum velocity an object must hit at to shatter this object
+  private float totalAccum = 0f; // total velocity accumulated from hits 
   // Start is called before the first frame update
   void Start()
   {
     spriteDimensions = GetComponent<SpriteRenderer>().size;
+    minImpactVel = (minImpactPerct / 100) * spriteDimensions.x * spriteDimensions.y;
+    // may the threshhold is smaller than the calculated minimal impact 
+    minImpactVel = Mathf.Min(minImpactVel, threshhold);
     if (spriteDimensions.x < 0.15f)
     {
       Destroy(gameObject);
@@ -24,7 +30,19 @@ public class ShatterableBehavior : MonoBehaviour
     GameObject go = collision.gameObject;
     Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
     float impactVelocity = rb.velocity.magnitude;
-    Shatter(Mathf.Min(impactVelocity / threshhold, 1));
+    if (impactVelocity < minImpactVel && totalAccum < minImpactVel)
+    {
+      totalAccum += impactVelocity > minImpactVel * 0.25f ? impactVelocity : 0; // we only want to account large impacts not small negligible ones
+      return;
+    }
+    if (totalAccum > minImpactVel)
+    {
+      Shatter(Mathf.Min(totalAccum / threshhold, 1));
+    }
+    else
+    {
+      Shatter(Mathf.Min(impactVelocity / threshhold, 1));
+    }
     Destroy(gameObject);
   }
 
@@ -33,7 +51,7 @@ public class ShatterableBehavior : MonoBehaviour
     // calculate amount of shards the shatter will make
     int numShards = (int)Mathf.Round(maxShards * shatterStrength);
     // calculate size of each shard to fill the current area
-    float shardDimensions = FitSquares(spriteDimensions.x, spriteDimensions.y, numShards); // Mathf.Sqrt(spriteDimensions.x * spriteDimensions.y / numShards);
+    float shardDimensions = FitSquares(spriteDimensions.x, spriteDimensions.y, numShards);
     int rowAmount = (int)(spriteDimensions.y / shardDimensions);
     int colAmount = (int)(spriteDimensions.x / shardDimensions);
     // the shattered version should start from the top left
