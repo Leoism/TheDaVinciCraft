@@ -67,7 +67,7 @@ public class Timer : MonoBehaviour
             {
                 secRemaining -= Time.deltaTime;
                 int seconds = (int)secRemaining;
-                timerEcho.text = "Time Remaining: " + seconds;
+                timerEcho.text = "Time:\n  " + seconds;
             }
             else
             {
