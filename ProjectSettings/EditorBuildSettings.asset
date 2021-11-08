@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StackingScene.unity
     guid: d00c813b043522d4abf9f5287b4eadb4
+  - enabled: 1
+    path: Assets/Scenes/GameMenu.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/PlayerSetting.unity
+    guid: ec3de51ff0d86482696d0a134ad059aa
   m_configObjects: {}
