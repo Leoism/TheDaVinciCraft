@@ -8,8 +8,7 @@ public class Timer : MonoBehaviour
     public Text timerEcho;
     public BattleSystem battleSystem;
     float secRemaining;
-    bool timerEnded = false;
-    bool timerStarted = false;
+    bool isTimerRunning = false;
     bool gameStarted = false;
 
     // Start is called before the first frame update
@@ -33,36 +32,30 @@ public class Timer : MonoBehaviour
         }
 
 
-        if (!timerStarted)
+        if (!isTimerRunning)
         {
             switch (battleSystem.state)
             {
                 case BattleState.HUMANBUY:
                     secRemaining = 30f;
-                    timerStarted = true;
-                    timerEnded = false;
+                    isTimerRunning = true;
                     break;
                 case BattleState.ALIENBUY:
                     secRemaining = 30f;
-                    timerStarted = true;
-                    timerEnded = false;
+                    isTimerRunning = true;
                     break;
                 case BattleState.HUMANBUILD:
                     secRemaining = 60f;
-                    timerStarted = true;
-                    timerEnded = false;
+                    isTimerRunning = true;
                     break;
                 case BattleState.ALIENDESTROY:
                     secRemaining = 60f;
-                    timerStarted = true;
-                    timerEnded = false;
+                    isTimerRunning = true;
                     break;
                 default: break;
             }
         }
-
-        if (!timerEnded)
-        {
+        else {
             if (secRemaining > 1)
             {
                 secRemaining -= Time.deltaTime;
@@ -70,14 +63,24 @@ public class Timer : MonoBehaviour
                 timerEcho.text = "Time:\n  " + seconds;
             }
             else
-            {
-                
+            {   
                 nextState();
             }
         }
 
 
     }
+
+    public bool IsTimeUp()
+    {
+        return !isTimerRunning; 
+    }
+
+    public string GetCurrentPlayer()
+    {
+        return (battleSystem.state == BattleState.ALIENBUY || battleSystem.state == BattleState.ALIENDESTROY || battleSystem.state == BattleState.ALIENWIN) ?
+        "Alien" : "Human";
+    } 
 
     // Completes state and goes to next
     public void finishState()
@@ -88,8 +91,7 @@ public class Timer : MonoBehaviour
     // Moves current state to next state
     public void nextState()
     {
-        timerEnded = true;
-        timerStarted = false;
+        isTimerRunning = false;
         switch (battleSystem.state)
         {
             case BattleState.HUMANBUY:
