@@ -2,6 +2,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/unity,visualstudiocode,visualstudio,macos,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=unity,visualstudiocode,visualstudio,macos,windows
 
+# Compiled Files
+EXE/
+WebGL/
+
 ### macOS ###
 # General
 .DS_Store

@@ -8,13 +8,16 @@ public class ShatterableBehavior : MonoBehaviour
   public float threshhold = 100f; // the max velocity that the object can take
   public int maxShards = 100; // the amount of shattered materials to make
   public GameObject tilePrefab = null;
+  private SpriteRenderer sr = null;
   private Vector2 spriteDimensions;
   private float minImpactVel = 0f; // the minimum velocity an object must hit at to shatter this object
   private float totalAccum = 0f; // total velocity accumulated from hits 
   // Start is called before the first frame update
   void Start()
   {
-    spriteDimensions = GetComponent<SpriteRenderer>().size;
+    sr = GetComponent<SpriteRenderer>();
+    maxShards = (int)Mathf.Pow(Mathf.Round(Mathf.Sqrt(maxShards)), 2f);
+    spriteDimensions = new Vector2(transform.localScale.x, transform.localScale.y);
     minImpactVel = (minImpactPerct / 100) * spriteDimensions.x * spriteDimensions.y;
     // may the threshhold is smaller than the calculated minimal impact 
     minImpactVel = Mathf.Min(minImpactVel, threshhold);
@@ -49,33 +52,38 @@ public class ShatterableBehavior : MonoBehaviour
   void Shatter(float shatterStrength)
   {
     // calculate amount of shards the shatter will make
-    int numShards = (int)Mathf.Round(maxShards * shatterStrength);
+    // by square rooting and rounding then squaring, we can assure a perfect
+    // amount of shards fit inside our tiles (Square) 
+    int numShards = (int)Mathf.Pow(Mathf.Floor(Mathf.Sqrt((int)Mathf.Round(maxShards * shatterStrength))), 2f);
     // calculate size of each shard to fill the current area
     float shardDimensions = FitSquares(spriteDimensions.x, spriteDimensions.y, numShards);
     int rowAmount = (int)(spriteDimensions.y / shardDimensions);
     int colAmount = (int)(spriteDimensions.x / shardDimensions);
     // the shattered version should start from the top left
-    Vector3 startingPos = new Vector3(transform.position.x - spriteDimensions.x / 2, transform.position.y + spriteDimensions.y / 2);
+    Vector3 startingPos = sr.transform.TransformPoint(new Vector3(sr.sprite.bounds.min.x, sr.sprite.bounds.max.y, 0));
     // adjust because transform.position is centered but we want top left corner
     // to at startingPos
     startingPos += new Vector3(shardDimensions / 2, shardDimensions / 2 * -1, 0);
+    // the direction that the shards should spawn along
+    Vector3 directionToSpawn = transform.right.normalized;
     for (int i = 0; i < rowAmount; i++)
     {
+      // go under the current position scaled by i
+      Vector3 currPos = startingPos + (-transform.up * shardDimensions * i);
       for (int j = 0; j < colAmount; j++)
       {
         // Create new shattered game objects
-        GameObject newGo = Instantiate(tilePrefab, startingPos + new Vector3(j * shardDimensions, i * shardDimensions * -1, 0), Quaternion.identity);
-        newGo.AddComponent<Rigidbody2D>();
+        GameObject newGo = Instantiate(tilePrefab, currPos, Quaternion.identity);
+        currPos += directionToSpawn * shardDimensions;
+        newGo.transform.right = directionToSpawn;
         // set the box collider because this behavior is dependent on sprite renderer sizes
-        newGo.AddComponent<BoxCollider2D>().size = new Vector2(shardDimensions, shardDimensions);
-        SpriteRenderer newSr = newGo.GetComponent<SpriteRenderer>();
-        ShatterableBehavior sb = newGo.AddComponent<ShatterableBehavior>();
+        ShatterableBehavior sb = newGo.GetComponent<ShatterableBehavior>();
         // set the shatterable behavior for the new game object
         sb.tilePrefab = tilePrefab;
         sb.threshhold = threshhold;
         sb.maxShards = (int)Mathf.Max(maxShards / 2, 8);
         // set the sprite renderer size
-        newSr.size = new Vector2(shardDimensions, shardDimensions);
+        newGo.transform.localScale = new Vector2(shardDimensions, shardDimensions);
       }
     }
   }
