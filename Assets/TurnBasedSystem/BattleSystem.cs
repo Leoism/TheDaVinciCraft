@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { HUMANBUY, ALIENBUY, HUMANBUILD, ALIENDESTROY, HUMANWIN, ALIENWIN}
+public enum BattleState { NONE, HUMANBUY, ALIENBUY, HUMANBUILD, ALIENDESTROY, HUMANWIN, ALIENWIN}
 public class BattleSystem : MonoBehaviour
 {
+    public bool displayState = false;
     public BattleState state;
     public Text battleStateEcho = null;
     public GameObject humanPrefab = null;
@@ -17,18 +18,13 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state = BattleState.HUMANBUY;
-        SetupBattle();
-    }
-
-    void SetupBattle()
-    {
-        //Instantiate(humanPrefab, humanBattleStation);
-        //Instantiate(alienPrefab, alienBattleStation);
+        if (state == BattleState.NONE)
+            state = BattleState.HUMANBUY;
     }
 
     private void LateUpdate()
     {
+        if (!displayState) return;
         switch (state)
         {
             case BattleState.HUMANBUY:
@@ -47,7 +43,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void SetBattleState(BattleState setState)
-        {
-            this.state = setState;
-        }
+    {
+        this.state = setState;
+    }
 }
