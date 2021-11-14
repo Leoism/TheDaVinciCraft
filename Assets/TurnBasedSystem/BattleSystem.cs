@@ -9,6 +9,8 @@ public class BattleSystem : MonoBehaviour
     public bool displayState = false;
     public BattleState state;
     public Text battleStateEcho = null;
+    public GameObject humanActionBar = null;
+    public GameObject alienActionBar = null;
     public GameObject humanPrefab = null;
     public GameObject alienPrefab = null;
 
@@ -29,8 +31,10 @@ public class BattleSystem : MonoBehaviour
         {
             case BattleState.HUMANBUY:
                 battleStateEcho.text = "HUMAN player - Buy Round";
+                humanActionBar.SetActive(true);
                 break;
             case BattleState.ALIENBUY:
+                humanActionBar.SetActive(false);
                 battleStateEcho.text = "ALIEN player - Buy Round";
                 break;
             case BattleState.HUMANBUILD:
