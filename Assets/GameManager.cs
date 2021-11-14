@@ -2,38 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
-    public static GameManager sTheGlobalBehavior = null;
-    public static Timer timer = null;
+  public static GameManager globalManager = new GameManager();
+  public Timer timer = null;
+  public Inventory humanInventory;
+  public Inventory alienInventory;
+  public Inventory artifacts;
+  public BattleSystem battleSystem;
 
-    public static Inventory humanInventory;
-    public static Inventory alienInventory;
-    public static BattleSystem battleSystem;
-    
-    private void Awake()
-    {
-        humanInventory = new Inventory();
-        alienInventory = new Inventory();
-        timer = new Timer();
-    }
+  private GameManager()
+  {
+    timer = new Timer();
+  }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameManager.sTheGlobalBehavior = this;  // Singleton pattern
-    }
+  public void SetAlienInventory(List<GameObject> newAlienInventory)
+  {
+    GameManager.globalManager.alienInventory = new Inventory(newAlienInventory);
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  public void SetHumanInventory(List<GameObject> newHumanInventory)
+  {
+    GameManager.globalManager.humanInventory = new Inventory(newHumanInventory);
+  }
 
-    Inventory getHumanInventory()
-    {
-        return humanInventory;
-    }
-
-
+  public void SetArtifacts(List<GameObject> newArtifacts)
+  {
+    GameManager.globalManager.artifacts = new Inventory(newArtifacts);
+  }
 }
