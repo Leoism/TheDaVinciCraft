@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayerSetting.unity
     guid: ec3de51ff0d86482696d0a134ad059aa
+  - enabled: 1
+    path: Assets/Scenes/BuyingMenu.unity
+    guid: 4d5130c171a72453fbc81a671f8e8a92
+  - enabled: 1
+    path: Assets/Scenes/GamePlayScene.unity
+    guid: 42e629c2f7bef8d429458354236b81ae
   m_configObjects: {}
