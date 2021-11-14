@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { HUMANBUY, ALIENBUY, HUMANBUILD, ALIENDESTROY, HUMANWIN, ALIENWIN}
+public enum BattleState { NONE, HUMANBUY, ALIENBUY, HUMANBUILD, ALIENDESTROY, HUMANWIN, ALIENWIN}
 public class BattleSystem : MonoBehaviour
 {
     public bool displayState = false;
@@ -18,7 +18,8 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state = BattleState.HUMANBUY;
+        if (state == BattleState.NONE)
+            state = BattleState.HUMANBUY;
     }
 
     private void LateUpdate()
