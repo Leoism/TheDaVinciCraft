@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public enum BattleState { HUMANBUY, ALIENBUY, HUMANBUILD, ALIENDESTROY, HUMANWIN, ALIENWIN}
 public class BattleSystem : MonoBehaviour
 {
+    public bool displayState = false;
     public BattleState state;
     public Text battleStateEcho = null;
     public GameObject humanPrefab = null;
@@ -18,17 +19,11 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         state = BattleState.HUMANBUY;
-        SetupBattle();
-    }
-
-    void SetupBattle()
-    {
-        //Instantiate(humanPrefab, humanBattleStation);
-        //Instantiate(alienPrefab, alienBattleStation);
     }
 
     private void LateUpdate()
     {
+        if (!displayState) return;
         switch (state)
         {
             case BattleState.HUMANBUY:
@@ -47,7 +42,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void SetBattleState(BattleState setState)
-        {
-            this.state = setState;
-        }
+    {
+        this.state = setState;
+    }
 }
