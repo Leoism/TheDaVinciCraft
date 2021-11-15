@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 /*
 namespace StackingSystem.Scripts
 {*/
@@ -63,7 +64,7 @@ public class AddTilemap : MonoBehaviour
         {
             CreateTileMap();
         }
-
+       // Debug.Log(EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject.CompareTag(""));
         if (CurrentTileToAdd != null && Input.GetMouseButton(0))
         {
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
