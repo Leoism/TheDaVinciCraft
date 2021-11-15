@@ -2,29 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory {
+public class Inventory
+{
+  public ActionBarBehavior actionBar = null;
+  [SerializeField]
+  private List<GameObject> currentInventory;
+  private GameObject currentInUse = null;
+  public Inventory(List<GameObject> inventory)
+  {
+    SetInventory(inventory);
+  }
 
-    [SerializeField]
-    private List<Item> itemList;
+  public void SetInventory(List<GameObject> newInventory)
+  {
+    currentInventory = newInventory;
+  }
 
-    public Inventory()
+  // Creates an actionbar
+  public void InitActionBar()
+  {
+    if (actionBar)
+      actionBar.SetList(currentInventory);
+  }
+
+  // "Uses up" on item 
+  public void UseItem(int itemIdx)
+  {
+    currentInUse = currentInventory[itemIdx];
+    currentInUse.GetComponent<Item>().DecreaseCount();
+  }
+
+  // retrieves the total amount of inventory count
+  public int TotalCount()
+  {
+    int sum = 0;
+    foreach (GameObject item in currentInventory)
     {
-        itemList = new List<Item>();
-        AddItem(new Item { materialType = Item.MaterialType.Wood, amount = 5 });
-        AddItem(new Item { materialType = Item.MaterialType.Stone, amount = 4 });
-        AddItem(new Item { materialType = Item.MaterialType.Metal, amount = 3 });
-        AddItem(new Item { materialType = Item.MaterialType.Fabric, amount = 2 });
-        AddItem(new Item { materialType = Item.MaterialType.Glass, amount = 1 });
-        Debug.Log(itemList.Count);
+      sum += item.GetComponent<Item>().GetCount();
     }
-
-    public void AddItem(Item item)
-    {
-        itemList.Add(item);
-    }
-
-    public List<Item> getItemList()
-    {
-        return itemList;
-    }
+    return sum;
+  }
 }

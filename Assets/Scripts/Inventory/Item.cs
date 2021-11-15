@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item 
+public class Item : MonoBehaviour
 {
-    public enum MaterialType
-    {
-        Wood,
-        Glass,
-        Metal,
-        Fabric,
-        Stone
-    }
+  private int count = 0;
 
-    public enum WeaponType
-    {
-        Deforestor,
-        Bomb,
-        Boomerang,
-        Magnet
-    }
+  public int IncreaseCount()
+  {
+    return ++count;
+  }
 
-    public MaterialType materialType;
-    public WeaponType weaponType;
-    public int amount;
-    
+  public int DecreaseCount()
+  {
+    return (count - 1 > 0) ? count : --count;
+  }
+
+  public void SetCount(int newCount)
+  {
+    count = newCount;
+  }
+
+  public int GetCount()
+  {
+    return count;
+  }
 }

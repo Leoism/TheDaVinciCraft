@@ -5,66 +5,51 @@ using UnityEngine.UI;
 
 public class ActionBarBehavior : MonoBehaviour
 {
-    public Text WoodAmountEcho;
-    public Text StoneAmountEcho;
-    public Text MetalAmountEcho;
-    public Text FabricAmountEcho;
-    public Text GlassAmountEcho;
-    public Text SelectedMatEcho;
+  [SerializeField]
+  private List<GameObject> itemsAvailable = new List<GameObject>();
 
-    private int selected;
-    
-    List<Item> currList;
-    Button[] buttons;
-    Text[] texts;
-    
-    // Start is called before the first frame update
-    void Start()
+  void Start()
+  {
+    Render();
+  }
+
+  public void Render()
+  {
+    Vector3 nextPos = GetComponent<RectTransform>().anchoredPosition;
+    for (int i = 0; i < itemsAvailable.Count; i++)
     {
-        buttons = this.GetComponentsInChildren<Button>();
-        currList = GameManager.humanInventory.getItemList();
-    }
+      GameObject item = itemsAvailable[i];
+      RectTransform itemRt = item.GetComponent<RectTransform>();
+      Button itemButton = item.GetComponent<Button>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        showAmount();
-    }
+      itemRt.anchoredPosition = nextPos;
+      nextPos = itemRt.anchoredPosition - new Vector2(0, itemRt.rect.height);
 
-    void showAmount()
-    {
-        WoodAmountEcho.text =   "" + currList[0].amount;
-        StoneAmountEcho.text =  "" + currList[1].amount;
-        MetalAmountEcho.text =  "" + currList[2].amount;
-        FabricAmountEcho.text = "" + currList[3].amount;
-        GlassAmountEcho.text =  "" + currList[4].amount;
+      int tempIdx = i;
+      // anonymous function to update count
+      itemButton.onClick.AddListener(() =>
+      {
+        item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
+        UseItem(tempIdx);
+      });
+      item.transform.SetParent(transform);
     }
-    public void selectedMaterial(int index)
-    {
-        // TODO: Keep button selected after click and have proper sprite attached
-        switch(index)
-        {
-        case 0:
-            SelectedMatEcho.text = "Selected: Wood";
-            break;
-        case 1:
-            SelectedMatEcho.text = "Selected: Stone";
-            break;
-        case 2:
-            SelectedMatEcho.text = "Selected: Metal";
-            break;
-        case 3:
-            SelectedMatEcho.text = "Selected: Fabric";
-            break;
-        case 4:
-            SelectedMatEcho.text = "Selected: Glass";
-            break;
-        default:
-            SelectedMatEcho.text = "Selected: None";
-            break;
-        }
-    }
+  }
 
+  public void AddItem(GameObject newItem)
+  {
+    itemsAvailable.Add(newItem);
+    Render();
+  }
 
+  public void SetList(List<GameObject> newList)
+  {
+    itemsAvailable = newList;
+    Render();
+  }
+
+  public int UseItem(int itemIdx)
+  {
+    return itemsAvailable[itemIdx].GetComponent<Item>().DecreaseCount();
+  }
 }
-
