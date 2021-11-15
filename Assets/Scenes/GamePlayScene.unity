@@ -1024,7 +1024,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
     m_FontSize: 64
     m_FontStyle: 1
     m_BestFit: 0
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbfa303f435463a4c8e0ad96b0648c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageOfCamera: {x: 0.97, y: 0.96, z: 0}
+  percentageOfCamera: {x: 0.95, y: 0.96, z: 0}
 --- !u!1001 &1172650233
 PrefabInstance:
   m_ObjectHideFlags: 0
