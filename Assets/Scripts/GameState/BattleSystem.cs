@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public enum BattleState { NONE, HUMANBUY, ALIENBUY, HUMANBUILD, ALIENDESTROY, HUMANWIN, ALIENWIN}
 public class BattleSystem : MonoBehaviour
 {
     public bool displayState = false;
     public BattleState state;
-    public Text battleStateEcho = null;
+    public TextMeshProUGUI battleStateEcho = null;
+    public GameObject humanActionBar = null;
+    public GameObject alienActionBar = null;
     public GameObject humanPrefab = null;
     public GameObject alienPrefab = null;
 
@@ -19,7 +21,7 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         if (state == BattleState.NONE)
-            state = BattleState.HUMANBUY;
+            SetBattleState(BattleState.HUMANBUY);
     }
 
     private void LateUpdate()
@@ -34,9 +36,11 @@ public class BattleSystem : MonoBehaviour
                 battleStateEcho.text = "ALIEN player - Buy Round";
                 break;
             case BattleState.HUMANBUILD:
+                humanActionBar.SetActive(true);
                 battleStateEcho.text = "HUMAN player - Build Round";
                 break;
             case BattleState.ALIENDESTROY:
+                humanActionBar.SetActive(true);
                 battleStateEcho.text = "ALIEN player - Destroy Round";
                 break;
         }

@@ -2,19 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public Text timerEcho;
+    public TextMeshProUGUI timerEcho;
+    public TextMeshProUGUI roundTitle;
     public BattleSystem battleSystem;
-    float secRemaining;
-    bool isTimerRunning = false;
-    bool gameStarted = false;
 
+    float secRemaining;
+
+    public float roundDelayTime = 5f;
+    private float delayRemaining;
+
+    bool isTimerRunning = false;
+    bool isDelayRunning = false;
+    bool isPaused = false;
+    bool gameStarted = false;
     // Start is called before the first frame update
     void Start()
     {
         gameStarted = true;
+        delayRemaining = roundDelayTime;
+        roundTitle.text = string.Empty;
     }
 
     // Update is called once per frame
@@ -31,8 +41,13 @@ public class Timer : MonoBehaviour
             timerEcho.color = new Color(255f, 255f, 255f, 255f);
         }
 
+        if (isPaused)
+        {
+            roundTitle.text = "PAUSED";
+            return;
+        }
 
-        if (!isTimerRunning)
+        if (!isTimerRunning && !isDelayRunning)
         {
             switch (battleSystem.state)
             {
@@ -59,12 +74,13 @@ public class Timer : MonoBehaviour
             if (secRemaining > 1)
             {
                 secRemaining -= Time.deltaTime;
-                int seconds = (int)secRemaining;
+                int seconds = (int) secRemaining;
                 timerEcho.text = "Time: " + seconds;
             }
             else
-            {   
-                nextState();
+            {
+                // Timer stops running
+                finishState();
             }
         }
 
@@ -85,13 +101,15 @@ public class Timer : MonoBehaviour
     // Completes state and goes to next
     public void finishState()
     {
-        nextState();
+        secRemaining = 0;
+        isTimerRunning = false;
+        isDelayRunning = true;
+        ShowDelay();
     }
     
     // Moves current state to next state
     public void nextState()
     {
-        isTimerRunning = false;
         switch (battleSystem.state)
         {
             case BattleState.HUMANBUY:
@@ -109,4 +127,48 @@ public class Timer : MonoBehaviour
             default: break;
         }
     }
+
+    void ShowDelay()
+    {
+        if (!isTimerRunning && delayRemaining > 1)
+        {
+            delayRemaining -= Time.deltaTime;
+            int seconds = (int)delayRemaining;
+            timerEcho.text = "Round \nSwitch \nDelay: " + seconds;
+
+            switch (battleSystem.state)
+            {
+                case BattleState.HUMANBUY:
+                    roundTitle.text = "Switching to Alien Buy Phase";
+                    break;
+                case BattleState.ALIENBUY:
+                    roundTitle.text = "Switching to Human Build Phase";
+                    break;
+                case BattleState.HUMANBUILD:
+                    roundTitle.text = "Switching to Alien Destroy Phase";
+                    break;
+                case BattleState.ALIENDESTROY:
+                    roundTitle.text = "Calculating Round Winner";
+                    break;
+                default: break;
+            }
+
+        }
+        else
+        {
+            roundTitle.text = string.Empty;
+            isDelayRunning = false;
+            delayRemaining = roundDelayTime;
+            nextState();
+        }
+    }
+    public void togglePause()
+    {
+        isPaused = !isPaused;
+        if (!isPaused && !isDelayRunning)
+        {
+            roundTitle.text = string.Empty;
+        }
+    }
 }
+

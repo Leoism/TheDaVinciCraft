@@ -7,10 +7,17 @@ public class SkipStateButtonHandler : MonoBehaviour
     public GameObject confirmBox = null;
     public Timer timer = null;
 
+    public void Update()
+    {
+        if (timer.IsTimeUp())
+        {
+            closePanel();
+        }
+    }
     // Skip to next state
     public void goNext()
     {
-        timer.nextState();
+        timer.finishState();
         confirmBox.SetActive(false);
     }
 
