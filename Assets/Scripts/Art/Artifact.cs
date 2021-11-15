@@ -22,6 +22,7 @@ public class Artifact : MonoBehaviour
     {
         Arts art = artsDB.GetArts(selectedArt);
         artWorkSprite.sprite = art.artSprite;
+        artWorkSprite.transform.localScale = new Vector2(art.artSprite.bounds.size.x * 5, art.artSprite.bounds.size.y * 5);
     }
 
     private void Load()
