@@ -176,7 +176,12 @@ public class Timer : MonoBehaviour
         isPaused = !isPaused;
         if (!isPaused && !isDelayRunning)
         {
+            Time.timeScale = 1;
             roundTitle.text = string.Empty;
+        }
+        else
+        {
+            Time.timeScale = 0;
         }
     }
 }
