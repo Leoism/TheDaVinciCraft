@@ -1212,8 +1212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa82b1c3af93e140ad6b733f91e4e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerEcho: {fileID: 1164047178}
-  battleSystem: {fileID: 1281474589}
 --- !u!4 &1281474588
 Transform:
   m_ObjectHideFlags: 0
@@ -1240,15 +1238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7777a8cbf19e33143ae958d151536c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayState: 0
-  state: 3
-  battleStateEcho: {fileID: 0}
-  humanActionBar: {fileID: 0}
-  alienActionBar: {fileID: 0}
-  humanPrefab: {fileID: 0}
-  alienPrefab: {fileID: 0}
-  humanBattleStation: {fileID: 0}
-  alienBattleStation: {fileID: 0}
 --- !u!114 &1281474590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,6 +1255,8 @@ MonoBehaviour:
   buildingZone: {fileID: 1503800019}
   alienZone: {fileID: 484399012}
   alienship: {fileID: 1317540226}
+  mainCanvas: {fileID: 418612265}
+  actionBarBehavior: {fileID: 595729586}
 --- !u!1 &1317540223
 GameObject:
   m_ObjectHideFlags: 0

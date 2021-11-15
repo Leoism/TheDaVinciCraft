@@ -9,10 +9,20 @@ public class Gameplay : MonoBehaviour
   public Transform buildingZone = null;
   public Transform alienZone = null;
   public Alienship alienship = null;
+  public Canvas mainCanvas = null;
+  public ActionBarBehavior actionBarBehavior = null;
   // Start is called before the first frame update
   void Start()
   {
     gameTimer.battleSystem.SetBattleState(BattleState.HUMANBUILD);
+    foreach (GameObject go in GameManager.globalManager.alienInventory.GetInventoryList())
+    {
+      go.transform.parent = mainCanvas.transform;
+      go.transform.localScale = new Vector3(1, 1, 1);
+    }
+    GameManager.globalManager.alienInventory.actionBar = actionBarBehavior;
+    actionBarBehavior.SetList(GameManager.globalManager.alienInventory.GetInventoryList());
+    GameManager.globalManager.alienInventory.InitActionBar();
   }
 
   // Update is called once per frame

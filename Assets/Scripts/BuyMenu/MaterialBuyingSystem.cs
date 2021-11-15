@@ -166,4 +166,64 @@ public class MaterialBuyingSystem : MonoBehaviour
         metal.interactable = false;
         metalAdd.interactable = false;
     }
+
+    public void SaveHumanInventory()
+    {
+        List<GameObject> humanInventory = new List<GameObject>();
+        if (FebricCnt.febricCnt > 0)
+        {
+            humanInventory.Add(CreateSprite(FebricCnt.febricCnt, "fabric"));
+        }
+        if (WoodCnt.woodCnt > 0)
+        {
+            humanInventory.Add(CreateSprite(WoodCnt.woodCnt, "wood"));
+        }
+        if (StoneCnt.stoneCnt > 0)
+        {
+            humanInventory.Add(CreateSprite(StoneCnt.stoneCnt, "stone"));
+        }
+        if (GlassCnt.glassCnt > 0)
+        {
+            humanInventory.Add(CreateSprite(GlassCnt.glassCnt, "glass"));
+        }
+        if (MetalCnt.metalCnt > 0)
+        {
+            humanInventory.Add(CreateSprite(MetalCnt.metalCnt, "metal"));
+        }
+        GameManager.globalManager.SetHumanInventory(humanInventory);
+    }
+
+    private GameObject CreateSprite(int count, string name)
+    {
+        GameObject newGameObject = new GameObject();
+        Item newItem = newGameObject.AddComponent<Item>();
+        newItem.SetCount(count);
+        Button itemButton = null;
+        switch(name) {
+            case "fabric": 
+                itemButton = febric;
+                break;
+            case "wood":
+                itemButton = wood;
+                break;
+            case "stone":
+                itemButton = stone;
+                break;
+            case "glass":
+                itemButton = glass;
+                break;
+            case "metal":
+                itemButton = metal;
+                break;
+            default:
+                break;
+        }
+        Sprite itemSprite = itemButton.GetComponent<Image>().sprite;
+        Image newImage = newGameObject.AddComponent<Image>();
+        newImage.sprite = itemSprite;
+        Button newButton = newGameObject.AddComponent<Button>();
+        newButton.GetComponent<RectTransform>().sizeDelta = new Vector2(128, 128);
+        newGameObject.AddComponent<ItemPreserver>();
+        return newGameObject;
+    }
 }
