@@ -13,7 +13,9 @@ public class Item : MonoBehaviour
 
   public int DecreaseCount()
   {
-    return (count - 1 > 0) ? count : --count;
+    if (count - 1 >= 0)
+      count--;
+    return count;
   }
 
   public void SetCount(int newCount)

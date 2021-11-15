@@ -7,10 +7,9 @@ public class ActionBarBehavior : MonoBehaviour
 {
   [SerializeField]
   private List<GameObject> itemsAvailable = new List<GameObject>();
-
+  public Gameplay gameplayScene = null;
   void Start()
   {
-    Render();
   }
 
   public void Render()
@@ -19,6 +18,7 @@ public class ActionBarBehavior : MonoBehaviour
     for (int i = 0; i < itemsAvailable.Count; i++)
     {
       GameObject item = itemsAvailable[i];
+      item.transform.SetParent(transform);
       RectTransform itemRt = item.GetComponent<RectTransform>();
       Button itemButton = item.GetComponent<Button>();
 
@@ -26,20 +26,20 @@ public class ActionBarBehavior : MonoBehaviour
       nextPos = itemRt.anchoredPosition - new Vector2(0, itemRt.rect.height);
 
       int tempIdx = i;
+      item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
       // anonymous function to update count
       itemButton.onClick.AddListener(() =>
       {
-        item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
-        UseItem(tempIdx);
+        gameplayScene.currentItem = item;
+        // UseItem(tempIdx);
+        // item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
       });
-      item.transform.SetParent(transform);
     }
   }
 
   public void AddItem(GameObject newItem)
   {
     itemsAvailable.Add(newItem);
-    Render();
   }
 
   public void SetList(List<GameObject> newList)

@@ -234,4 +234,83 @@ public class WeaponBuyingSystem : MonoBehaviour
         grenadeSub.interactable = condition;
     }
     
+    public void SaveAlienInventory()
+    {
+        List<GameObject> alienInventory = new List<GameObject>();
+        if (DeforestorCnt.deCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(DeforestorCnt.deCnt, "deforestor"));
+        }
+        if (MECnt.meCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(MECnt.meCnt, "mineral"));
+        }
+        if (ArrowCnt.arrCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(ArrowCnt.arrCnt, "arrow"));
+        }
+        if (BallCnt.ballCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(BallCnt.ballCnt, "ball"));
+        }
+        if (BoomCnt.boomCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(BoomCnt.boomCnt, "boomerang"));
+        }
+        if (RayCnt.rayCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(RayCnt.rayCnt, "ray"));
+        }
+        if (GrenadeCnt.grCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(GrenadeCnt.grCnt, "grenade"));
+        }
+        GameManager.globalManager.SetAlienInventory(alienInventory);
+    }
+
+    private GameObject CreateSprite(int count, string name)
+    {
+        GameObject newGameObject = new GameObject();
+        Item newItem = newGameObject.AddComponent<Item>();
+        newItem.SetCount(count);
+        Button itemButton = null;
+        switch(name) {
+            case "deforestor": 
+                itemButton = deforestor;
+                break;
+            case "mineral":
+                itemButton = mExtractor;
+                break;
+            case "arrow":
+                itemButton = arrow;
+                break;
+            case "ball":
+                itemButton = ball;
+                break;
+            case "boomerang":
+                itemButton = boomerange;
+                break;
+            case "ray":
+                itemButton = ray;
+                break;
+            case "grenade":
+                itemButton = grenade;
+                break;
+            default:
+                break;
+        }
+        Sprite itemSprite = itemButton.GetComponent<Image>().sprite;
+        Image newImage = newGameObject.AddComponent<Image>();
+        newImage.sprite = itemSprite;
+        Button newButton = newGameObject.AddComponent<Button>();
+        newButton.GetComponent<RectTransform>().sizeDelta = new Vector2(128, 128);
+        newGameObject.AddComponent<ItemPreserver>();
+        GameObject textCount = new GameObject();
+        Text newText = textCount.AddComponent<Text>();
+        newText.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+        newText.fontSize = 75;
+        textCount.transform.localPosition = newGameObject.transform.position + new Vector3(150, 0, 0);
+        textCount.transform.parent = newGameObject.transform;
+        return newGameObject;
+    }
 }

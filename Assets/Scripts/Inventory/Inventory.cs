@@ -13,6 +13,11 @@ public class Inventory
     SetInventory(inventory);
   }
 
+  public List<GameObject> GetInventoryList()
+  {
+    return currentInventory;
+  }
+
   public void SetInventory(List<GameObject> newInventory)
   {
     currentInventory = newInventory;
