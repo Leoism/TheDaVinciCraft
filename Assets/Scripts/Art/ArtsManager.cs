@@ -11,6 +11,9 @@ public class ArtsManager : MonoBehaviour
     public Text artNameText;
     public SpriteRenderer artWorkSprite;
     private int selectedArt = 0;
+    [SerializeField] private Button next;
+    [SerializeField] private Button prev;
+
     void Start()
     {
         // to load the arts sprite when scene changed
@@ -21,6 +24,13 @@ public class ArtsManager : MonoBehaviour
         }
 
         UpdateArt(selectedArt);
+    }
+    private void Update()
+    {
+        if (CountDownTimer.isTimeUp == true) {
+            next.interactable = false;
+            prev.interactable = false;
+        }
     }
 
     public void ChangeScene(string scene)
@@ -62,6 +72,7 @@ public class ArtsManager : MonoBehaviour
     {
         selectedArt = PlayerPrefs.GetInt("selectedArt"); 
     }
+
     private void Save()
     {
         PlayerPrefs.SetInt("selectedArt", selectedArt);
