@@ -5,6 +5,7 @@ using UnityEngine;
 public class Alienship : MonoBehaviour
 {
   bool isInitialized = false;
+  public ShootingBehavior shootingBehavior = null;
   // Start is called before the first frame update
   void Start()
   {

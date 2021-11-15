@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8868571235721496947}
   - component: {fileID: 8868571235721496944}
   - component: {fileID: 8868571235721496946}
-  - component: {fileID: 137014712251101948}
+  - component: {fileID: 153438699862861672}
+  - component: {fileID: -3705056844102174693}
   m_Layer: 0
   m_Name: oregon_man
   m_TagString: Weapon
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8868571235721496945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -105,7 +106,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &137014712251101948
+--- !u!114 &153438699862861672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8868571235721496945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71171ce1ebb3c9f4a9aa413a66775fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &-3705056844102174693
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

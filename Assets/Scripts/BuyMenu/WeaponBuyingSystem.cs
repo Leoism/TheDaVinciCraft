@@ -311,6 +311,9 @@ public class WeaponBuyingSystem : MonoBehaviour
         newText.fontSize = 75;
         textCount.transform.localPosition = newGameObject.transform.position + new Vector3(150, 0, 0);
         textCount.transform.parent = newGameObject.transform;
+
+        ActionBarItem actionBarItem = newGameObject.AddComponent<ActionBarItem>();
+        actionBarItem.actionItem = newItem;
         return newGameObject;
     }
 }

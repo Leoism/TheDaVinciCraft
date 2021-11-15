@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 2263465392987367229}
   - component: {fileID: 2263465392987367202}
   - component: {fileID: 8909719124733804655}
+  - component: {fileID: 393169715942238936}
   m_Layer: 0
   m_Name: Tilemap_Build
-  m_TagString: Untagged
+  m_TagString: tm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,5 +195,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b058d71b7bf654b9e4410b09926514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
-  tileToAdd: {fileID: 0}
+--- !u!114 &393169715942238936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263465392987367225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9af79ba969f354fa32da8b4126fb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTileToAdd: {fileID: 11400000, guid: 79f2c3003e2ab46478c7a1182604b049, type: 2}
+  shatter: {fileID: 1366299487685945622, guid: bf05ff6374e0ab44481ba8f2b31b77e4, type: 3}
+  tilemapPrefab: {fileID: 2263465392987367228}
