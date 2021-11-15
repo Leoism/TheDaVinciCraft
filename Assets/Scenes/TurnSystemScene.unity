@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayState: 1
   state: 0
-  battleStateEcho: {fileID: 0}
+  battleStateEcho: {fileID: 1139925649}
   humanActionBar: {fileID: 4828235002576560500}
   alienActionBar: {fileID: 360324640}
   humanPrefab: {fileID: 0}
@@ -1855,6 +1855,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071254628}
   m_CullTransparentMesh: 1
+--- !u!114 &1139925649 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5665616301266707934, guid: 6c21e562af2243840b9c767aa545e73d, type: 3}
+  m_PrefabInstance: {fileID: 287793862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1223642183 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1126055256365176577, guid: b6c3784ac75e7594b985f1f554fa06cc, type: 3}
@@ -2078,6 +2089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 537420968}
+  mainCamera: {fileID: 0}
+
   canvasRectTransform: {fileID: 716196287}
 --- !u!1 &1504013489
 GameObject:
