@@ -9,7 +9,9 @@ public class TooltipManager : MonoBehaviour
     public static TooltipManager _instance;
     public TextMeshProUGUI textComponent;
 
-    [SerializeField] private RectTransform canvasRectTransform;
+    public Camera mainCamera = null;
+    [SerializeField]
+    private RectTransform canvasRectTransform;
     private RectTransform backgroundRectTransform;
     private void Awake()
     {
@@ -20,8 +22,10 @@ public class TooltipManager : MonoBehaviour
         {
             _instance = this;
         }
-
+        //canvasRectTransform = mainCamera.GetComponent<RectTransform>();
         backgroundRectTransform = transform.GetComponent<RectTransform>();
+        Debug.Log(canvasRectTransform.rect.width);
+        Debug.Log(canvasRectTransform.rect.height);
     }
 
 

@@ -19,9 +19,7 @@ public class BattleSystem : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        if (state == BattleState.NONE)
-            SetBattleState(BattleState.HUMANBUY);
+    { 
     }
 
     private void LateUpdate()
@@ -40,7 +38,8 @@ public class BattleSystem : MonoBehaviour
                 battleStateEcho.text = "HUMAN player - Build Round";
                 break;
             case BattleState.ALIENDESTROY:
-                humanActionBar.SetActive(true);
+                humanActionBar.SetActive(false);
+                alienActionBar.SetActive(true);
                 battleStateEcho.text = "ALIEN player - Destroy Round";
                 break;
         }
