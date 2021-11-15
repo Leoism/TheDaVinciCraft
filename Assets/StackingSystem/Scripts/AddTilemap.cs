@@ -10,6 +10,7 @@ namespace StackingSystem.Scripts
 // Will attach to the Grid
 public class AddTilemap : MonoBehaviour
 {
+    public Gameplay gameplayScene = null;
     [SerializeField] private TileBase[] tilesToAdd;
     [SerializeField] private int currentTileToAddIndex;
     [SerializeField] private Tilemap tilemapPrefab;
@@ -49,26 +50,21 @@ public class AddTilemap : MonoBehaviour
         HandleTileAddSwitch();
     }
 
+    public void UpdateTileArt(Tile newTile)
+    {
+        tilesToAdd[currentTileToAddIndex] = newTile;
+    }
+
     private readonly HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
 
     private void HandleTileMapCreation()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (CurrentTileToAdd != null && Input.GetMouseButtonUp(0))
         {
-            // Creates a new tilemap from the prefab as a child of this
-            var tilemap = Instantiate(tilemapPrefab, transform);
-
-            foreach (var pos in _addedTiles)
-                tilemap.SetTile(pos, CurrentTileToAdd);
-
-            _addedTiles.Clear();
-            tempTilemap.ClearAllTiles();
-            placed = false;
-            xDom = false;
-            yDom = false;
+            CreateTileMap();
         }
 
-        if (Input.GetMouseButton(0))
+        if (CurrentTileToAdd != null && Input.GetMouseButton(0))
         {
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var newTilePos = _grid.WorldToCell(mousePos);
@@ -93,7 +89,23 @@ public class AddTilemap : MonoBehaviour
             _addedTiles.Add(newTilePos);
             oldTilePos = newTilePos;
             tempTilemap.SetTile(newTilePos, CurrentTileToAdd);
+            gameplayScene.UseItem();
         }
+    }
+
+    public void CreateTileMap()
+    {
+        // Creates a new tilemap from the prefab as a child of this
+        var tilemap = Instantiate(tilemapPrefab, transform);
+        tilemap.GetComponent<Split>().CurrentTileToAdd = CurrentTileToAdd;
+        foreach (var pos in _addedTiles)
+        tilemap.SetTile(pos, CurrentTileToAdd);
+
+        _addedTiles.Clear();
+        tempTilemap.ClearAllTiles();
+        placed = false;
+        xDom = false;
+        yDom = false;
     }
 
 

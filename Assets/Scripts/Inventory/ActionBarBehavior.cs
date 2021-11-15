@@ -12,6 +12,10 @@ public class ActionBarBehavior : MonoBehaviour
   {
   }
 
+  void Update()
+  {
+  }
+
   public void Render()
   {
     Vector3 nextPos = GetComponent<RectTransform>().anchoredPosition;
@@ -35,6 +39,15 @@ public class ActionBarBehavior : MonoBehaviour
         // item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
       });
     }
+  }
+
+  public void Reset()
+  {
+    foreach (GameObject item in itemsAvailable)
+    {
+      Destroy(item);
+    }
+    itemsAvailable = null;
   }
 
   public void AddItem(GameObject newItem)
