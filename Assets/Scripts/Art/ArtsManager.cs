@@ -13,6 +13,7 @@ public class ArtsManager : MonoBehaviour
     private int selectedArt = 0;
     void Start()
     {
+        // to load the arts sprite when scene changed
         if(!PlayerPrefs.HasKey("selectedArt")){
             selectedArt = 0;
         } else {
