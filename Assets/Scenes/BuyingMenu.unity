@@ -1847,7 +1847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071194dc68f3494bb61b9b1c92ae9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 10
+  startingTime: 30
   countdowntext: {fileID: 1885842721}
 --- !u!224 &280566456
 RectTransform:
@@ -6441,7 +6441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071194dc68f3494bb61b9b1c92ae9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 5
+  startingTime: 15
   countdowntext: {fileID: 1749875764}
 --- !u!224 &1126634048
 RectTransform:
