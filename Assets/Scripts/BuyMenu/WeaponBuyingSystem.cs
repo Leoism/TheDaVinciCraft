@@ -63,6 +63,11 @@ public class WeaponBuyingSystem : MonoBehaviour
         if (selectedWeapons < totalWeapons) {
             activateAllAdds(true);
         }
+
+        if (CountDownTimer.isTimeUp == true) {
+            activateAllAdds(false);
+            activateAllSubs(false);
+        }
     }
 
     //------------------------------ Deforestor -----------------------------
