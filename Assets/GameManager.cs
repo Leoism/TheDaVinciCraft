@@ -18,9 +18,9 @@ public class GameManager
   public Inventory alienInventory;
   public Inventory artifacts;
   public BattleSystem battleSystem;
+  public Player alienPlayer = null;
+  public Player humanPlayer = null;
   private List<List<Player>> rounds = null;
-  private Player alienPlayer = null;
-  private Player humanPlayer = null;
 
   private GameManager()
   {
@@ -89,5 +89,10 @@ public class GameManager
     }
 
     return humanTotalScore > alienTotalScore ? "human" : (alienTotalScore > humanTotalScore ? "alien" : "tie");
+  }
+
+  public string GetGameModeName()
+  {
+    return GameManager.globalManager.gameMode == GameMode.SHORT ? "Short" : (GameManager.globalManager.gameMode == GameMode.STANDARD ? "Standard" : "Long");
   }
 }

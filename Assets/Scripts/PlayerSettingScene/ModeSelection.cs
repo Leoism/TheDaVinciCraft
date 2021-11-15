@@ -20,6 +20,21 @@ public class ModeSelection : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++){
             transform.GetChild(i).gameObject.SetActive(i == _index);
         }
+
+        switch (transform.GetChild(_index).gameObject.name)
+        {
+        case "Short":
+            GameManager.globalManager.SetGameType(GameMode.SHORT);
+            break;
+        case "Standard":
+            GameManager.globalManager.SetGameType(GameMode.STANDARD);
+            break;
+        case "Long":
+            GameManager.globalManager.SetGameType(GameMode.LONG);
+            break;
+        default:
+            break;
+        }
     }
 
     public void ChangeMode(int _change) 
