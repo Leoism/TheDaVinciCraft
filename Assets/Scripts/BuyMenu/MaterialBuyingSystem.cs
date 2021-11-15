@@ -224,6 +224,12 @@ public class MaterialBuyingSystem : MonoBehaviour
         Button newButton = newGameObject.AddComponent<Button>();
         newButton.GetComponent<RectTransform>().sizeDelta = new Vector2(128, 128);
         newGameObject.AddComponent<ItemPreserver>();
+        GameObject textCount = new GameObject();
+        Text newText = textCount.AddComponent<Text>();
+        newText.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+        newText.fontSize = 75;
+        textCount.transform.localPosition = newGameObject.transform.position + new Vector3(150, 0, 0);
+        textCount.transform.parent = newGameObject.transform;
         return newGameObject;
     }
 }
