@@ -18,8 +18,9 @@ public class RelativeToCamera : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    Vector3 windowCorner = Camera.main.ViewportToWorldPoint(new Vector3(percentageOfCamera.x, percentageOfCamera.y, 1));
-    transform.position = windowCorner;
+    Vector3 windowCorner = Camera.main.ViewportToWorldPoint(new Vector3(percentageOfCamera.x, percentageOfCamera.y, 0));
+    transform.position = new Vector3(windowCorner.x, windowCorner.y, 0);
+    rt.anchoredPosition3D = new Vector3(rt.anchoredPosition.x, rt.anchoredPosition.y, 1);
     rt.localScale = initScale * (Camera.main.orthographicSize / initCamSize);
   }
 }

@@ -10,6 +10,7 @@ public class ShootingBehavior : MonoBehaviour
   public Transform projectileSpawnPoint = null;
   public GameObject powerBar = null;
   private GameObject[] trajectoryPoints;
+  public Gameplay gameplayScene = null;
   private int trajectoryPointCount = 20;
   private float trajectoryPointSpace = 0.0625f;
   // mouse settings
@@ -58,6 +59,7 @@ public class ShootingBehavior : MonoBehaviour
       CalculateShootSettings();
       Shoot();
       SetTrajectoryPointStatus(false);
+      gameplayScene.UseItem();
     }
   }
 

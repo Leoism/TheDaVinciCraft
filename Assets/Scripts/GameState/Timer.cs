@@ -51,6 +51,9 @@ public class Timer : MonoBehaviour
         {
             switch (battleSystem.state)
             {
+                case BattleState.NONE:
+                    finishState();
+                    break;
                 case BattleState.HUMANBUY:
                     secRemaining = 30f;
                     isTimerRunning = true;
@@ -112,6 +115,9 @@ public class Timer : MonoBehaviour
     {
         switch (battleSystem.state)
         {
+            case BattleState.NONE:
+                battleSystem.SetBattleState(BattleState.HUMANBUY);
+                break;
             case BattleState.HUMANBUY:
                 battleSystem.SetBattleState(BattleState.ALIENBUY);
                 break;
@@ -138,6 +144,9 @@ public class Timer : MonoBehaviour
 
             switch (battleSystem.state)
             {
+                case BattleState.NONE:
+                    roundTitle.text = "Starting Game: Human Buy Phase Start";
+                    break;
                 case BattleState.HUMANBUY:
                     roundTitle.text = "Switching to Alien Buy Phase";
                     break;
@@ -167,7 +176,12 @@ public class Timer : MonoBehaviour
         isPaused = !isPaused;
         if (!isPaused && !isDelayRunning)
         {
+            Time.timeScale = 1;
             roundTitle.text = string.Empty;
+        }
+        else
+        {
+            Time.timeScale = 0;
         }
     }
 }
