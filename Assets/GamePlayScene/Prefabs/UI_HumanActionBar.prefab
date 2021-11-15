@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 4828235001101638645}
   - component: {fileID: 4828235001101638644}
   - component: {fileID: 4828235001101638643}
+  - component: {fileID: 5112006878053279908}
   m_Layer: 5
   m_Name: Fabric
   m_TagString: Untagged
@@ -211,6 +212,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &5112006878053279908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828235001101638641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658d65a15643f44e96a306d9c73efa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Fabric
 --- !u!1 &4828235001124187201
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +237,7 @@ GameObject:
   - component: {fileID: 4828235001124187205}
   - component: {fileID: 4828235001124187204}
   - component: {fileID: 4828235001124187203}
+  - component: {fileID: 4872235485493222106}
   m_Layer: 5
   m_Name: Wood
   m_TagString: Untagged
@@ -343,6 +358,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &4872235485493222106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828235001124187201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658d65a15643f44e96a306d9c73efa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Wood
 --- !u!1 &4828235001173494797
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +872,7 @@ GameObject:
   - component: {fileID: 4828235002381136921}
   - component: {fileID: 4828235002381136920}
   - component: {fileID: 4828235002381136903}
+  - component: {fileID: 7745228620957623978}
   m_Layer: 5
   m_Name: Metal
   m_TagString: Untagged
@@ -964,6 +993,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &7745228620957623978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828235002381136901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658d65a15643f44e96a306d9c73efa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Metal
 --- !u!1 &4828235002399377115
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,6 +1018,7 @@ GameObject:
   - component: {fileID: 4828235002399377119}
   - component: {fileID: 4828235002399377118}
   - component: {fileID: 4828235002399377117}
+  - component: {fileID: 8631152783762743377}
   m_Layer: 5
   m_Name: Stone
   m_TagString: Untagged
@@ -1096,6 +1139,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &8631152783762743377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828235002399377115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658d65a15643f44e96a306d9c73efa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Stone
 --- !u!1 &4828235002621576442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1211,7 @@ GameObject:
   - component: {fileID: 4828235002643642689}
   - component: {fileID: 4828235002643642688}
   - component: {fileID: 4828235002643642703}
+  - component: {fileID: 3925169102396798382}
   m_Layer: 5
   m_Name: Glass
   m_TagString: Untagged
@@ -1275,3 +1332,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &3925169102396798382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828235002643642701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658d65a15643f44e96a306d9c73efa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Glass
