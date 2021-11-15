@@ -31,10 +31,9 @@ public class Artifact : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("IS it this?");
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
        
     }

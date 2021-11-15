@@ -59,7 +59,7 @@ public class ShootingBehavior : MonoBehaviour
       CalculateShootSettings();
       Shoot();
       SetTrajectoryPointStatus(false);
-      gameplayScene.UseItem();
+      //gameplayScene.UseItem();
     }
   }
 
