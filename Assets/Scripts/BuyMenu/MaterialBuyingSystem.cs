@@ -42,32 +42,14 @@ public class MaterialBuyingSystem : MonoBehaviour
     }
 
     private void Update() {
-        // if (CountDownTimer.isTimeUp == true) {
-        //     inactiveButtons();
-        // }
+        if (CountDownTimer.isTimeUp == true) {
+            inactiveAllButs();
+        }
         if (selectedMaterials >= totalMaterials) {
-            wood.interactable = false;
-            woodAdd.interactable = false;
-            febric.interactable = false;
-            febricAdd.interactable = false;
-            stone.interactable = false;
-            stoneAdd.interactable = false;
-            glass.interactable = false;
-            glassAdd.interactable = false;
-            metal.interactable = false;
-            metalAdd.interactable = false;
+            activeAllAdds(false);
         }
         if (selectedMaterials < totalMaterials) {
-            wood.interactable = true;
-            woodAdd.interactable = true;
-            febric.interactable = true;
-            febricAdd.interactable = true;
-            stone.interactable = true;
-            stoneAdd.interactable = true;
-            glass.interactable = true;
-            glassAdd.interactable = true;
-            metal.interactable = true;
-            metalAdd.interactable = true;
+            activeAllAdds(true);
         }
     }
 
@@ -154,7 +136,8 @@ public class MaterialBuyingSystem : MonoBehaviour
         sub.interactable = (count > 0);
         return count;
     }
-    private void inactiveButtons() {
+    private void inactiveAllButs()
+    {
         wood.interactable = false;
         woodAdd.interactable = false;
         febric.interactable = false;
@@ -165,6 +148,23 @@ public class MaterialBuyingSystem : MonoBehaviour
         glassAdd.interactable = false;
         metal.interactable = false;
         metalAdd.interactable = false;
+        woodRemove.interactable = false;
+        febricRemove.interactable = false;
+        stoneRemove.interactable = false;
+        glassRemove.interactable = false;
+        metalRemove.interactable = false;
+    }
+    private void activeAllAdds(bool conditions) {
+        wood.interactable = conditions;
+        woodAdd.interactable = conditions;
+        febric.interactable = conditions;
+        febricAdd.interactable = conditions;
+        stone.interactable = conditions;
+        stoneAdd.interactable = conditions;
+        glass.interactable = conditions;
+        glassAdd.interactable = conditions;
+        metal.interactable = conditions;
+        metalAdd.interactable = conditions;
     }
 
     public void SaveHumanInventory()
