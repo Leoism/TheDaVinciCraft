@@ -24,7 +24,7 @@ public class Artifact : MonoBehaviour
         artWorkSprite.sprite = art.artSprite;
         artWorkSprite.transform.localScale = new Vector2(art.artSprite.bounds.size.x * 5, art.artSprite.bounds.size.y * 5);
     }
-
+    
     private void Load()
     {
         selectedArt = PlayerPrefs.GetInt("selectedArt"); 
@@ -33,6 +33,7 @@ public class Artifact : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Weapon"))
         {
+            SceneManager.LoadScene("AlienWin");
             Destroy(this.gameObject);
         }
        
