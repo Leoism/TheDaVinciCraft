@@ -9,6 +9,10 @@ public class UISceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameMenu");
     }
+     public void BuyMenu()
+    {
+        SceneManager.LoadScene("BuyingMenu");
+    }
     public void PlayerTurn()
     {
         SceneManager.LoadScene("PlayerSwitch");
