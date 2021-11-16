@@ -15,6 +15,7 @@ public class Gameplay : MonoBehaviour
   public ShootingBehavior shootingBehavior = null;
   public AddTilemap tilemapAdder = null;
   public GameObject currentItem = null;
+  public GameObject prevItem = null;
   // Start is called before the first frame update
   void Start()
   {
@@ -45,17 +46,21 @@ public class Gameplay : MonoBehaviour
     else
     {
 
-      mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, alienZone.position, 534f * Time.smoothDeltaTime);
+      mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, alienZone.position, 86f * Time.smoothDeltaTime);
       mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, 108f, 40f * Time.smoothDeltaTime);
       if (mainCamera.transform.position == alienZone.position)
         alienship.Init();
-      if (currentItem != null)
+      if (currentItem != null && currentItem != prevItem)
       {
         GameObject newProjectile = Instantiate(currentItem);
+        newProjectile.AddComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
         newProjectile.AddComponent<Rigidbody2D>();
         newProjectile.AddComponent<BoxCollider2D>();
         newProjectile.GetComponent<ItemPreserver>().enabled = false;
+        newProjectile.tag = "Weapon";
+        newProjectile.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         shootingBehavior.projectilePrefab = newProjectile;
+        prevItem = currentItem;
       }
     }
 
@@ -86,5 +91,16 @@ public class Gameplay : MonoBehaviour
         currentItem = null;
       }
     }
+  }
+
+  public bool IsItemEmpty()
+  {
+    return currentItem.GetComponent<Item>().GetCount() == 0;
+  }
+
+  public void SetProjectile(GameObject newProjectile)
+  {
+    prevItem = currentItem;
+    currentItem = newProjectile;
   }
 }
