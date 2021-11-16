@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - tm
+  - Button
   layers:
   - Default
   - TransparentFX

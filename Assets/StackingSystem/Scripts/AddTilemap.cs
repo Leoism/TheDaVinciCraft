@@ -35,7 +35,6 @@ public class AddTilemap : MonoBehaviour
 
     private Camera _mainCamera;
     private Grid _grid;
-
     private void Start()
     {
         placed = false;
@@ -64,15 +63,17 @@ public class AddTilemap : MonoBehaviour
         {
             CreateTileMap();
         }
-       // Debug.Log(EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject.CompareTag(""));
-        if (CurrentTileToAdd != null && Input.GetMouseButton(0))
+
+        if (CurrentTileToAdd != null && Input.GetMouseButton(0) && !(EventSystem.current.IsPointerOverGameObject () && 
+     EventSystem.current.currentSelectedGameObject != null && 
+     EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )))
         {
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var newTilePos = _grid.WorldToCell(mousePos);
             // If none of the tiles are adjacent, then do not place newTilePos
             if (_addedTiles.Count != 0 &&
                 _addedTiles.All(pos => ManhattanDistance(oldTilePos, newTilePos) != 1)) return;
-            
+
             if (placed)
             {
                 if (xDom && oldTilePos.y - newTilePos.y == 0)
@@ -85,7 +86,7 @@ public class AddTilemap : MonoBehaviour
                 else
                     yDom = true;
             }
-                  
+
             placed = true;
             _addedTiles.Add(newTilePos);
             oldTilePos = newTilePos;
@@ -100,7 +101,7 @@ public class AddTilemap : MonoBehaviour
         var tilemap = Instantiate(tilemapPrefab, transform);
         tilemap.GetComponent<Split>().CurrentTileToAdd = CurrentTileToAdd;
         foreach (var pos in _addedTiles)
-        tilemap.SetTile(pos, CurrentTileToAdd);
+            tilemap.SetTile(pos, CurrentTileToAdd);
 
         _addedTiles.Clear();
         tempTilemap.ClearAllTiles();
