@@ -673,7 +673,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 617376227}
         m_TargetAssemblyTypeName: UISceneManager, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: BuyMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -791,7 +791,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Next Round
 --- !u!222 &1611520606
 CanvasRenderer:
   m_ObjectHideFlags: 0
