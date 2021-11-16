@@ -65,7 +65,9 @@ public class AddTilemap : MonoBehaviour
             CreateTileMap();
         }
        // Debug.Log(EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject.CompareTag(""));
-        if (CurrentTileToAdd != null && Input.GetMouseButton(0))
+         if (CurrentTileToAdd != null && Input.GetMouseButton(0) && !(EventSystem.current.IsPointerOverGameObject () && 
+     EventSystem.current.currentSelectedGameObject != null && 
+     EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )))
         {
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var newTilePos = _grid.WorldToCell(mousePos);

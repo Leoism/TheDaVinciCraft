@@ -25,7 +25,7 @@ public class ActionBarBehavior : MonoBehaviour
       item.transform.SetParent(transform);
       RectTransform itemRt = item.GetComponent<RectTransform>();
       Button itemButton = item.GetComponent<Button>();
-
+      itemButton.tag = "Button";
       itemRt.anchoredPosition = nextPos;
       nextPos = itemRt.anchoredPosition - new Vector2(0, itemRt.rect.height);
 
