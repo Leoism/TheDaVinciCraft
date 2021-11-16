@@ -44,6 +44,4 @@ public class CountDownTimer : MonoBehaviour
         isTimeUp = false;
         currentTime = startingTime;
     }
-
-
 }
