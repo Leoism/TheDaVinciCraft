@@ -38,7 +38,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     }
     void Start()
     {
-        totalMaterials = 12;
+        totalMaterials = 40;
     }
 
     private void Update() {

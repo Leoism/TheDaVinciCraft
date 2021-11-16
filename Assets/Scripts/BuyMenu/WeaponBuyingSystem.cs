@@ -50,7 +50,7 @@ public class WeaponBuyingSystem : MonoBehaviour
     }
     void Start()
     {
-        totalWeapons = 3;
+        totalWeapons = 6;
     }
 
     // Update is called once per frame
