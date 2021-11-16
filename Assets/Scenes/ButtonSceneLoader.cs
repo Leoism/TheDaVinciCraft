@@ -9,6 +9,7 @@ public class ButtonSceneLoader : MonoBehaviour
 
   public void LoadScene(string scene)
   {
+    Debug.Log("HI");
     SceneManager.LoadScene(scene);
   }
 }
