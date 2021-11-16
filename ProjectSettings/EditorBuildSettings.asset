@@ -6,24 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/UserInteractionScene.unity
-    guid: da2ecfe3cefc0994cbee04374562c4e3
-  - enabled: 1
-    path: Assets/Scenes/ObjectTravelScene.unity
-    guid: 76550e529a1d1864ea116ddf972476f2
-  - enabled: 1
-    path: Assets/Scenes/PhysicsScene.unity
-    guid: 75c68ffa2c23aa84abfae1ff00a55872
-  - enabled: 1
-    path: Assets/Scenes/TurnSystemScene.unity
-    guid: f138051de1b143844b88db5d773b6a31
-  - enabled: 1
-    path: Assets/Scenes/StackingScene.unity
-    guid: d00c813b043522d4abf9f5287b4eadb4
-  - enabled: 1
     path: Assets/Scenes/GameMenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
@@ -35,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GamePlayScene.unity
     guid: 42e629c2f7bef8d429458354236b81ae
+  - enabled: 1
+    path: Assets/Scenes/HumanWin.unity
+    guid: 90663d00ce464e4479ac4ff314452d7f
+  - enabled: 1
+    path: Assets/Scenes/AlienWin.unity
+    guid: 0c5b67b6ef04f644abc6bba78902a65d
   m_configObjects: {}
