@@ -29,4 +29,12 @@ public class Artifact : MonoBehaviour
     {
         selectedArt = PlayerPrefs.GetInt("selectedArt"); 
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Weapon"))
+        {
+            Destroy(this.gameObject);
+        }
+       
+    }
 }

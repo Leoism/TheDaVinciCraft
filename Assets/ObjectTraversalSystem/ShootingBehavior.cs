@@ -46,6 +46,7 @@ public class ShootingBehavior : MonoBehaviour
 
   void DetectOnAim()
   {
+    if (gameplayScene.IsItemEmpty()) return;
     if (Input.GetMouseButtonDown(0))
     {
       isAiming = true;

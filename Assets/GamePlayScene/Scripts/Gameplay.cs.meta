@@ -3,7 +3,17 @@ guid: a77dbb488f9188f41a568b2485638257
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gameTimer: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - buildingZone: {instanceID: 0}
+  - alienZone: {instanceID: 0}
+  - alienship: {instanceID: 0}
+  - mainCanvas: {instanceID: 0}
+  - actionBarBehavior: {instanceID: 0}
+  - shootingBehavior: {instanceID: 0}
+  - tilemapAdder: {instanceID: 0}
+  - currentItem: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -77,5 +77,4 @@ public class ArtsManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("selectedArt", selectedArt);
     }
-
 }

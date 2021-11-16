@@ -34,7 +34,7 @@ public class ActionBarBehavior : MonoBehaviour
       // anonymous function to update count
       itemButton.onClick.AddListener(() =>
       {
-        gameplayScene.currentItem = item;
+        gameplayScene.SetProjectile(item);
         // UseItem(tempIdx);
         // item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
       });
