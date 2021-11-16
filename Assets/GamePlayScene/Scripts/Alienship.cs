@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Alienship : MonoBehaviour
 {
   bool isInitialized = false;
@@ -24,6 +24,11 @@ public class Alienship : MonoBehaviour
     if (isInitialized)
     {
       gameObject.SetActive(false);
+    }
+  }
+  void Update() {
+    if (GameManager.globalManager.alienInventory.TotalCount() <= 0) {
+      SceneManager.LoadScene("HumanWin");
     }
   }
 }
