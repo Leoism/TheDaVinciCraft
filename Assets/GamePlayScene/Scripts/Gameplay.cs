@@ -52,13 +52,15 @@ public class Gameplay : MonoBehaviour
         alienship.Init();
       if (currentItem != null && currentItem != prevItem)
       {
-        GameObject newProjectile = Instantiate(currentItem);
+        GameObject newProjectile = new GameObject();
+        newProjectile.name = "Projectile";
         newProjectile.AddComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
         newProjectile.AddComponent<Rigidbody2D>();
         newProjectile.AddComponent<BoxCollider2D>();
-        newProjectile.GetComponent<ItemPreserver>().enabled = false;
         newProjectile.tag = "Weapon";
         newProjectile.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        // the game object is needed to be used as a prefab
+        newProjectile.transform.position = new Vector3(-5000, -5000, -5000);
         shootingBehavior.projectilePrefab = newProjectile;
         prevItem = currentItem;
       }
@@ -95,7 +97,7 @@ public class Gameplay : MonoBehaviour
 
   public bool IsItemEmpty()
   {
-    return currentItem.GetComponent<Item>().GetCount() == 0;
+    return currentItem && currentItem.GetComponent<Item>().GetCount() == 0;
   }
 
   public void SetProjectile(GameObject newProjectile)
