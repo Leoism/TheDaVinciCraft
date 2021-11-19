@@ -25,6 +25,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     // int variables
     private int totalMaterials;
     private int selectedMaterials = 0;
+    // public static int round = 0;
 
 
     private void Awake() 
