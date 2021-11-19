@@ -27,7 +27,16 @@ public class Alienship : MonoBehaviour
     }
   }
   void Update() {
+    // add timer about 10 sec
     if (GameManager.globalManager.alienInventory.TotalCount() <= 0) {
+      // float curTime = 10f;
+      // while (curTime >= 0){
+      //   curTime -= 1 * Time.deltaTime;
+      // }
+      // Debug.Log(curTime);
+      // if (curTime == 0) {
+      //   SceneManager.LoadScene("HumanWin");
+      // }
       SceneManager.LoadScene("HumanWin");
     }
   }
