@@ -181,8 +181,14 @@ public class WeaponBuyingSystem : MonoBehaviour
     //------------------------------ Grenade ------------------------------------
     public void SelectGrenade()
     {
-        selectedWeapons += 1;
-        GrenadeCnt.grCnt = add(grenade,grenadeAdd,grenadeSub, totalWeapons, GrenadeCnt.grCnt, selectedWeapons);
+        if (GrenadeCnt.grCnt < 1) {
+            selectedWeapons += 1;
+            GrenadeCnt.grCnt = add(grenade,grenadeAdd,grenadeSub, totalWeapons, GrenadeCnt.grCnt, selectedWeapons);
+        }
+        if (GrenadeCnt.grCnt > 0) {
+            grenade.interactable = false;
+            grenadeAdd.interactable = false;
+        }
     }
     public void RemoveGrenade()
     {
@@ -226,8 +232,12 @@ public class WeaponBuyingSystem : MonoBehaviour
         bombAdd.interactable = condition;
         ray.interactable = condition;
         rayAdd.interactable = condition;
-        grenade.interactable = condition;
-        grenadeAdd.interactable = condition;
+        if (GrenadeCnt.grCnt < 1) {
+            grenade.interactable = condition;
+            grenadeAdd.interactable = condition;
+        }
+        // grenade.interactable = condition;
+        // grenadeAdd.interactable = condition;
     }
 
     private void activateAllSubs(bool condition)

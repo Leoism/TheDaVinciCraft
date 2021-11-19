@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 public class Alienship : MonoBehaviour
 {
   bool isInitialized = false;
+  private float currentTime = 0;
   public ShootingBehavior shootingBehavior = null;
   // Start is called before the first frame update
   void Start()
   {
     gameObject.SetActive(false);
+    currentTime = 10;
   }
   public void Init()
   {
@@ -28,16 +30,22 @@ public class Alienship : MonoBehaviour
   }
   void Update() {
     // add timer about 10 sec
+    Debug.Log(GameManager.globalManager.alienInventory.TotalCount());
     if (GameManager.globalManager.alienInventory.TotalCount() <= 0) {
-      // float curTime = 10f;
-      // while (curTime >= 0){
-      //   curTime -= 1 * Time.deltaTime;
-      // }
-      // Debug.Log(curTime);
-      // if (curTime == 0) {
-      //   SceneManager.LoadScene("HumanWin");
-      // }
+      CoutTenSec();
+    }
+  }
+  private void CoutTenSec()
+  {
+    if (Timer.secRemaining < 10) {
+      currentTime = Timer.secRemaining;
+    }
+    currentTime -= 1 * Time.deltaTime;
+    Debug.Log(currentTime);
+    if (currentTime <= 0){
+      currentTime = 10;
       SceneManager.LoadScene("HumanWin");
     }
+
   }
 }

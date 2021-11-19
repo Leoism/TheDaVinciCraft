@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     private string prevTitle = "";
     public BattleSystem battleSystem;
 
-    float secRemaining;
+    public static float secRemaining;
 
     public float roundDelayTime = 5f;
     private float delayRemaining;
