@@ -6,8 +6,9 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public TextMeshProUGUI timerEcho;
-    public TextMeshProUGUI roundTitle;
+    public Text timerEcho;
+    public Text roundTitle;
+    private string prevTitle = "";
     public BattleSystem battleSystem;
 
     float secRemaining;
@@ -24,7 +25,6 @@ public class Timer : MonoBehaviour
     {
         gameStarted = true;
         delayRemaining = roundDelayTime;
-        roundTitle.text = string.Empty;
     }
 
     // Update is called once per frame
@@ -165,7 +165,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            roundTitle.text = string.Empty;
+            roundTitle.text = prevTitle;
             isDelayRunning = false;
             delayRemaining = roundDelayTime;
             nextState();
@@ -177,10 +177,11 @@ public class Timer : MonoBehaviour
         if (!isPaused && !isDelayRunning)
         {
             Time.timeScale = 1;
-            roundTitle.text = string.Empty;
+            roundTitle.text = prevTitle;
         }
         else
         {
+            prevTitle = roundTitle.text;
             Time.timeScale = 0;
         }
     }

@@ -27,6 +27,18 @@ public class GameManager
     timer = new Timer();
   }
 
+  public void Reset()
+  {
+    GameManager.globalManager.gameMode = GameMode.SHORT;
+    GameManager.globalManager.timer = new Timer();
+    GameManager.globalManager.humanInventory = null;
+    GameManager.globalManager.alienInventory = null;
+    GameManager.globalManager.artifacts = null;
+    GameManager.globalManager.alienPlayer = null;
+    GameManager.globalManager.humanPlayer = null;
+    GameManager.globalManager.rounds = null;
+  }
+
   // Sets the weapons that the alien selected
   public void SetAlienInventory(List<GameObject> newAlienInventory)
   {
@@ -78,7 +90,7 @@ public class GameManager
   }
 
   // Returns whether a game ended with human or alien as winner, or tie
-  public string GetWinner()
+  public Player GetWinner()
   {
     int humanTotalScore = 0;
     int alienTotalScore = 0;
@@ -88,7 +100,7 @@ public class GameManager
       alienTotalScore += round[1].points;
     }
 
-    return humanTotalScore > alienTotalScore ? "human" : (alienTotalScore > humanTotalScore ? "alien" : "tie");
+    return humanTotalScore > alienTotalScore ? humanPlayer : (alienTotalScore > humanTotalScore ? alienPlayer : null);
   }
 
   public string GetGameModeName()
