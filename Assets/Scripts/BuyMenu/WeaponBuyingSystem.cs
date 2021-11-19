@@ -51,6 +51,15 @@ public class WeaponBuyingSystem : MonoBehaviour
     void Start()
     {
         totalWeapons = 6;
+        DeforestorCnt.deCnt = 0;
+        MECnt.meCnt = 0;
+        ArrowCnt.arrCnt = 0;
+        BallCnt.ballCnt = 0;
+        BoomCnt.boomCnt = 0;
+        MagnetCnt.magCnt = 0;
+        BombCnt.bombCnt = 0;
+        RayCnt.rayCnt = 0;
+        GrenadeCnt.grCnt = 0;
     }
 
     // Update is called once per frame

@@ -36,6 +36,5 @@ public class Artifact : MonoBehaviour
             SceneManager.LoadScene("AlienWin");
             Destroy(this.gameObject);
         }
-       
     }
 }

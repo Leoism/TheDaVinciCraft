@@ -39,6 +39,11 @@ public class MaterialBuyingSystem : MonoBehaviour
     void Start()
     {
         totalMaterials = 40;
+        WoodCnt.woodCnt = 0;
+        FebricCnt.febricCnt = 0;
+        StoneCnt.stoneCnt = 0;
+        GlassCnt.glassCnt = 0;
+        MetalCnt.metalCnt = 0;
     }
 
     private void Update() {
