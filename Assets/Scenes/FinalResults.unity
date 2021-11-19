@@ -222,6 +222,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7565207045865635918, guid: ffc37c598ddb0b14ebb8eae074fab96a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565207045865635918, guid: ffc37c598ddb0b14ebb8eae074fab96a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1195
       objectReference: {fileID: 0}
@@ -345,6 +349,7 @@ GameObject:
   - component: {fileID: 3229667168151700380}
   - component: {fileID: 3229667168151700383}
   - component: {fileID: 3229667168151700382}
+  - component: {fileID: 3229667168151700370}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -352,6 +357,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3229667168151700370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229667168151700369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b6bcd23833394986fc836b845ae66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resultsText: {fileID: 3229667169873082416}
 --- !u!223 &3229667168151700380
 Canvas:
   m_ObjectHideFlags: 0
@@ -766,7 +784,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: 1
+    m_LineSpacing: 1.2
   m_Text: "        Final Round Results\n\n             Round 1\nJimmy: 1           
     Not Kelvin:  0\n             Round 2\nJimmy: 0            Not Kelvin:  1\n            
     Round 3 \nJimmy: 0            Not Kelvin:  1\n\nWinner: Not Kelvin"
