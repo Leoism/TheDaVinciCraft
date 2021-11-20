@@ -22,6 +22,7 @@ public class ActionBarBehavior : MonoBehaviour
     for (int i = 0; i < itemsAvailable.Count; i++)
     {
       GameObject item = itemsAvailable[i];
+            Debug.Log(item.name);
       item.transform.SetParent(transform);
       RectTransform itemRt = item.GetComponent<RectTransform>();
       Button itemButton = item.GetComponent<Button>();
@@ -29,9 +30,10 @@ public class ActionBarBehavior : MonoBehaviour
       itemRt.localScale = new Vector3(1, 1, 1);
       itemRt.anchoredPosition = nextPos;
       nextPos = itemRt.anchoredPosition - new Vector2(0, itemRt.rect.height);
-
       int tempIdx = i;
       item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
+            Tooltip newTT = item.AddComponent<Tooltip>();
+            newTT.setMessage(item.GetComponent<Item>().GetMessage());
       // anonymous function to update count
       itemButton.onClick.AddListener(() =>
       {
@@ -54,6 +56,7 @@ public class ActionBarBehavior : MonoBehaviour
   public void AddItem(GameObject newItem)
   {
     itemsAvailable.Add(newItem);
+
   }
 
   public void SetList(List<GameObject> newList)
@@ -66,4 +69,10 @@ public class ActionBarBehavior : MonoBehaviour
   {
     return itemsAvailable[itemIdx].GetComponent<Item>().DecreaseCount();
   }
+
+  public string SetToolTip(string item)
+    {
+        Debug.Log(item);
+        return item;
+    }
 }
