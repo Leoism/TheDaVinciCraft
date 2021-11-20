@@ -2090,6 +2090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 537420968}
   mainCamera: {fileID: 0}
+
   canvasRectTransform: {fileID: 716196287}
 --- !u!1 &1504013489
 GameObject:

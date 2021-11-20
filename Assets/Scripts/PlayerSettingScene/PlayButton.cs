@@ -20,7 +20,9 @@ public class PlayButton : MonoBehaviour
       Player humanPlayer = new Player();
       Player alienPlayer = new Player();
       humanPlayer.name = humanInput.text;
+      humanPlayer.type = "(Human)";
       alienPlayer.name = alienInput.text;
+      alienPlayer.type = "(Alien)";
       GameManager.globalManager.SetPlayers(humanPlayer, alienPlayer);
       SceneManager.LoadScene("BuyingMenu");
     });

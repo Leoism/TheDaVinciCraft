@@ -734,7 +734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8e8f5d9297d8342d68bebc6969282d63, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f52d54b2730746a0b279f6f17a84fd7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e3b869c69388645b0ad01f2886dc3cc4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b2464e547c5e470bbf49d0a0b8a59c1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2313,7 +2313,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 296a4b8fb9dfd4895aba925320133372, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 1378b34534bd543d19317556d12db9e0, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -2329,7 +2329,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 387542365}
         m_TargetAssemblyTypeName: GameSettingMenu, Assembly-CSharp
-        m_MethodName: Play
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2359,7 +2359,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 41c43469512364493af5cb4854914346, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a46ff7e238b5f450680cd99b34e0728d, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3036,7 +3036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 098b84362831c4f4685d88a164d476c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32b9d4808dabc41839c553cb772f1eb4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

@@ -6,10 +6,12 @@ public class ShootingBehavior : MonoBehaviour
 {
   // projectile settings
   public GameObject projectilePrefab = null;
+  public Inventory alienInventory;
   public GameObject trajectoryPointPrefab = null;
   public Transform projectileSpawnPoint = null;
   public GameObject powerBar = null;
   private GameObject[] trajectoryPoints;
+  public Gameplay gameplayScene = null;
   private int trajectoryPointCount = 20;
   private float trajectoryPointSpace = 0.0625f;
   // mouse settings
@@ -39,12 +41,14 @@ public class ShootingBehavior : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (projectilePrefab == null) return;
     DetectOnAim();
     OnAim();
   }
 
   void DetectOnAim()
   {
+    if (gameplayScene.IsItemEmpty()) return;
     if (Input.GetMouseButtonDown(0))
     {
       isAiming = true;
@@ -58,6 +62,7 @@ public class ShootingBehavior : MonoBehaviour
       CalculateShootSettings();
       Shoot();
       SetTrajectoryPointStatus(false);
+      gameplayScene.UseItem();
     }
   }
 

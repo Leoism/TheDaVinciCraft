@@ -7,7 +7,7 @@ public class GameSettingMenu : MonoBehaviour
 {
     public void Play()
     {
-        // SceneManager.LoadScene("PlayerSetting");
+        SceneManager.LoadScene("BuyingMenu");
     }
     public void Home()
     {

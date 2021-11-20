@@ -34,12 +34,12 @@ public class BattleSystem : MonoBehaviour
                 battleStateEcho.text = "ALIEN player - Buy Round";
                 break;
             case BattleState.HUMANBUILD:
-                humanActionBar.SetActive(true);
+                // humanActionBar.SetActive(true);
                 battleStateEcho.text = "HUMAN player - Build Round";
                 break;
             case BattleState.ALIENDESTROY:
-                humanActionBar.SetActive(false);
-                alienActionBar.SetActive(true);
+                // humanActionBar.SetActive(false);
+                // alienActionBar.SetActive(true);
                 battleStateEcho.text = "ALIEN player - Destroy Round";
                 break;
         }
