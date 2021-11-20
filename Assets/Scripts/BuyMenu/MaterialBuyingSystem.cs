@@ -206,20 +206,25 @@ public class MaterialBuyingSystem : MonoBehaviour
         newItem.SetCount(count);
         Button itemButton = null;
         switch(name) {
-            case "fabric": 
+            case "fabric":
                 itemButton = febric;
+                newItem.SetMessage("Fabric Material");
                 break;
             case "wood":
                 itemButton = wood;
+                newItem.SetMessage("Wood Material");
                 break;
             case "stone":
                 itemButton = stone;
+                newItem.SetMessage("Stone Material");
                 break;
             case "glass":
                 itemButton = glass;
+                newItem.SetMessage("Glass Material");
                 break;
             case "metal":
                 itemButton = metal;
+                newItem.SetMessage("Metal Material");
                 break;
             default:
                 break;
@@ -228,6 +233,7 @@ public class MaterialBuyingSystem : MonoBehaviour
         Image newImage = newGameObject.AddComponent<Image>();
         newImage.sprite = itemSprite;
         Button newButton = newGameObject.AddComponent<Button>();
+        
         newButton.GetComponent<RectTransform>().sizeDelta = new Vector2(128, 128);
         newGameObject.AddComponent<ItemPreserver>();
         GameObject textCount = new GameObject();

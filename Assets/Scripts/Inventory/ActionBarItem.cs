@@ -7,6 +7,7 @@ public class ActionBarItem : MonoBehaviour
 {
   public Text currentCount = null;
   public Item actionItem = null;
+    public string message;
   // Start is called before the first frame update
   void Start()
   {
@@ -23,4 +24,14 @@ public class ActionBarItem : MonoBehaviour
   {
     currentCount.text = newCount;
   }
+
+    public void SetMessage(string msg)
+    {
+        message = msg;
+    }
+
+    public string GetMessage()
+    {
+        return message;
+    }
 }

@@ -9,10 +9,11 @@ public class TooltipManager : MonoBehaviour
     public static TooltipManager _instance;
     public TextMeshProUGUI textComponent;
 
-    public Camera mainCamera = null;
     [SerializeField]
     private RectTransform canvasRectTransform;
+
     private RectTransform backgroundRectTransform;
+    private bool hasShown = false;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -22,10 +23,7 @@ public class TooltipManager : MonoBehaviour
         {
             _instance = this;
         }
-        //canvasRectTransform = mainCamera.GetComponent<RectTransform>();
         backgroundRectTransform = transform.GetComponent<RectTransform>();
-        Debug.Log(canvasRectTransform.rect.width);
-        Debug.Log(canvasRectTransform.rect.height);
     }
 
 
@@ -57,8 +55,30 @@ public class TooltipManager : MonoBehaviour
 
     public void SetAndShowToolTip(string message)
     {
+
+        if (message == "" || message == null)
+            return;
+
         gameObject.SetActive(true);
         textComponent.text = message;
+        textComponent.ForceMeshUpdate();
+
+        Vector2 textSize = textComponent.GetRenderedValues(false);
+        Vector2 paddingSize = new Vector2(8, 8);
+
+        backgroundRectTransform.sizeDelta = textSize + paddingSize;
+
+    }
+
+    public void renderToolTipSize(string message)
+    {
+        textComponent.ForceMeshUpdate();
+
+        Vector2 textSize = textComponent.GetRenderedValues(false);
+        Vector2 paddingSize = new Vector2(8, 8);
+
+        backgroundRectTransform.sizeDelta = textSize + paddingSize;
+
     }
 
     public void HideToolTip()

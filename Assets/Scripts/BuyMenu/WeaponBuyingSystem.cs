@@ -296,24 +296,30 @@ public class WeaponBuyingSystem : MonoBehaviour
         switch(name) {
             case "deforestor": 
                 itemButton = deforestor;
+                newItem.SetMessage("Deforestor - Strong against Wood! ");
                 break;
             case "mineral":
                 itemButton = mExtractor;
+                newItem.SetMessage("Mineral Extractor - Strong against Stone! ");
                 break;
             case "arrow":
                 itemButton = arrow;
                 break;
             case "ball":
                 itemButton = ball;
+                newItem.SetMessage("Bowling Ball - Strong against glass & stone! ");
                 break;
             case "boomerang":
                 itemButton = boomerange;
+                newItem.SetMessage("Boomerang - Strong against glass & fabric! ");
                 break;
             case "ray":
                 itemButton = ray;
+                newItem.SetMessage("Raygun - Strong against everything except glass! ");
                 break;
             case "grenade":
                 itemButton = grenade;
+                newItem.SetMessage("Grenade - Annihilates everything");
                 break;
             default:
                 break;
