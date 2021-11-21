@@ -208,23 +208,23 @@ public class MaterialBuyingSystem : MonoBehaviour
         switch(name) {
             case "fabric":
                 itemButton = febric;
-                newItem.SetMessage("Fabric Material");
+                newItem.SetMessage("Fabric Material ");
                 break;
             case "wood":
                 itemButton = wood;
-                newItem.SetMessage("Wood Material");
+                newItem.SetMessage("Wood Material ");
                 break;
             case "stone":
                 itemButton = stone;
-                newItem.SetMessage("Stone Material");
+                newItem.SetMessage("Stone Material ");
                 break;
             case "glass":
                 itemButton = glass;
-                newItem.SetMessage("Glass Material");
+                newItem.SetMessage("Glass Material ");
                 break;
             case "metal":
                 itemButton = metal;
-                newItem.SetMessage("Metal Material");
+                newItem.SetMessage("Metal Material ");
                 break;
             default:
                 break;
