@@ -276,6 +276,14 @@ public class WeaponBuyingSystem : MonoBehaviour
         {
             alienInventory.Add(CreateSprite(BoomCnt.boomCnt, "boomerang"));
         }
+        if (MagnetCnt.magCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(MagnetCnt.magCnt, "magnet"));
+        }
+        if (BombCnt.bombCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(BombCnt.bombCnt, "bomb"));
+        }
         if (RayCnt.rayCnt > 0)
         {
             alienInventory.Add(CreateSprite(RayCnt.rayCnt, "ray"));
@@ -304,6 +312,7 @@ public class WeaponBuyingSystem : MonoBehaviour
                 break;
             case "arrow":
                 itemButton = arrow;
+                newItem.SetMessage("Arrow - Tears apart fabrics! ");
                 break;
             case "ball":
                 itemButton = ball;
@@ -313,13 +322,21 @@ public class WeaponBuyingSystem : MonoBehaviour
                 itemButton = boomerange;
                 newItem.SetMessage("Boomerang - Strong against glass & fabric! ");
                 break;
+            case "magnet":
+                itemButton = magnet;
+                newItem.SetMessage("Magnet - Attracts metals! ");
+                break;
+            case "bomb":
+                itemButton = bomb;
+                newItem.SetMessage("Bomb - Destroys everything but metals! ");
+                break;
             case "ray":
                 itemButton = ray;
                 newItem.SetMessage("Raygun - Strong against everything except glass! ");
                 break;
             case "grenade":
                 itemButton = grenade;
-                newItem.SetMessage("Grenade - Annihilates everything");
+                newItem.SetMessage("Grenade - Annihilates everything! ");
                 break;
             default:
                 break;
