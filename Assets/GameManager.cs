@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +12,7 @@ public enum GameMode
 public class GameManager
 {
   public static readonly GameManager globalManager = new GameManager();
+  public readonly Timer Timer;
   public GameMode gameMode;
   public Inventory humanInventory;
   public Inventory alienInventory;
@@ -21,10 +21,14 @@ public class GameManager
   public Player alienPlayer;
   public Player humanPlayer;
 
+  private int _currentRound;
+
   public List<List<Player>> Rounds { get; private set; }
 
   private GameManager()
   {
+    Timer = new Timer();
+    _currentRound = 0;
   }
 
   public void Reset()
@@ -94,4 +98,47 @@ public class GameManager
 
     return humanTotalScore > alienTotalScore ? humanPlayer : (alienTotalScore > humanTotalScore ? alienPlayer : null);
   }
+
+  public string GetGameModeName()
+  {
+    return GameManager.globalManager.gameMode == GameMode.SHORT ? "Short" : (GameManager.globalManager.gameMode == GameMode.STANDARD ? "Standard" : "Long");
+  }
+
+  public List<int> GetMaterialCountForRound()
+    {
+        List<int> materialBuyingCount = new List<int>();
+        int materialCount = 20;
+        for (int i = 0; i < 13; i++)
+        {
+            materialBuyingCount.Add(materialCount);
+            materialCount += 10;
+        }
+        return materialBuyingCount;
+    }
+    public List<int> GetWeaponCountForRound()
+    {
+        List<int> weaponBuyingCount = new List<int>();
+        int weaponCount = 6;
+        for (int i = 0; i < 13; i++)
+        {
+            weaponBuyingCount.Add(weaponCount);
+            weaponCount += 6;
+        }
+        return weaponBuyingCount;
+    }
+
+    public int GetCurrentRound()
+    {
+        return _currentRound;
+    }
+
+    public void IncrementCurrRound()
+    {
+        _currentRound++;
+    }
+
+    public void ResetRound()
+    {
+        _currentRound = 0;
+    }
 }

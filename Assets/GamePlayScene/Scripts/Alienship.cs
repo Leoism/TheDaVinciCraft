@@ -41,6 +41,7 @@ public class Alienship : MonoBehaviour
             CountTenSec();
     }
 
+
     private void CountTenSec()
     {
         if (Timer.secRemaining < 10)

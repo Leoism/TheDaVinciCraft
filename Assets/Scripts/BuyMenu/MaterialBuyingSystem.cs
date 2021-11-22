@@ -21,12 +21,11 @@ public class MaterialBuyingSystem : MonoBehaviour
     [SerializeField] private Button metal;
     [SerializeField] private Button metalAdd;
     [SerializeField] private Button metalRemove;
-
+    [SerializeField] private BuyingSystem buySystem;
     // int variables
     private int totalMaterials;
     private int selectedMaterials = 0;
     // public static int round = 0;
-
 
     private void Awake() 
     {
@@ -39,7 +38,10 @@ public class MaterialBuyingSystem : MonoBehaviour
     }
     void Start()
     {
-        totalMaterials = 40;
+        buySystem.currentAdded = 0;
+        List<int> totalMaterialList = GameManager.globalManager.GetMaterialCountForRound();
+        int currentRound = buySystem.GetCurrentRound();
+        totalMaterials = totalMaterialList[currentRound];
         WoodCnt.woodCnt = 0;
         FebricCnt.febricCnt = 0;
         StoneCnt.stoneCnt = 0;
@@ -132,6 +134,7 @@ public class MaterialBuyingSystem : MonoBehaviour
         image.interactable = (selected < total);
         add.interactable = (selected < total);
         sub.interactable = (count > 0);
+        buySystem.incrementAdded();
         return count;
     }
     public int sub(Button image, Button add, Button sub, int total, int count, int selected)
@@ -140,6 +143,7 @@ public class MaterialBuyingSystem : MonoBehaviour
         add.interactable = (selected < total + 1);
         count -= 1;
         sub.interactable = (count > 0);
+        buySystem.decremenentAdded();
         return count;
     }
     private void inactiveAllButs()

@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EventSystemKeepSelected : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private EventSystem eventSystem;
+    private GameObject lastSelected = null;
     void Start()
     {
-        
+        eventSystem = GetComponent<EventSystem>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (eventSystem != null)
+        {
+            if (eventSystem.currentSelectedGameObject != null)
+            {
+                lastSelected = eventSystem.currentSelectedGameObject;
+            }
+            else
+            {
+                eventSystem.SetSelectedGameObject(lastSelected);
+            }
+        }
     }
 }

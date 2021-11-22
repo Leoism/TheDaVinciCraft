@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseButton
       objectReference: {fileID: 0}
+    - target: {fileID: 1126055256365176576, guid: b6c3784ac75e7594b985f1f554fa06cc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1126055256365176577, guid: b6c3784ac75e7594b985f1f554fa06cc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -17,8 +17,11 @@ public class SkipStateButtonHandler : MonoBehaviour
     // Skip to next state
     public void goNext()
     {
-        timer.finishState();
-        confirmBox.SetActive(false);
+        if (timer.battleSystem.state != BattleState.ALIENDESTROY)
+        {
+            timer.finishState();
+            confirmBox.SetActive(false);
+        }
     }
 
     public void showPanel()
