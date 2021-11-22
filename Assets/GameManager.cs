@@ -38,6 +38,7 @@ public class GameManager
     GameManager.globalManager.alienPlayer = null;
     GameManager.globalManager.humanPlayer = null;
     GameManager.globalManager.rounds = null;
+    currentRound = 0;
   }
 
   // Sets the weapons that the alien selected
