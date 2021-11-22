@@ -13,7 +13,6 @@ public class TooltipManager : MonoBehaviour
     private RectTransform canvasRectTransform;
 
     private RectTransform backgroundRectTransform;
-    private bool hasShown = false;
     private void Awake()
     {
         if (_instance != null && _instance != this)

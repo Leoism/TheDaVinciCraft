@@ -20,9 +20,12 @@ public class Timer : MonoBehaviour
     bool isDelayRunning = false;
     bool isPaused = false;
     bool gameStarted = false;
+    bool isLastState = false;
+    int roundCount;
     // Start is called before the first frame update
     void Start()
     {
+        roundCount = 0;
         gameStarted = true;
         delayRemaining = roundDelayTime;
     }
@@ -67,9 +70,11 @@ public class Timer : MonoBehaviour
                     isTimerRunning = true;
                     break;
                 case BattleState.ALIENDESTROY:
-                    secRemaining = 60f;
-                    isTimerRunning = true;
-                    break;
+                        secRemaining = 60f;
+                        isTimerRunning = true;
+                        isLastState = true;
+                        GameManager.globalManager.IncrementCurrRound();
+                        break;
                 default: break;
             }
         }
@@ -184,6 +189,11 @@ public class Timer : MonoBehaviour
             prevTitle = roundTitle.text;
             Time.timeScale = 0;
         }
+    }
+
+    public int GetRound()
+    {
+        return roundCount;
     }
 }
 

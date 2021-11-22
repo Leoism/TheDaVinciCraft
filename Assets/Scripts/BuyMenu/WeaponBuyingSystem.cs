@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class WeaponBuyingSystem : MonoBehaviour
 {
@@ -32,10 +33,13 @@ public class WeaponBuyingSystem : MonoBehaviour
     [SerializeField] private Button grenade;
     [SerializeField] private Button grenadeAdd;
     [SerializeField] private Button grenadeSub;
-
-        // int variables
+    [SerializeField] private BuyingSystem buySystem;
+    
+    // int variables
     private int totalWeapons;
     private int selectedWeapons = 0;
+
+
     private void Awake()
     {
         deSub.interactable = (DeforestorCnt.deCnt > 0);
@@ -50,7 +54,10 @@ public class WeaponBuyingSystem : MonoBehaviour
     }
     void Start()
     {
-        totalWeapons = 6;
+        buySystem.currentAdded = 0;
+        List<int> totalWeaponsList = GameManager.globalManager.GetWeaponCountForRound();
+        int currentRound = buySystem.GetCurrentRound();
+        totalWeapons = totalWeaponsList[currentRound];
         DeforestorCnt.deCnt = 0;
         MECnt.meCnt = 0;
         ArrowCnt.arrCnt = 0;
@@ -203,6 +210,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         image.interactable = (selected < total);
         add.interactable = (selected < total);
         sub.interactable = (count > 0);
+        buySystem.incrementAdded();
         return count;
     }
     private int sub(Button image, Button add, Button sub, int total, int count, int selected)
@@ -211,6 +219,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         add.interactable = (selected < total + 1);
         count -= 1;
         sub.interactable = (count > 0);
+        buySystem.decremenentAdded();
         return count;
     }
 
