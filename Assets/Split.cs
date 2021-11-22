@@ -9,6 +9,8 @@ public class Split : MonoBehaviour
     public TileBase CurrentTileToAdd;
     public GameObject shatter;
     private Tilemap tl;
+    private Tile t;
+    private ShatterableBehavior sb;
     private bool create = false;
     private Vector3Int oldTilePos;
     [SerializeField] private Tilemap tilemapPrefab;
@@ -17,20 +19,12 @@ public class Split : MonoBehaviour
     void Start()
     {
         tl = GetComponent<Tilemap>();
+        shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*  for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x; x++)
-          {
-              for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y; y++)
-              {
-                  if (tl.GetTile(new Vector3Int(x, y, 0)) != null)
-                  {
-                     Debug.Log(new Vector3Int(x, y, 0));
-                  }
-              }
-          }*/
+        
         _addedTiles.Clear();
         bool breaking = true;
 
@@ -42,22 +36,57 @@ public class Split : MonoBehaviour
             List<Vector3Int> hitPos = new List<Vector3Int>();
             foreach (ContactPoint2D hit in collision.contacts)
             {
-                //Debug.Log("BEFORE HIT AT: " + GetComponent<Tilemap>().WorldToCell(hitPosition) + "Normal Pos" + GetComponent<Tilemap>().CellToWorld(GetComponent<Tilemap>().WorldToCell(hitPosition)));
                 hitPosition.x = hit.point.x + 2f * hit.normal.x;
                 hitPosition.y = hit.point.y + 2f * hit.normal.y;
-                // Debug.Log("Pos " + hit.point.x + " normal " + hit.normal.x +  " final " + GetComponent<Tilemap>().WorldToCell(hitPosition).x);
-                // Debug.Log("HIT AT: " + GetComponent<Tilemap>().WorldToCell(hitPosition) + "Normal Pos" + GetComponent<Tilemap>().CellToWorld(GetComponent<Tilemap>().WorldToCell(hitPosition)));
+
+                t = tl.GetTile<Tile>(tl.WorldToCell(hitPosition));
+               // Debug.Log(t.sprite);
                 if (tl.GetTile(tl.WorldToCell(hitPosition)) != null)
                 {
                     tl.SetTile(tl.WorldToCell(hitPosition), null);
                     hitPos.Add(tl.WorldToCell(hitPosition));
+                  
                     tilesDestroyed++;
                 }
+              
             }
+            shatter.GetComponent<SpriteRenderer>().sprite = t.sprite;
             for (int i = 0; i <= tilesDestroyed - 1; i++)
             {
-               // GameObject s = Instantiate(shatter, tl.GetCellCenterWorld(hitPos[i]), Quaternion.identity);
-                //s.GetComponent<ShatterableBehavior>().Shatter(1);
+                Vector3 shattterPos = tl.GetCellCenterWorld(hitPos[i]);
+                // GameObject s = Instantiate(shatter, shattterPos, Quaternion.identity);
+                for (int z = 0; z < 4; z++)
+                {
+                    shattterPos = tl.GetCellCenterWorld(hitPos[i]);
+                    switch (z)
+                    {
+                        case 0:
+                            shattterPos.y = shattterPos.y + 0.5f;
+                            shattterPos.x = shattterPos.x - 0.5f;
+                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            break;
+                        case 1:
+                            shattterPos.y = shattterPos.y + 0.5f;
+                            shattterPos.x = shattterPos.x + 0.5f;
+                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            break;
+                        case 2:
+                            shattterPos.y = shattterPos.y - 0.5f;
+                            shattterPos.x = shattterPos.x - 0.5f;
+                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            break;
+                        case 3:
+                            shattterPos.y = shattterPos.y - 0.5f;
+                            shattterPos.x = shattterPos.x + 0.5f;
+                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            break;
+                    }
+                    
+                }
+                    
+             /*   sb = s.GetComponent<ShatterableBehavior>();
+                sb.sr = s.GetComponent<SpriteRenderer>();
+                sb.triggerShatter();*/
             }
 
             Destroy(collision.gameObject);

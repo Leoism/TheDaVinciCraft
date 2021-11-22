@@ -16,6 +16,7 @@ public class AddTilemap : MonoBehaviour
     [SerializeField] private int currentTileToAddIndex;
     [SerializeField] private Tilemap tilemapPrefab;
     [SerializeField] private Tilemap tempTilemap;
+    public TileBase tileType;
     private bool xDom;
     private bool yDom;
     private bool placed;
@@ -67,7 +68,7 @@ public class AddTilemap : MonoBehaviour
        // Debug.Log(EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject.CompareTag(""));
          if (CurrentTileToAdd != null && Input.GetMouseButton(0) && !(EventSystem.current.IsPointerOverGameObject () && 
      EventSystem.current.currentSelectedGameObject != null && 
-     EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )))
+     EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )) && GameManager.globalManager.humanInventory.TotalCount() != 0)
         {
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var newTilePos = _grid.WorldToCell(mousePos);
