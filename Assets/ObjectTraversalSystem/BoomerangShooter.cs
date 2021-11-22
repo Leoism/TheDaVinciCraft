@@ -61,6 +61,7 @@ public class BoomerangShooter : MonoBehaviour
     bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
     bb.SetLifespan(5f * multiplier);
 
+    boomerangPrefab = null;
     gameplayScene.UseItem();
   }
 

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Gameplay : MonoBehaviour
 {
-    public WeaponDB weaponDB;
+    public WeaponStore weaponStore;
     public Timer gameTimer;
     public Camera mainCamera;
     public Transform buildingZone;
@@ -19,8 +19,10 @@ public class Gameplay : MonoBehaviour
     public BoomerangShooter boomerangShooter;
     public RayShooter rayShooter;
     public AddTilemap tilemapAdder;
-    public GameObject currentItem;
-    public GameObject prevItem;
+
+
+    private GameObject _currentItem;
+    private GameObject _prevItem;
 
     private void Start()
     {
@@ -53,7 +55,7 @@ public class Gameplay : MonoBehaviour
                     go.GetComponent<RectTransform>().anchoredPosition3D.y, 1);
             }
 
-            currentItem = null;
+            _currentItem = null;
             actionBarBehavior.Reset();
             GameManager.globalManager.alienInventory.actionBar = actionBarBehavior;
             actionBarBehavior.SetList(GameManager.globalManager.alienInventory.GetInventoryList());
@@ -67,10 +69,10 @@ public class Gameplay : MonoBehaviour
             534f * Time.smoothDeltaTime);
         mainCamera.orthographicSize =
             Mathf.MoveTowards(mainCamera.orthographicSize, 50f, 40f * Time.smoothDeltaTime);
-        if (currentItem != null)
+        if (_currentItem != null)
         {
             Tile currentTile = new Tile();
-            currentTile.sprite = currentItem.GetComponent<Image>().sprite;
+            currentTile.sprite = _currentItem.GetComponent<Image>().sprite;
             tilemapAdder.UpdateTileArt(currentTile);
         }
     }
@@ -87,9 +89,9 @@ public class Gameplay : MonoBehaviour
         if (mainCamera.transform.position == alienZone.position)
             alienship.Init();
 
-        if (currentItem != null && currentItem != prevItem)
+        if (_currentItem != null && _currentItem != _prevItem)
         {
-            var weaponSO = weaponDB.GetWeaponFromBuyingSystemName(currentItem.name);
+            var weaponSO = weaponStore.GetWeaponFromBuyingSystemName(_currentItem.name);
 
             switch (weaponSO.travelBehavior)
             {
@@ -97,9 +99,15 @@ public class Gameplay : MonoBehaviour
                     throw new NotImplementedException();
 
                 case TravelBehavior.Boomerang:
+                {
+                    boomerangShooter.boomerangPrefab = weaponSO.prefab;
+                    _prevItem = _currentItem;
+                    break;
+                }
                 case TravelBehavior.Linear:
                 {
                     rayShooter.rayPrefab = weaponSO.prefab;
+                    _prevItem = _currentItem;
                     break;
                 }
 
@@ -110,7 +118,7 @@ public class Gameplay : MonoBehaviour
                         name = "Projectile"
                     };
 
-                    newProjectile.AddComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
+                    newProjectile.AddComponent<SpriteRenderer>().sprite = _currentItem.GetComponent<Image>().sprite;
                     newProjectile.AddComponent<Rigidbody2D>();
                     newProjectile.AddComponent<BoxCollider2D>();
                     newProjectile.tag = "Weapon";
@@ -118,7 +126,7 @@ public class Gameplay : MonoBehaviour
                     // the game object is needed to be used as a prefab
                     newProjectile.transform.position = new Vector3(-5000, -5000, -5000);
                     shootingBehavior.projectilePrefab = newProjectile;
-                    prevItem = currentItem;
+                    _prevItem = _currentItem;
                     break;
                 }
 
@@ -131,23 +139,23 @@ public class Gameplay : MonoBehaviour
 
     public void UseItem()
     {
-        if (currentItem.GetComponent<Item>().DecreaseCount() == 0 &&
+        if (_currentItem.GetComponent<Item>().DecreaseCount() == 0 &&
             gameTimer.GetCurrentPlayer().Equals("Human"))
         {
             tilemapAdder.CreateTileMap();
             tilemapAdder.UpdateTileArt(null);
-            currentItem = null;
+            _currentItem = null;
         }
     }
 
     public bool IsItemEmpty()
     {
-        return currentItem && currentItem.GetComponent<Item>().GetCount() == 0;
+        return _currentItem && _currentItem.GetComponent<Item>().GetCount() == 0;
     }
 
     public void SetProjectile(GameObject newProjectile)
     {
-        prevItem = currentItem;
-        currentItem = newProjectile;
+        _prevItem = _currentItem;
+        _currentItem = newProjectile;
     }
 }

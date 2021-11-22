@@ -1897,7 +1897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77dbb488f9188f41a568b2485638257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDB: {fileID: 11400000, guid: d07202a7513b81c44bfe13b572db3847, type: 2}
+  weaponStore: {fileID: 11400000, guid: d07202a7513b81c44bfe13b572db3847, type: 2}
   gameTimer: {fileID: 1876572932}
   mainCamera: {fileID: 350305}
   buildingZone: {fileID: 1503800019}
@@ -1909,8 +1909,6 @@ MonoBehaviour:
   boomerangShooter: {fileID: 1317540229}
   rayShooter: {fileID: 1317540228}
   tilemapAdder: {fileID: 519856263}
-  currentItem: {fileID: 0}
-  prevItem: {fileID: 0}
 --- !u!1 &1317540223
 GameObject:
   m_ObjectHideFlags: 0

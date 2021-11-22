@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eraser Ray
   m_EditorClassIdentifier: 
   name: Eraser Ray
-  prefab: {fileID: 7325736790143997498, guid: 5f18f12fb65616d4999d232f1673826c, type: 3}
+  prefab: {fileID: 5417275941265449733, guid: e8a165b510800854ab89a08740003d69, type: 3}
   strongAgainst:
   - {fileID: 11400000, guid: dd44d43d8f7b1a74a99d7c26796c753f, type: 2}
   - {fileID: 11400000, guid: 7d7bc95e75322394d9eb1d3d63f83ea0, type: 2}

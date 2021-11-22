@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GamePlayScene.ScriptableObjects.WeaponsScriptableObject
 {
     [CreateAssetMenu]
-    public class WeaponDB : ScriptableObject
+    public class WeaponStore : ScriptableObject
     {
         public List<WeaponScriptableObject> allWeapons;
 
@@ -15,7 +15,7 @@ namespace GamePlayScene.ScriptableObjects.WeaponsScriptableObject
         /// by name as defined in the Scriptable objects
         /// </summary>
         /// <param name="weaponName"> The weapon's name </param>
-        /// <returns> The WeaponScriptableObject id found, null otherwise </returns>
+        /// <returns> The WeaponScriptableObject if found, null otherwise </returns>
         public WeaponScriptableObject GetWeaponFromSOName(string weaponName)
         {
             return allWeapons.FirstOrDefault(w => w.name == weaponName);
@@ -26,7 +26,7 @@ namespace GamePlayScene.ScriptableObjects.WeaponsScriptableObject
         /// by name as defined in the Buying System
         /// </summary>
         /// <param name="weaponName"> The weapon's name </param>
-        /// <returns> The WeaponScriptableObject id found, null otherwise </returns>
+        /// <returns> The WeaponScriptableObject if found, null otherwise </returns>
         public WeaponScriptableObject GetWeaponFromBuyingSystemName(string weaponName)
         {
             return weaponName switch
@@ -47,7 +47,7 @@ namespace GamePlayScene.ScriptableObjects.WeaponsScriptableObject
         /// by name as defined in Scriptable objects then the Buying System
         /// </summary>
         /// <param name="weaponName"> The weapon's name</param>
-        /// <returns> The WeaponScriptableObject id found, null otherwise </returns>
+        /// <returns> The WeaponScriptableObject if found, null otherwise </returns>
         public WeaponScriptableObject GetWeaponFromName(string weaponName)
         {
             return GetWeaponFromSOName(weaponName) ?? GetWeaponFromBuyingSystemName(weaponName);

@@ -29,6 +29,7 @@ public class RayShooter : MonoBehaviour
     RayBehavior rb = newRay.AddComponent<RayBehavior>();
     rb.SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
+    rayPrefab = null;
     gameplayScene.UseItem();
   }
 }
