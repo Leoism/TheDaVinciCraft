@@ -8,7 +8,7 @@ public class ShatterableBehavior : MonoBehaviour
     public float threshhold = 100f; // the max velocity that the object can take
     public int maxShards = 100; // the amount of shattered materials to make
     public GameObject tilePrefab = null;
-    private SpriteRenderer sr = null;
+    public SpriteRenderer sr = null;
     private Vector2 spriteDimensions;
     private float minImpactVel = 0f; // the minimum velocity an object must hit at to shatter this object
     private float totalAccum = 0f; // total velocity accumulated from hits 
@@ -26,15 +26,22 @@ public class ShatterableBehavior : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void triggerShatter ()
+    {
+        Debug.Log("Da fuck");
+        Shatter(1f);
+        Destroy(gameObject);
+
+    }
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        //if (!collision.gameObject.name.Contains("Circle")) return;
-
-        Debug.Log("Im here");
+       if (!collision.gameObject.name.Contains("Circle")) return;
+      //  if (collision.gameObject.tag != ("Weapon")) return;
         GameObject go = collision.gameObject;
         Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
         float impactVelocity = rb.velocity.magnitude;
+      
         if (impactVelocity < minImpactVel && totalAccum < minImpactVel)
         {
             totalAccum += impactVelocity > minImpactVel * 0.25f ? impactVelocity : 0; // we only want to account large impacts not small negligible ones
@@ -42,10 +49,12 @@ public class ShatterableBehavior : MonoBehaviour
         }
         if (totalAccum > minImpactVel)
         {
+            Debug.Log("Mathf.Min(totalAccum / threshhold, 1): " + Mathf.Min(totalAccum / threshhold, 1));
             Shatter(Mathf.Min(totalAccum / threshhold, 1));
         }
         else
         {
+            Debug.Log("Mathf.Min(impactVelocity / threshhold, 1): " + Mathf.Min(impactVelocity / threshhold, 1));
             Shatter(Mathf.Min(impactVelocity / threshhold, 1));
         }
         Destroy(gameObject);
@@ -58,7 +67,8 @@ public class ShatterableBehavior : MonoBehaviour
         // calculate amount of shards the shatter will make
         // by square rooting and rounding then squaring, we can assure a perfect
         // amount of shards fit inside our tiles (Square) 
-        int numShards = (int)Mathf.Pow(Mathf.Floor(Mathf.Sqrt((int)Mathf.Round(maxShards * shatterStrength))), 2f);
+        //  int numShards = (int)Mathf.Pow(Mathf.Floor(Mathf.Sqrt((int)Mathf.Round(maxShards * shatterStrength))), 2f);
+        int numShards = 4;
         // calculate size of each shard to fill the current area
         float shardDimensions = FitSquares(spriteDimensions.x, spriteDimensions.y, numShards);
         int rowAmount = (int)(spriteDimensions.y / shardDimensions);
