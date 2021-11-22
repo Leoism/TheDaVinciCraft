@@ -27,14 +27,13 @@ public class Gameplay : MonoBehaviour
     private void Start()
     {
         gameTimer.battleSystem.SetBattleState(BattleState.HUMANBUILD);
-        foreach (var go in GameManager.globalManager.humanInventory.GetInventoryList())
+        foreach (var go in GameManager.globalManager.humanInventory.CurrentInventory)
         {
             go.transform.parent = mainCanvas.transform;
             go.transform.localScale = new Vector3(1, 1, 1);
         }
 
-        GameManager.globalManager.humanInventory.actionBar = actionBarBehavior;
-        actionBarBehavior.SetList(GameManager.globalManager.humanInventory.GetInventoryList());
+        actionBarBehavior.SetList(GameManager.globalManager.humanInventory.CurrentInventory);
     }
 
     private void Update()
@@ -46,7 +45,7 @@ public class Gameplay : MonoBehaviour
 
         if (gameTimer.IsTimeUp() && gameTimer.GetCurrentPlayer().Equals("Alien"))
         {
-            foreach (var go in GameManager.globalManager.alienInventory.GetInventoryList())
+            foreach (var go in GameManager.globalManager.alienInventory.CurrentInventory)
             {
                 go.transform.parent = mainCanvas.transform;
                 go.transform.localScale = new Vector3(1, 1, 1);
@@ -57,8 +56,7 @@ public class Gameplay : MonoBehaviour
 
             _currentItem = null;
             actionBarBehavior.Reset();
-            GameManager.globalManager.alienInventory.actionBar = actionBarBehavior;
-            actionBarBehavior.SetList(GameManager.globalManager.alienInventory.GetInventoryList());
+            actionBarBehavior.SetList(GameManager.globalManager.alienInventory.CurrentInventory);
             tilemapAdder.enabled = false;
         }
     }
