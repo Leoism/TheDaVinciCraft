@@ -57,8 +57,9 @@ public class BuyingSystem : MonoBehaviour
         currentAdded = 0;
     }
 
-    public void ResetRound()
+    public void ResetRounds()
     {
+        currentAdded = 0;
         GameManager.globalManager.ResetRound();
     }
 }
