@@ -9,10 +9,11 @@ public class Player
   public string type = "Default";
   public Player Clone()
   {
-    Player newPlayer = new Player();
-    newPlayer.points = points;
-    newPlayer.name = name;
-    newPlayer.type = type;
-    return newPlayer;
+    return new Player
+    {
+      points = points,
+      name = name,
+      type = type
+    };
   }
 }
