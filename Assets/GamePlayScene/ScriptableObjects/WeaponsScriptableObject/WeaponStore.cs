@@ -38,6 +38,7 @@ namespace GamePlayScene.ScriptableObjects.WeaponsScriptableObject
                 "bomb" => GetWeaponFromSOName("Bomb"),
                 "ray" => GetWeaponFromSOName("Eraser Ray"),
                 "grenade" => GetWeaponFromSOName("Grenade"),
+                "arrow" => GetWeaponFromSOName("Arrow"),
                 _ => null
             };
         }
