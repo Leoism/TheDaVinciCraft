@@ -15,6 +15,6 @@ public class Inventory
   // retrieves the total amount of inventory count
   public int TotalCount()
   {
-    return CurrentInventory.Sum(o => o.GetComponent<Item>().GetCount());
+    return CurrentInventory.Sum(o => o.GetComponent<Item>().Count);
   }
 }

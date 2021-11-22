@@ -23,9 +23,9 @@ public class ActionBarBehavior : MonoBehaviour
             itemRt.anchoredPosition = nextPos;
             nextPos = itemRt.anchoredPosition - new Vector2(0, itemRt.rect.height);
             int tempIdx = i;
-            item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
+            item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().Count.ToString();
             Tooltip newTT = item.AddComponent<Tooltip>();
-            newTT.setMessage(item.GetComponent<Item>().GetMessage());
+            newTT.setMessage(item.GetComponent<Item>().Message);
             // anonymous function to update count
             itemButton.onClick.AddListener(() => { gameplayScene.SetProjectile(item); });
         }
@@ -54,7 +54,7 @@ public class ActionBarBehavior : MonoBehaviour
 
     public int UseItem(int itemIdx)
     {
-        return itemsAvailable[itemIdx].GetComponent<Item>().DecreaseCount();
+        return itemsAvailable[itemIdx].GetComponent<Item>().DecreaseCountInsureNonNegative();
     }
 
     public string SetToolTip(string item)

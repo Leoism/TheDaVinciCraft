@@ -299,44 +299,44 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         GameObject newGameObject = new GameObject();
         Item newItem = newGameObject.AddComponent<Item>();
-        newItem.SetCount(count);
+        newItem.Count = count;
         Button itemButton = null;
         switch(name) {
             case "deforestor": 
                 itemButton = deforestor;
-                newItem.SetMessage("Deforestor - Strong against Wood! ");
+                newItem.Message = "Deforestor - Strong against Wood! ";
                 break;
             case "mineral":
                 itemButton = mExtractor;
-                newItem.SetMessage("Mineral Extractor - Strong against Stone! ");
+                newItem.Message = "Mineral Extractor - Strong against Stone! ";
                 break;
             case "arrow":
                 itemButton = arrow;
-                newItem.SetMessage("Arrow - Tears apart fabrics! ");
+                newItem.Message = "Arrow - Tears apart fabrics! ";
                 break;
             case "ball":
                 itemButton = ball;
-                newItem.SetMessage("Bowling Ball - Strong against glass & stone! ");
+                newItem.Message = "Bowling Ball - Strong against glass & stone! ";
                 break;
             case "boomerang":
                 itemButton = boomerange;
-                newItem.SetMessage("Boomerang - Strong against glass & fabric! ");
+                newItem.Message = "Boomerang - Strong against glass & fabric! ";
                 break;
             case "magnet":
                 itemButton = magnet;
-                newItem.SetMessage("Magnet - Attracts metals! ");
+                newItem.Message = "Magnet - Attracts metals! ";
                 break;
             case "bomb":
                 itemButton = bomb;
-                newItem.SetMessage("Bomb - Destroys everything but metals! ");
+                newItem.Message = "Bomb - Destroys everything but metals! ";
                 break;
             case "ray":
                 itemButton = ray;
-                newItem.SetMessage("Raygun - Strong against everything except glass! ");
+                newItem.Message = "Raygun - Strong against everything except glass! ";
                 break;
             case "grenade":
                 itemButton = grenade;
-                newItem.SetMessage("Grenade - Annihilates everything! ");
+                newItem.Message = "Grenade - Annihilates everything! ";
                 break;
             default:
                 break;

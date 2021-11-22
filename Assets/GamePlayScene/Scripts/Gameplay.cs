@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GamePlayScene.ScriptableObjects.MaterialsScriptableObject;
 using GamePlayScene.ScriptableObjects.WeaponsScriptableObject;
 using UnityEngine;
@@ -53,7 +54,6 @@ public class Gameplay : MonoBehaviour
                     go.GetComponent<RectTransform>().anchoredPosition3D.x,
                     go.GetComponent<RectTransform>().anchoredPosition3D.y, 1);
             }
-
             _currentItem = null;
             actionBarBehavior.Reset();
             actionBarBehavior.SetList(GameManager.globalManager.alienInventory.CurrentInventory);
@@ -137,7 +137,7 @@ public class Gameplay : MonoBehaviour
 
     public void UseItem()
     {
-        if (_currentItem.GetComponent<Item>().DecreaseCount() == 0 &&
+        if (_currentItem.GetComponent<Item>().DecreaseCountInsureNonNegative() == 0 &&
             gameTimer.GetCurrentPlayer().Equals("Human"))
         {
             tilemapAdder.CreateTileMap();
@@ -148,7 +148,7 @@ public class Gameplay : MonoBehaviour
 
     public bool IsItemEmpty()
     {
-        return _currentItem && _currentItem.GetComponent<Item>().GetCount() == 0;
+        return _currentItem && _currentItem.GetComponent<Item>().Count == 0;
     }
 
     public void SetProjectile(GameObject newProjectile)
