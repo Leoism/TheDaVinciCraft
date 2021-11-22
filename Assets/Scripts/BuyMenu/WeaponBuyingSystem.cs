@@ -356,6 +356,9 @@ public class WeaponBuyingSystem : MonoBehaviour
 
         ActionBarItem actionBarItem = newGameObject.AddComponent<ActionBarItem>();
         actionBarItem.actionItem = newItem;
+
+        newGameObject.name = name;
+
         return newGameObject;
     }
 }

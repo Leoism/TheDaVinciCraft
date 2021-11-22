@@ -567,9 +567,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 595729585}
   - {fileID: 30402598}
   - {fileID: 2036412268}
-  - {fileID: 595729585}
   - {fileID: 1876572931}
   - {fileID: 1164047177}
   - {fileID: 1999188320}
@@ -972,7 +972,7 @@ RectTransform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 418612266}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -1034,7 +1034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 855464316349763319, guid: ffd24989f4cd57e46a63779452a7ec0d, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 855464316349763319, guid: ffd24989f4cd57e46a63779452a7ec0d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1373,7 +1373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1061570918646657404, guid: 3525bb91ce4a96748b4e10df0f977eee, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1061570918646657404, guid: 3525bb91ce4a96748b4e10df0f977eee, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1897,6 +1897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77dbb488f9188f41a568b2485638257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDB: {fileID: 11400000, guid: d07202a7513b81c44bfe13b572db3847, type: 2}
   gameTimer: {fileID: 1876572932}
   mainCamera: {fileID: 350305}
   buildingZone: {fileID: 1503800019}
@@ -1905,6 +1906,8 @@ MonoBehaviour:
   mainCanvas: {fileID: 418612265}
   actionBarBehavior: {fileID: 595729586}
   shootingBehavior: {fileID: 1317540227}
+  boomerangShooter: {fileID: 1317540229}
+  rayShooter: {fileID: 1317540228}
   tilemapAdder: {fileID: 519856263}
   currentItem: {fileID: 0}
   prevItem: {fileID: 0}
@@ -1920,6 +1923,8 @@ GameObject:
   - component: {fileID: 1317540224}
   - component: {fileID: 1317540226}
   - component: {fileID: 1317540227}
+  - component: {fileID: 1317540229}
+  - component: {fileID: 1317540228}
   m_Layer: 0
   m_Name: Alienship
   m_TagString: Untagged
@@ -2023,6 +2028,37 @@ MonoBehaviour:
   trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   projectileSpawnPoint: {fileID: 2147219063}
   powerBar: {fileID: 734583843}
+  gameplayScene: {fileID: 1281474590}
+--- !u!114 &1317540228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317540223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc84c199803b1e14ea97363909021d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayPrefab: {fileID: 0}
+  spawnPoint: {fileID: 2147219063}
+  gameplayScene: {fileID: 1281474590}
+--- !u!114 &1317540229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317540223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531c53f9b320c0e46be2869b50985cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boomerangPrefab: {fileID: 0}
+  spawnPoint: {fileID: 2147219063}
+  trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   gameplayScene: {fileID: 1281474590}
 --- !u!1 &1396289729
 GameObject:
