@@ -21,10 +21,11 @@ public class GameManager
   public Player alienPlayer = null;
   public Player humanPlayer = null;
   private List<List<Player>> rounds = null;
-
+  private int currentRound;
   private GameManager()
   {
     timer = new Timer();
+    currentRound = 0;
   }
 
   public void Reset()
@@ -107,4 +108,37 @@ public class GameManager
   {
     return GameManager.globalManager.gameMode == GameMode.SHORT ? "Short" : (GameManager.globalManager.gameMode == GameMode.STANDARD ? "Standard" : "Long");
   }
+
+  public List<int> GetMaterialCountForRound()
+    {
+        List<int> materialBuyingCount = new List<int>();
+        int materialCount = 20;
+        for (int i = 0; i < 13; i++)
+        {
+            materialBuyingCount.Add(materialCount);
+            materialCount += 10;
+        }
+        return materialBuyingCount;
+    }
+    public List<int> GetWeaponCountForRound()
+    {
+        List<int> weaponBuyingCount = new List<int>();
+        int weaponCount = 6;
+        for (int i = 0; i < 13; i++)
+        {
+            weaponBuyingCount.Add(weaponCount);
+            weaponCount += 6;
+        }
+        return weaponBuyingCount;
+    }
+
+    public int GetCurrentRound()
+    {
+        return currentRound;
+    }
+
+    public void IncrementCurrRound()
+    {
+        currentRound++;
+    }
 }
