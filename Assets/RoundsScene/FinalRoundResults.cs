@@ -8,7 +8,7 @@ public class FinalRoundResults : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    List<List<Player>> rounds = GameManager.globalManager.GetRounds();
+    List<List<Player>> rounds = GameManager.globalManager.Rounds;
     string resultsStr = "Final Round Results\n\n";
     for (int i = 0; i < rounds.Count; i++)
     {
