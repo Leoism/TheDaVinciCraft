@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class ShootingBehavior : MonoBehaviour
 {
   // projectile settings
@@ -42,13 +42,22 @@ public class ShootingBehavior : MonoBehaviour
   void Update()
   {
     if (projectilePrefab == null) return;
-    DetectOnAim();
-    OnAim();
+    if (!(EventSystem.current.IsPointerOverGameObject() &&
+         EventSystem.current.currentSelectedGameObject != null &&
+         EventSystem.current.currentSelectedGameObject.CompareTag("Button")))
+        {
+            DetectOnAim();
+            OnAim();
+        }
   }
 
   void DetectOnAim()
   {
     if (gameplayScene.IsItemEmpty()) return;
+
+      /*  if (CurrentTileToAdd != null && Input.GetMouseButton(0) && !(EventSystem.current.IsPointerOverGameObject() &&
+         EventSystem.current.currentSelectedGameObject != null &&
+         EventSystem.current.currentSelectedGameObject.CompareTag("Button")))*/
     if (Input.GetMouseButtonDown(0))
     {
       isAiming = true;
