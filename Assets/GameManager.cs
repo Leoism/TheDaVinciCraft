@@ -141,4 +141,9 @@ public class GameManager
     {
         currentRound++;
     }
+
+    public void ResetRound()
+    {
+        currentRound = 0;
+    }
 }

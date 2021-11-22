@@ -38,6 +38,8 @@ public class WeaponBuyingSystem : MonoBehaviour
     // int variables
     private int totalWeapons;
     private int selectedWeapons = 0;
+
+
     private void Awake()
     {
         deSub.interactable = (DeforestorCnt.deCnt > 0);
