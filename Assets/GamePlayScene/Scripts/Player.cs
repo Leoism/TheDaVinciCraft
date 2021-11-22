@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Player
 {
-  public int points = 0;
-  public string name = "Default";
-  public string type = "Default";
-  public Player Clone()
+  public int Points;
+  public string Name = "Default";
+  public string Type = "Default";
+  public Player Clone(int? newPoints = null, string newName = null, string newType = null)
   {
     return new Player
     {
-      points = points,
-      name = name,
-      type = type
+      Points = newPoints ?? Points,
+      Name = newName ?? Name,
+      Type = newType ?? Type
     };
   }
 }

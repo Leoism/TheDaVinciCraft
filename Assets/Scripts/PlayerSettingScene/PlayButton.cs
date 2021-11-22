@@ -22,13 +22,13 @@ public class PlayButton : MonoBehaviour
 
             Player humanPlayer = new Player
             {
-                name = humanInput.text,
-                type = "(Human)"
+                Name = humanInput.text,
+                Type = "(Human)"
             };
             Player alienPlayer = new Player
             {
-                name = alienInput.text,
-                type = "(Alien)"
+                Name = alienInput.text,
+                Type = "(Alien)"
             };
             GameManager.globalManager.SetPlayers(humanPlayer, alienPlayer);
             SceneManager.LoadScene("BuyingMenu");

@@ -65,14 +65,13 @@ public class GameManager
 
   /// Returns true if there are still rounds to complete, otherwise returns
   /// false
-  public bool SaveRound(int humanScore, int alienScore)
+  public void SaveRound(int humanScore, int alienScore)
   {
-    Player alien = alienPlayer.Clone();
-    alien.points = alienScore;
-    Player human = humanPlayer.Clone();
-    human.points = humanScore;
-    Rounds.Add(new List<Player>() { human, alien });
-    return Rounds.Count >= (int)gameMode;
+    Rounds.Add(new List<Player>
+    {
+      humanPlayer.Clone( newPoints: humanScore ),
+      alienPlayer.Clone( newPoints: alienScore )
+    });
   }
 
   // Sets the human player and alien player
@@ -89,8 +88,8 @@ public class GameManager
     int alienTotalScore = 0;
     foreach (List<Player> round in Rounds)
     {
-      humanTotalScore += round[0].points;
-      alienTotalScore += round[1].points;
+      humanTotalScore += round[0].Points;
+      alienTotalScore += round[1].Points;
     }
 
     return humanTotalScore > alienTotalScore ? humanPlayer : (alienTotalScore > humanTotalScore ? alienPlayer : null);

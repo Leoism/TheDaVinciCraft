@@ -13,10 +13,10 @@ public class FinalRoundResults : MonoBehaviour
     for (int i = 0; i < rounds.Count; i++)
     {
       Player roundWinner = RoundWinner(rounds[i]);
-      resultsStr += "Round " + (i + 1) + ": " + roundWinner.name + " " + roundWinner.type + "\n";
+      resultsStr += "Round " + (i + 1) + ": " + roundWinner.Name + " " + roundWinner.Type + "\n";
     }
     Player winner = GameManager.globalManager.GetWinner();
-    resultsStr += "Winner: " + winner.name + " " + winner.type;
+    resultsStr += "Winner: " + winner.Name + " " + winner.Type;
     resultsText.text = resultsStr;
   }
 
@@ -30,7 +30,7 @@ public class FinalRoundResults : MonoBehaviour
         currentWinner = players[i];
         continue;
       }
-      if (players[i].points > currentWinner.points)
+      if (players[i].Points > currentWinner.Points)
       {
         currentWinner = players[i];
       }
