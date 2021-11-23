@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6556831154932102518}
   - component: {fileID: 6556831154932102517}
   - component: {fileID: 6556831154932102516}
+  - component: {fileID: 7728355240306602059}
   m_Layer: 5
   m_Name: Room
   m_TagString: Untagged
@@ -87,13 +88,26 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 17b965b4cbf8241d898343398966c394, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
+--- !u!114 &7728355240306602059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556831154932102506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32af14e36eb0a249991d91a7088a1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 6556831155917118025}
 --- !u!1 &6556831155917118031
 GameObject:
   m_ObjectHideFlags: 0

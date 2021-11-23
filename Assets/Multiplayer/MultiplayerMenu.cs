@@ -13,6 +13,7 @@ public class MultiplayerMenu : MonoBehaviourPunCallbacks
   public override void OnConnectedToMaster()
   {
     print("Connected to server");
+    PhotonNetwork.JoinLobby();
   }
 
   public override void OnDisconnected(DisconnectCause cause)
@@ -49,7 +50,6 @@ public class MultiplayerMenu : MonoBehaviourPunCallbacks
       return;
     }
     PhotonNetwork.NickName = value;
-    Debug.Log(PhotonNetwork.NickName);
   }
   public void CreateRoom()
   {
