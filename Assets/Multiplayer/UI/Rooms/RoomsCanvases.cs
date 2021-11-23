@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class RoomsCanvases : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  [SerializeField]
+  private CreateOrJoin _createOrJoin;
+  public CreateOrJoin CreateOrJoin { get { return _createOrJoin; } }
+  [SerializeField]
+  private CurrentRoom _currentRoom;
+  public CurrentRoom CurrentRoom { get { return _currentRoom; } }
+  [SerializeField]
+  private LeaveRoomButton _leaveRoom;
+  // Start is called before the first frame update
+  void Awake()
+  {
+    Initialize();
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  void Initialize()
+  {
+    CreateOrJoin.Initialize(this);
+    CurrentRoom.Initialize(this);
+    _leaveRoom.Initialize(this);
+    CreateOrJoin.Show();
+    CurrentRoom.Hide();
+  }
 }

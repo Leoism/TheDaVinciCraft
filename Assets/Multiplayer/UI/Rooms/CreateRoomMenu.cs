@@ -8,7 +8,14 @@ using Photon.Pun;
 public class CreateRoomMenu : MonoBehaviourPunCallbacks
 {
   [SerializeField]
-  private Text _roomName;
+  private InputField _roomName;
+
+  private RoomsCanvases _roomsCanvases;
+
+  public void Initialize(RoomsCanvases canvases)
+  {
+    _roomsCanvases = canvases;
+  }
 
   public void OnClick_CreateRoom()
   {
@@ -20,6 +27,7 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
   public override void OnCreatedRoom()
   {
     Debug.Log("Created Room");
+    _roomsCanvases.CurrentRoom.Show();
   }
 
   public override void OnCreateRoomFailed(short returnCode, string message)

@@ -13,7 +13,8 @@ public class MultiplayerMenu : MonoBehaviourPunCallbacks
   public override void OnConnectedToMaster()
   {
     print("Connected to server");
-    PhotonNetwork.JoinLobby();
+    if (!PhotonNetwork.InLobby)
+      PhotonNetwork.JoinLobby();
   }
 
   public override void OnDisconnected(DisconnectCause cause)
@@ -44,12 +45,13 @@ public class MultiplayerMenu : MonoBehaviourPunCallbacks
 
   public void SetPlayerName(string value)
   {
-    if (string.IsNullOrEmpty(value.Trim()))
+    string inputValue = nameField.text;
+    if (string.IsNullOrEmpty(inputValue.Trim()))
     {
       Debug.LogError("Player name is empty");
       return;
     }
-    PhotonNetwork.NickName = value;
+    PhotonNetwork.NickName = inputValue;
   }
   public void CreateRoom()
   {
