@@ -34,7 +34,7 @@ public class Alienship : MonoBehaviour
   void Update()
   {
     // add timer about 10 sec
-    Debug.Log(GameManager.globalManager.alienInventory.TotalCount());
+    //Debug.Log(GameManager.globalManager.alienInventory.TotalCount());
     if (GameManager.globalManager.alienInventory.TotalCount() <= 0)
     {
       CountTenSec();
@@ -47,7 +47,7 @@ public class Alienship : MonoBehaviour
       currentTime = Timer.secRemaining;
     }
     currentTime -= 1 * Time.deltaTime;
-    Debug.Log(currentTime);
+   // Debug.Log(currentTime);
     if (currentTime <= 0)
     {
       currentTime = 10;

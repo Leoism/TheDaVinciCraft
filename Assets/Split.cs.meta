@@ -3,7 +3,10 @@ guid: df9af79ba969f354fa32da8b4126fb12
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - CurrentTileToAdd: {instanceID: 0}
+  - shatter: {fileID: 1366299487685945622, guid: 8df954bdb4a3c2349a3cb46e849408d2, type: 3}
+  - tilemapPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

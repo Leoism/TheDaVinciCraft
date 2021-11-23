@@ -17,6 +17,9 @@ public class Dragable : MonoBehaviour
         // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        curPosition.x = Mathf.Clamp(curPosition.x, -70f, 16f);
+        curPosition.y = Mathf.Clamp(curPosition.y, -34f, 12f);
+        // -70-16 -30-12
         transform.position = new Vector3(curPosition.x, curPosition.y, 0);
     }
 
