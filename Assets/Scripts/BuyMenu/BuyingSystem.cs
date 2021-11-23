@@ -22,7 +22,7 @@ public class BuyingSystem : MonoBehaviour
 
     void LateUpdate()
     {
-        currentRound = GameManager.globalManager.Timer.GetRound();
+        currentRound = GameManager.globalManager.timer.GetRound();
         if (weaponCountEcho)
             weaponCountEcho.text = "Weapon Buy Limit: " + (GetWeaponBuyLimit() - currentAdded);
         if (materialCountEcho)

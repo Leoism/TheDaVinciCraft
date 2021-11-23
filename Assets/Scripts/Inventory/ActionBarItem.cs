@@ -17,7 +17,7 @@ public class ActionBarItem : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    currentCount.text = actionItem.Count.ToString();
+    currentCount.text = actionItem.GetCount().ToString();
   }
 
   public void SetCount(string newCount)

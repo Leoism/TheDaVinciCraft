@@ -11,81 +11,84 @@ public enum GameMode
 
 public class GameManager
 {
-  public static readonly GameManager globalManager = new GameManager();
-  public readonly Timer Timer;
+  public static GameManager globalManager = new GameManager();
   public GameMode gameMode;
   public Timer timer = null;
   public Inventory humanInventory;
   public Inventory alienInventory;
   public Inventory artifacts;
   public BattleSystem battleSystem;
-  public Player alienPlayer;
-  public Player humanPlayer;
-
-  private int _currentRound;
-
-  public List<List<Player>> Rounds { get; private set; }
-
+  public Player alienPlayer = null;
+  public Player humanPlayer = null;
+  private List<List<Player>> rounds = null;
+  private int currentRound;
   private GameManager()
   {
-    Timer = new Timer();
-    _currentRound = 0;
+    timer = new Timer();
+    currentRound = 0;
   }
 
   public void Reset()
   {
-    gameMode = GameMode.SHORT;
-    humanInventory = null;
-    alienInventory = null;
-    artifacts = null;
-    alienPlayer = null;
-    humanPlayer = null;
-    Rounds = null;
-    _currentRound = 0;
+    GameManager.globalManager.gameMode = GameMode.SHORT;
+    GameManager.globalManager.timer = new Timer();
+    GameManager.globalManager.humanInventory = null;
+    GameManager.globalManager.alienInventory = null;
+    GameManager.globalManager.artifacts = null;
+    GameManager.globalManager.alienPlayer = null;
+    GameManager.globalManager.humanPlayer = null;
+    GameManager.globalManager.rounds = null;
+    currentRound = 0;
   }
 
   // Sets the weapons that the alien selected
   public void SetAlienInventory(List<GameObject> newAlienInventory)
   {
-    alienInventory = new Inventory(newAlienInventory);
+    GameManager.globalManager.alienInventory = new Inventory(newAlienInventory);
   }
 
   // Sets the materials that the human selected
   public void SetHumanInventory(List<GameObject> newHumanInventory)
   {
-    humanInventory = new Inventory(newHumanInventory);
+    GameManager.globalManager.humanInventory = new Inventory(newHumanInventory);
   }
 
   // Sets the artifacts to defend
   public void SetArtifacts(List<GameObject> newArtifacts)
   {
-    artifacts = new Inventory(newArtifacts);
+    GameManager.globalManager.artifacts = new Inventory(newArtifacts);
   }
 
   // Sets the game type for the game (Short, Standard, Long)
   public void SetGameType(GameMode newGameMode)
   {
-    gameMode = newGameMode;
-    Rounds = new List<List<Player>>();
+    GameManager.globalManager.gameMode = newGameMode;
+    GameManager.globalManager.rounds = new List<List<Player>>();
   }
 
   /// Returns true if there are still rounds to complete, otherwise returns
   /// false
   public bool SaveRound(int humanScore, int alienScore)
   {
-    Rounds.Add(new List<Player>
-    {
-      humanPlayer.Clone( newPoints: humanScore ),
-      alienPlayer.Clone( newPoints: alienScore )
-    });
-    return Rounds.Count >= (int)gameMode;
+    Player alien = alienPlayer.Clone();
+    alien.points = alienScore;
+    Player human = humanPlayer.Clone();
+    human.points = humanScore;
+    GameManager.globalManager.rounds.Add(new List<Player>() { human, alien });
+    return GameManager.globalManager.rounds.Count >= (int)GameManager.globalManager.gameMode;
   }
 
   // Sets the human player and alien player
   public void SetPlayers(Player human, Player alien)
   {
-    humanPlayer = human;
-    alienPlayer = alien;
+    GameManager.globalManager.humanPlayer = human;
+    GameManager.globalManager.alienPlayer = alien;
+  }
+
+  // Returns the rounds
+  public List<List<Player>> GetRounds()
+  {
+    return GameManager.globalManager.rounds;
   }
 
   // Returns whether a game ended with human or alien as winner, or tie
@@ -93,10 +96,10 @@ public class GameManager
   {
     int humanTotalScore = 0;
     int alienTotalScore = 0;
-    foreach (List<Player> round in Rounds)
+    foreach (List<Player> round in rounds)
     {
-      humanTotalScore += round[0].Points;
-      alienTotalScore += round[1].Points;
+      humanTotalScore += round[0].points;
+      alienTotalScore += round[1].points;
     }
 
     return humanTotalScore > alienTotalScore ? humanPlayer : (alienTotalScore > humanTotalScore ? alienPlayer : null);
@@ -132,16 +135,16 @@ public class GameManager
 
     public int GetCurrentRound()
     {
-        return _currentRound;
+        return currentRound;
     }
 
     public void IncrementCurrRound()
     {
-        _currentRound++;
+        currentRound++;
     }
 
     public void ResetRound()
     {
-        _currentRound = 0;
+        currentRound = 0;
     }
 }

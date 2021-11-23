@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
 /*
 namespace StackingSystem.Scripts
 {*/
@@ -21,12 +20,10 @@ public class AddTilemap : MonoBehaviour
     private bool xDom;
     private bool yDom;
     private bool placed;
-
     private Vector3Int oldTilePos;
     //[SerializeField] private Text indexText;
 
     private TileBase CurrentTileToAdd => tilesToAdd[currentTileToAddIndex];
-
     private int CurrentTileToAddIndex
     {
         get => currentTileToAddIndex;
@@ -78,7 +75,7 @@ public class AddTilemap : MonoBehaviour
             // If none of the tiles are adjacent, then do not place newTilePos
             if (_addedTiles.Count != 0 &&
                 _addedTiles.All(pos => ManhattanDistance(oldTilePos, newTilePos) != 1)) return;
-
+            
             if (placed)
             {
                 if (xDom && oldTilePos.y - newTilePos.y == 0)
@@ -91,7 +88,7 @@ public class AddTilemap : MonoBehaviour
                 else
                     yDom = true;
             }
-
+                  
             placed = true;
             _addedTiles.Add(newTilePos);
             oldTilePos = newTilePos;
@@ -106,7 +103,7 @@ public class AddTilemap : MonoBehaviour
         var tilemap = Instantiate(tilemapPrefab, transform);
         tilemap.GetComponent<Split>().CurrentTileToAdd = CurrentTileToAdd;
         foreach (var pos in _addedTiles)
-            tilemap.SetTile(pos, CurrentTileToAdd);
+        tilemap.SetTile(pos, CurrentTileToAdd);
 
         _addedTiles.Clear();
         tempTilemap.ClearAllTiles();
@@ -138,4 +135,6 @@ public class AddTilemap : MonoBehaviour
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z);
     }
+
 }
+//}
