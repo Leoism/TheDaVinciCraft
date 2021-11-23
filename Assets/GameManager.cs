@@ -14,6 +14,7 @@ public class GameManager
   public static readonly GameManager globalManager = new GameManager();
   public readonly Timer Timer;
   public GameMode gameMode;
+  public Timer timer = null;
   public Inventory humanInventory;
   public Inventory alienInventory;
   public Inventory artifacts;
@@ -40,6 +41,7 @@ public class GameManager
     alienPlayer = null;
     humanPlayer = null;
     Rounds = null;
+    _currentRound = 0;
   }
 
   // Sets the weapons that the alien selected
@@ -69,13 +71,14 @@ public class GameManager
 
   /// Returns true if there are still rounds to complete, otherwise returns
   /// false
-  public void SaveRound(int humanScore, int alienScore)
+  public bool SaveRound(int humanScore, int alienScore)
   {
     Rounds.Add(new List<Player>
     {
       humanPlayer.Clone( newPoints: humanScore ),
       alienPlayer.Clone( newPoints: alienScore )
     });
+    return Rounds.Count >= (int)gameMode;
   }
 
   // Sets the human player and alien player
@@ -122,7 +125,7 @@ public class GameManager
         for (int i = 0; i < 13; i++)
         {
             weaponBuyingCount.Add(weaponCount);
-            weaponCount += 6;
+            weaponCount += 3;
         }
         return weaponBuyingCount;
     }

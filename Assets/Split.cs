@@ -50,12 +50,15 @@ public class Split : MonoBehaviour
                 }
               
             }
-            shatter.GetComponent<SpriteRenderer>().sprite = t.sprite;
-            for (int i = 0; i <= tilesDestroyed - 1; i++)
+            if (t != null)
+            {
+                shatter.GetComponent<SpriteRenderer>().sprite = t.sprite;
+            }
+                  for (int i = 0; i <= tilesDestroyed - 1; i++)
             {
                 Vector3 shattterPos = tl.GetCellCenterWorld(hitPos[i]);
                 // GameObject s = Instantiate(shatter, shattterPos, Quaternion.identity);
-                for (int z = 0; z < 4; z++)
+                for (int z = 0; z < 3; z++)
                 {
                     shattterPos = tl.GetCellCenterWorld(hitPos[i]);
                     switch (z)

@@ -311,39 +311,39 @@ public class WeaponBuyingSystem : MonoBehaviour
         switch(name) {
             case "deforestor": 
                 itemButton = deforestor;
-                newItem.Message = "Deforestor - Strong against Wood! ";
+                newItem.Message = "Deforestor ";
                 break;
             case "mineral":
                 itemButton = mExtractor;
-                newItem.Message = "Mineral Extractor - Strong against Stone! ";
+                newItem.Message = "Mineral Extractor ";
                 break;
             case "arrow":
                 itemButton = arrow;
-                newItem.Message = "Arrow - Tears apart fabrics! ";
+                newItem.Message = "Arrow ";
                 break;
             case "ball":
                 itemButton = ball;
-                newItem.Message = "Bowling Ball - Strong against glass & stone! ";
+                newItem.Message = "Bowling Ball ";
                 break;
             case "boomerang":
                 itemButton = boomerange;
-                newItem.Message = "Boomerang - Strong against glass & fabric! ";
+                newItem.Message = "Boomerang ";
                 break;
             case "magnet":
                 itemButton = magnet;
-                newItem.Message = "Magnet - Attracts metals! ";
+                newItem.Message = "Magnet ";
                 break;
             case "bomb":
                 itemButton = bomb;
-                newItem.Message = "Bomb - Destroys everything but metals! ";
+                newItem.Message = "Bomb ";
                 break;
             case "ray":
                 itemButton = ray;
-                newItem.Message = "Raygun - Strong against everything except glass! ";
+                newItem.Message = "Raygun ";
                 break;
             case "grenade":
                 itemButton = grenade;
-                newItem.Message = "Grenade - Annihilates everything! ";
+                newItem.Message = "Grenade ";
                 break;
             default:
                 break;
