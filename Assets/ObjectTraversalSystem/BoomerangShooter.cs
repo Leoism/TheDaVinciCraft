@@ -7,6 +7,7 @@ public class BoomerangShooter : MonoBehaviour
   public GameObject boomerangPrefab = null;
   public Transform spawnPoint = null;
   public GameObject trajectoryPointPrefab = null;
+  public Gameplay gameplayScene = null;
   private bool isFirstClick = true;
   private Vector3 firstClickPos;
   private Vector3 secondClickPos;
@@ -31,6 +32,7 @@ public class BoomerangShooter : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (boomerangPrefab == null) return;
     if (Input.GetMouseButtonDown(0))
     {
       Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -58,6 +60,9 @@ public class BoomerangShooter : MonoBehaviour
     BoomerangBehavior bb = newProjectile.AddComponent<BoomerangBehavior>();
     bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
     bb.SetLifespan(5f * multiplier);
+
+    boomerangPrefab = null;
+    gameplayScene.UseItem();
   }
 
   void SetTrajectoryPointStatus(bool isOn)

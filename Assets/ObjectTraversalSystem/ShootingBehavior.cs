@@ -6,7 +6,6 @@ public class ShootingBehavior : MonoBehaviour
 {
   // projectile settings
   public GameObject projectilePrefab = null;
-  public Inventory alienInventory;
   public GameObject trajectoryPointPrefab = null;
   public Transform projectileSpawnPoint = null;
   public GameObject powerBar = null;
@@ -27,7 +26,6 @@ public class ShootingBehavior : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    // Debug.Assert(projectilePrefab != null);
     Debug.Assert(trajectoryPointPrefab != null);
     Debug.Assert(projectileSpawnPoint != null);
     trajectoryPoints = new GameObject[trajectoryPointCount];

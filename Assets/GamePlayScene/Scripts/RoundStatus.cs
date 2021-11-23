@@ -9,6 +9,6 @@ public class RoundStatus : MonoBehaviour
   // Start is called before the first frame update
   void Awake()
   {
-    roundText.text = "ROUND: " + (GameManager.globalManager.GetRounds().Count + 1).ToString();
+    roundText.text = "ROUND: " + (GameManager.globalManager.Rounds.Count + 1).ToString();
   }
 }

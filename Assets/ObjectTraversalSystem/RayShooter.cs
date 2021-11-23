@@ -6,16 +6,17 @@ public class RayShooter : MonoBehaviour
 {
   public GameObject rayPrefab = null;
   public Transform spawnPoint = null;
+  public Gameplay gameplayScene = null;
   // Start is called before the first frame update
   void Start()
   {
-    Debug.Assert(rayPrefab != null);
     Debug.Assert(spawnPoint != null);
   }
 
   // Update is called once per frame
   void Update()
   {
+    if (rayPrefab == null) return;
     if (Input.GetMouseButtonDown(0))
     {
       Shoot();
@@ -27,5 +28,8 @@ public class RayShooter : MonoBehaviour
     GameObject newRay = Instantiate(rayPrefab, spawnPoint.position, spawnPoint.rotation);
     RayBehavior rb = newRay.AddComponent<RayBehavior>();
     rb.SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+    rayPrefab = null;
+    gameplayScene.UseItem();
   }
 }

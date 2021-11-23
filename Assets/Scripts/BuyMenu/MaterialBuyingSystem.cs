@@ -207,28 +207,28 @@ public class MaterialBuyingSystem : MonoBehaviour
     {
         GameObject newGameObject = new GameObject();
         Item newItem = newGameObject.AddComponent<Item>();
-        newItem.SetCount(count);
+        newItem.Count = count;
         Button itemButton = null;
         switch(name) {
             case "fabric":
                 itemButton = febric;
-                newItem.SetMessage("Fabric Material ");
+                newItem.Message = "Fabric Material ";
                 break;
             case "wood":
                 itemButton = wood;
-                newItem.SetMessage("Wood Material ");
+                newItem.Message = "Wood Material ";
                 break;
             case "stone":
                 itemButton = stone;
-                newItem.SetMessage("Stone Material ");
+                newItem.Message = "Stone Material ";
                 break;
             case "glass":
                 itemButton = glass;
-                newItem.SetMessage("Glass Material ");
+                newItem.Message = "Glass Material ";
                 break;
             case "metal":
                 itemButton = metal;
-                newItem.SetMessage("Metal Material ");
+                newItem.Message = "Metal Material ";
                 break;
             default:
                 break;

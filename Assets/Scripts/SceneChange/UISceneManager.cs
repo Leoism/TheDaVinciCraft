@@ -11,7 +11,7 @@ public class UISceneManager : MonoBehaviour
     }
      public void BuyMenu()
     {
-        if ((SceneManager.GetActiveScene().name.Equals("HumanWin") || SceneManager.GetActiveScene().name.Equals("AlienWin")) && GameManager.globalManager.GetRounds().Count >= (int)GameManager.globalManager.gameMode)
+        if ((SceneManager.GetActiveScene().name.Equals("HumanWin") || SceneManager.GetActiveScene().name.Equals("AlienWin")) && GameManager.globalManager.Rounds.Count >= (int)GameManager.globalManager.gameMode)
         {
             SceneManager.LoadScene("FinalResults");
         } else
