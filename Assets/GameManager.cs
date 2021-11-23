@@ -128,7 +128,7 @@ public class GameManager
         for (int i = 0; i < 13; i++)
         {
             weaponBuyingCount.Add(weaponCount);
-            weaponCount += 6;
+            weaponCount += 3;
         }
         return weaponBuyingCount;
     }
