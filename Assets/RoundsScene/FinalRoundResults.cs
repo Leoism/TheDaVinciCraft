@@ -8,15 +8,15 @@ public class FinalRoundResults : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    List<List<Player>> rounds = GameManager.globalManager.Rounds;
+    List<List<Player>> rounds = GameManager.globalManager.GetRounds();
     string resultsStr = "Final Round Results\n\n";
     for (int i = 0; i < rounds.Count; i++)
     {
       Player roundWinner = RoundWinner(rounds[i]);
-      resultsStr += "Round " + (i + 1) + ": " + roundWinner.Name + " " + roundWinner.Type + "\n";
+      resultsStr += "Round " + (i + 1) + ": " + roundWinner.name + " " + roundWinner.type + "\n";
     }
     Player winner = GameManager.globalManager.GetWinner();
-    resultsStr += "Winner: " + winner.Name + " " + winner.Type;
+    resultsStr += "Winner: " + winner.name + " " + winner.type;
     resultsText.text = resultsStr;
   }
 
@@ -30,7 +30,7 @@ public class FinalRoundResults : MonoBehaviour
         currentWinner = players[i];
         continue;
       }
-      if (players[i].Points > currentWinner.Points)
+      if (players[i].points > currentWinner.points)
       {
         currentWinner = players[i];
       }

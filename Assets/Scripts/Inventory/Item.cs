@@ -4,13 +4,38 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public int Count { get; set; }
-    public string Message { get; set; }
+  private int count = 0;
+  private string message;
+  public int IncreaseCount()
+  {
+    return ++count;
+  }
 
-    public int DecreaseCountInsureNonNegative()
+  public int DecreaseCount()
+  {
+    if (count - 1 >= 0)
+      count--;
+    return count;
+  }
+
+  public void SetCount(int newCount)
+  {
+    count = newCount;
+  }
+
+  public int GetCount()
+  {
+    return count;
+  }
+  
+    public void SetMessage(string msg)
     {
-        if (Count - 1 >= 0)
-            Count--;
-        return Count;
+        message = msg;
     }
+
+    public string GetMessage()
+    {
+        return message;
+    }
+
 }

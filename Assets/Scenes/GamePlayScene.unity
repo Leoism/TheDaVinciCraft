@@ -1901,7 +1901,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77dbb488f9188f41a568b2485638257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStore: {fileID: 11400000, guid: d07202a7513b81c44bfe13b572db3847, type: 2}
   gameTimer: {fileID: 1876572932}
   mainCamera: {fileID: 350305}
   buildingZone: {fileID: 1503800019}
@@ -1910,9 +1909,9 @@ MonoBehaviour:
   mainCanvas: {fileID: 418612265}
   actionBarBehavior: {fileID: 595729586}
   shootingBehavior: {fileID: 1317540227}
-  boomerangShooter: {fileID: 1317540229}
-  rayShooter: {fileID: 1317540228}
   tilemapAdder: {fileID: 519856263}
+  currentItem: {fileID: 0}
+  prevItem: {fileID: 0}
 --- !u!1 &1317540223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1925,8 +1924,6 @@ GameObject:
   - component: {fileID: 1317540224}
   - component: {fileID: 1317540226}
   - component: {fileID: 1317540227}
-  - component: {fileID: 1317540229}
-  - component: {fileID: 1317540228}
   m_Layer: 0
   m_Name: Alienship
   m_TagString: Untagged
@@ -2030,37 +2027,6 @@ MonoBehaviour:
   trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   projectileSpawnPoint: {fileID: 2147219063}
   powerBar: {fileID: 734583843}
-  gameplayScene: {fileID: 1281474590}
---- !u!114 &1317540228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317540223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc84c199803b1e14ea97363909021d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayPrefab: {fileID: 0}
-  spawnPoint: {fileID: 2147219063}
-  gameplayScene: {fileID: 1281474590}
---- !u!114 &1317540229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317540223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531c53f9b320c0e46be2869b50985cf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boomerangPrefab: {fileID: 0}
-  spawnPoint: {fileID: 2147219063}
-  trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   gameplayScene: {fileID: 1281474590}
 --- !u!1 &1396289729
 GameObject:

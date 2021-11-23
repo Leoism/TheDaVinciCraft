@@ -306,44 +306,53 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         GameObject newGameObject = new GameObject();
         Item newItem = newGameObject.AddComponent<Item>();
-        newItem.Count = count;
+        newItem.SetCount(count);
         Button itemButton = null;
         switch(name) {
             case "deforestor": 
                 itemButton = deforestor;
-                newItem.Message = "Deforestor ";
+                newItem.SetMessage("Deforestor ");
+                // newItem.SetMessage("Deforestor - Strong against Wood! ");
                 break;
             case "mineral":
                 itemButton = mExtractor;
-                newItem.Message = "Mineral Extractor ";
+                newItem.SetMessage("Mineral Extractor ");
+                // newItem.SetMessage("Mineral Extractor - Strong against Stone! ");
                 break;
             case "arrow":
                 itemButton = arrow;
-                newItem.Message = "Arrow ";
+                newItem.SetMessage("Arrow ");
+                // newItem.SetMessage("Arrow - Tears apart fabrics! ");
                 break;
             case "ball":
                 itemButton = ball;
-                newItem.Message = "Bowling Ball ";
+                newItem.SetMessage("Bowling Ball ");
+                // newItem.SetMessage("Bowling Ball - Strong against glass & stone! ");
                 break;
             case "boomerang":
                 itemButton = boomerange;
-                newItem.Message = "Boomerang ";
+                newItem.SetMessage("Boomerang ");
+                //newItem.SetMessage("Boomerang - Strong against glass & fabric! ");
                 break;
             case "magnet":
                 itemButton = magnet;
-                newItem.Message = "Magnet ";
+                newItem.SetMessage("Magnet ");
+                // newItem.SetMessage("Magnet - Attracts metals! ");
                 break;
             case "bomb":
                 itemButton = bomb;
-                newItem.Message = "Bomb ";
+                newItem.SetMessage("Bomb ");
+                // newItem.SetMessage("Bomb - Destroys everything but metals! ");
                 break;
             case "ray":
                 itemButton = ray;
-                newItem.Message = "Raygun ";
+                newItem.SetMessage("Raygun ");
+                // newItem.SetMessage("Raygun - Strong against everything except glass! ");
                 break;
             case "grenade":
                 itemButton = grenade;
-                newItem.Message = "Grenade ";
+                newItem.SetMessage("Grenade ");
+                // newItem.SetMessage("Grenade - Annihilates everything! ");
                 break;
             default:
                 break;
@@ -363,9 +372,6 @@ public class WeaponBuyingSystem : MonoBehaviour
 
         ActionBarItem actionBarItem = newGameObject.AddComponent<ActionBarItem>();
         actionBarItem.actionItem = newItem;
-
-        newGameObject.name = name;
-
         return newGameObject;
     }
 }
