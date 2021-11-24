@@ -11,10 +11,46 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
   [SerializeField]
   private PlayerListing _playerListing;
   private List<PlayerListing> _listings = new List<PlayerListing>();
+  private RoomsCanvases _roomsCanvases;
 
-  void Awake()
+  public void Initialize(RoomsCanvases canvases)
   {
+    _roomsCanvases = canvases;
+  }
+
+  public override void OnEnable()
+  {
+    base.OnEnable();
     GetCurrentRoomPlayers();
+
+  }
+
+  public override void OnDisable()
+  {
+    base.OnDisable();
+    for (int i = 0; i < _listings.Count; i++)
+    {
+      Destroy(_listings[i].gameObject);
+    }
+    _listings.Clear();
+  }
+
+  public void OnClick_StartGame()
+  {
+    if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+    {
+      Player humanPlayer = new Player();
+      Player alienPlayer = new Player();
+      humanPlayer.name = PhotonNetwork.LocalPlayer.NickName;
+      humanPlayer.type = "(Human)";
+      alienPlayer.name = PhotonNetwork.CurrentRoom.Players[1].NickName;
+      alienPlayer.type = "(Alien)";
+      GameManager.globalManager.Reset();
+      GameManager.globalManager.SetPlayers(humanPlayer, alienPlayer);
+      PhotonNetwork.CurrentRoom.IsOpen = false;
+      PhotonNetwork.CurrentRoom.IsVisible = false;
+      PhotonNetwork.LoadLevel("BuyingMenu");
+    }
   }
 
   private void GetCurrentRoomPlayers()
@@ -28,9 +64,22 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
 
   private void AddPlayerListing(Photon.Realtime.Player newPlayer)
   {
-    PlayerListing listing = Instantiate(_playerListing, _content);
-    listing.SetPlayerInfo(newPlayer);
-    _listings.Add(listing);
+    int idx = _listings.FindIndex(listing => listing.Player == newPlayer);
+    if (idx >= 0)
+    {
+      _listings[idx].SetPlayerInfo(newPlayer);
+    }
+    else
+    {
+      PlayerListing listing = Instantiate(_playerListing, _content);
+      listing.SetPlayerInfo(newPlayer);
+      _listings.Add(listing);
+    }
+  }
+
+  public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+  {
+    _roomsCanvases.CurrentRoom.LeaveRoomButton.OnClick_Leave();
   }
 
   public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
