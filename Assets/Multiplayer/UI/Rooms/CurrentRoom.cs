@@ -12,6 +12,8 @@ public class CurrentRoom : MonoBehaviour
   private PlayersListingMenu _playersListingMenu;
   [SerializeField]
   private LeaveRoomButton _leaveRoomButton;
+  [SerializeField]
+  private ToggleGroup _modeToggles;
   public LeaveRoomButton LeaveRoomButton { get { return _leaveRoomButton; } }
   // Start is called before the first frame update
   public void Initialize(RoomsCanvases canvases)
@@ -22,9 +24,10 @@ public class CurrentRoom : MonoBehaviour
 
   }
 
-  void Start()
+  void Update()
   {
     _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+    _modeToggles.gameObject.SetActive(PhotonNetwork.IsMasterClient);
   }
 
   public void Show()

@@ -12,6 +12,9 @@ public class RoomsCanvases : MonoBehaviour
   public CurrentRoom CurrentRoom { get { return _currentRoom; } }
   [SerializeField]
   private LeaveRoomButton _leaveRoom;
+  [SerializeField]
+  private ModeGroup _modeGroup;
+  public ModeGroup ModeGroup { get { return _modeGroup; } }
   // Start is called before the first frame update
   void Awake()
   {

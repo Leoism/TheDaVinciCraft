@@ -37,18 +37,24 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
 
   public void OnClick_StartGame()
   {
+    Debug.Log(_roomsCanvases.ModeGroup.toggleGroup.GetFirstActiveToggle().name);
+
     if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2)
     {
-      Player humanPlayer = new Player();
-      Player alienPlayer = new Player();
-      humanPlayer.name = PhotonNetwork.LocalPlayer.NickName;
-      humanPlayer.type = "(Human)";
-      alienPlayer.name = PhotonNetwork.CurrentRoom.Players[1].NickName;
-      alienPlayer.type = "(Alien)";
+      // set up game manager
       GameManager.globalManager.Reset();
-      GameManager.globalManager.SetPlayers(humanPlayer, alienPlayer);
+      GameManager.globalManager.isOnlineMode = true;
+      Player[] players = CreatePlayers();
+      // set who is the human and alien
+      GameManager.globalManager.SetPlayers(players[0], players[1]);
+      string modeToggle = _roomsCanvases.ModeGroup.toggleGroup.GetFirstActiveToggle().name;
+      GameMode mode = modeToggle.StartsWith("Quick") ? GameMode.SHORT : (modeToggle.StartsWith("Standard") ? GameMode.STANDARD : GameMode.LONG);
+      GameManager.globalManager.SetGameType(mode);
+      // hide the room
       PhotonNetwork.CurrentRoom.IsOpen = false;
       PhotonNetwork.CurrentRoom.IsVisible = false;
+      // send RPCs to other player
+      base.photonView.RPC("RPC_SendGameInfo", RpcTarget.Others, mode);
       PhotonNetwork.LoadLevel("BuyingMenu");
     }
   }
@@ -75,6 +81,27 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
       listing.SetPlayerInfo(newPlayer);
       _listings.Add(listing);
     }
+  }
+
+  private Player[] CreatePlayers()
+  {
+    Player myself = new Player();
+    Player other = new Player();
+    myself.name = PhotonNetwork.LocalPlayer.NickName;
+    other.name = PhotonNetwork.CurrentRoom.Players[1].NickName;
+    myself.type = PhotonNetwork.IsMasterClient ? "(Human)" : "(Alien)";
+    myself.type = PhotonNetwork.IsMasterClient ? "(Alien)" : "(Human)";
+    return new Player[] { myself, other };
+  }
+
+  [PunRPC]
+  public void RPC_SendGameInfo(int mode)
+  {
+    GameManager.globalManager.Reset();
+    GameManager.globalManager.isOnlineMode = true;
+    Player[] players = CreatePlayers();
+    GameManager.globalManager.SetPlayers(players[1], players[0]);
+    GameManager.globalManager.SetGameType((GameMode)mode);
   }
 
   public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
