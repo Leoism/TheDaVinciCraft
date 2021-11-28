@@ -13,6 +13,7 @@ public class PlayButton : MonoBehaviour
   {
     playButton.onClick.AddListener(() =>
     {
+<<<<<<< Updated upstream
       if (humanInput.text.Trim().Equals("") || alienInput.text.Trim().Equals(""))
       {
         return;
@@ -28,3 +29,41 @@ public class PlayButton : MonoBehaviour
     });
   }
 }
+=======
+        playButton.onClick.AddListener(() =>
+        {
+            if (humanInput.text.Trim().Equals("") || alienInput.text.Trim().Equals(""))
+            {
+                return;
+            }
+
+            Player humanPlayer = new Player
+            {
+                Name = humanInput.text,
+                Type = "(Human)"
+            };
+            Player alienPlayer = new Player
+            {
+                Name = alienInput.text,
+                Type = "(Alien)"
+            };
+            GameManager.globalManager.SetPlayers(humanPlayer, alienPlayer);
+            // SceneManager.LoadScene("BuyingMenu");
+            StartCoroutine(ChangeScene());
+        });
+    }
+
+    public Animator musicAnim;
+    public float waitTime;
+
+    IEnumerator ChangeScene()
+    {
+        musicAnim.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(waitTime);
+        SceneManager.LoadScene("BuyingMenu");
+    }
+
+
+
+}
+>>>>>>> Stashed changes
