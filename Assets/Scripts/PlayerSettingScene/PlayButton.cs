@@ -5,50 +5,25 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class PlayButton : MonoBehaviour
 {
-  // Start is called before the first frame update
-  public Button playButton = null;
-  public InputField humanInput = null;
-  public InputField alienInput = null;
-  void Start()
-  {
-    playButton.onClick.AddListener(() =>
+    // Start is called before the first frame update
+    public Button playButton = null;
+    public InputField humanInput = null;
+    public InputField alienInput = null;
+    void Start()
     {
-<<<<<<< Updated upstream
-      if (humanInput.text.Trim().Equals("") || alienInput.text.Trim().Equals(""))
-      {
-        return;
-      }
-      Player humanPlayer = new Player();
-      Player alienPlayer = new Player();
-      humanPlayer.name = humanInput.text;
-      humanPlayer.type = "(Human)";
-      alienPlayer.name = alienInput.text;
-      alienPlayer.type = "(Alien)";
-      GameManager.globalManager.SetPlayers(humanPlayer, alienPlayer);
-      SceneManager.LoadScene("BuyingMenu");
-    });
-  }
-}
-=======
         playButton.onClick.AddListener(() =>
         {
             if (humanInput.text.Trim().Equals("") || alienInput.text.Trim().Equals(""))
             {
                 return;
             }
-
-            Player humanPlayer = new Player
-            {
-                Name = humanInput.text,
-                Type = "(Human)"
-            };
-            Player alienPlayer = new Player
-            {
-                Name = alienInput.text,
-                Type = "(Alien)"
-            };
+            Player humanPlayer = new Player();
+            Player alienPlayer = new Player();
+            humanPlayer.name = humanInput.text;
+            humanPlayer.type = "(Human)";
+            alienPlayer.name = alienInput.text;
+            alienPlayer.type = "(Alien)";
             GameManager.globalManager.SetPlayers(humanPlayer, alienPlayer);
-            // SceneManager.LoadScene("BuyingMenu");
             StartCoroutine(ChangeScene());
         });
     }
@@ -62,8 +37,4 @@ public class PlayButton : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         SceneManager.LoadScene("BuyingMenu");
     }
-
-
-
 }
->>>>>>> Stashed changes
