@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
   private int count = 0;
-
+  private string message;
   public int IncreaseCount()
   {
     return ++count;
@@ -27,4 +27,15 @@ public class Item : MonoBehaviour
   {
     return count;
   }
+  
+    public void SetMessage(string msg)
+    {
+        message = msg;
+    }
+
+    public string GetMessage()
+    {
+        return message;
+    }
+
 }

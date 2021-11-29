@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Animator musicAnim;
+    private float waitTime = 1.5f;
     public void ExitButton()
     {
         Application.Quit();
@@ -14,6 +15,14 @@ public class MainMenu : MonoBehaviour
 
     public void GameStart()
     {
+        // SceneManager.LoadScene("PlayerSetting");
+        StartCoroutine(ChangeScene());
+    }
+
+    IEnumerator ChangeScene()
+    {
+        musicAnim.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(waitTime);
         SceneManager.LoadScene("PlayerSetting");
     }
 

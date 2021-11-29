@@ -208,5 +208,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentTileToAdd: {fileID: 11400000, guid: 79f2c3003e2ab46478c7a1182604b049, type: 2}
-  shatter: {fileID: 1366299487685945622, guid: bf05ff6374e0ab44481ba8f2b31b77e4, type: 3}
+  shatter: {fileID: 1366299487685945622, guid: 8df954bdb4a3c2349a3cb46e849408d2, type: 3}
   tilemapPrefab: {fileID: 2263465392987367228}

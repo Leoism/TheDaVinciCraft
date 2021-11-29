@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class WeaponBuyingSystem : MonoBehaviour
 {
@@ -32,8 +33,9 @@ public class WeaponBuyingSystem : MonoBehaviour
     [SerializeField] private Button grenade;
     [SerializeField] private Button grenadeAdd;
     [SerializeField] private Button grenadeSub;
-
-        // int variables
+    [SerializeField] private BuyingSystem buySystem;
+    
+    // int variables
     private int totalWeapons;
     private int selectedWeapons = 0;
     private void Awake()
@@ -50,7 +52,10 @@ public class WeaponBuyingSystem : MonoBehaviour
     }
     void Start()
     {
-        totalWeapons = 6;
+        buySystem.currentAdded = 0;
+        List<int> totalWeaponsList = GameManager.globalManager.GetWeaponCountForRound();
+        int currentRound = buySystem.GetCurrentRound();
+        totalWeapons = totalWeaponsList[currentRound];
         DeforestorCnt.deCnt = 0;
         MECnt.meCnt = 0;
         ArrowCnt.arrCnt = 0;
@@ -203,6 +208,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         image.interactable = (selected < total);
         add.interactable = (selected < total);
         sub.interactable = (count > 0);
+        buySystem.incrementAdded();
         return count;
     }
     private int sub(Button image, Button add, Button sub, int total, int count, int selected)
@@ -211,6 +217,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         add.interactable = (selected < total + 1);
         count -= 1;
         sub.interactable = (count > 0);
+        buySystem.decremenentAdded();
         return count;
     }
 
@@ -276,6 +283,14 @@ public class WeaponBuyingSystem : MonoBehaviour
         {
             alienInventory.Add(CreateSprite(BoomCnt.boomCnt, "boomerang"));
         }
+        if (MagnetCnt.magCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(MagnetCnt.magCnt, "magnet"));
+        }
+        if (BombCnt.bombCnt > 0)
+        {
+            alienInventory.Add(CreateSprite(BombCnt.bombCnt, "bomb"));
+        }
         if (RayCnt.rayCnt > 0)
         {
             alienInventory.Add(CreateSprite(RayCnt.rayCnt, "ray"));
@@ -296,24 +311,48 @@ public class WeaponBuyingSystem : MonoBehaviour
         switch(name) {
             case "deforestor": 
                 itemButton = deforestor;
+                newItem.SetMessage("Deforestor ");
+                // newItem.SetMessage("Deforestor - Strong against Wood! ");
                 break;
             case "mineral":
                 itemButton = mExtractor;
+                newItem.SetMessage("Mineral Extractor ");
+                // newItem.SetMessage("Mineral Extractor - Strong against Stone! ");
                 break;
             case "arrow":
                 itemButton = arrow;
+                newItem.SetMessage("Arrow ");
+                // newItem.SetMessage("Arrow - Tears apart fabrics! ");
                 break;
             case "ball":
                 itemButton = ball;
+                newItem.SetMessage("Bowling Ball ");
+                // newItem.SetMessage("Bowling Ball - Strong against glass & stone! ");
                 break;
             case "boomerang":
                 itemButton = boomerange;
+                newItem.SetMessage("Boomerang ");
+                //newItem.SetMessage("Boomerang - Strong against glass & fabric! ");
+                break;
+            case "magnet":
+                itemButton = magnet;
+                newItem.SetMessage("Magnet ");
+                // newItem.SetMessage("Magnet - Attracts metals! ");
+                break;
+            case "bomb":
+                itemButton = bomb;
+                newItem.SetMessage("Bomb ");
+                // newItem.SetMessage("Bomb - Destroys everything but metals! ");
                 break;
             case "ray":
                 itemButton = ray;
+                newItem.SetMessage("Raygun ");
+                // newItem.SetMessage("Raygun - Strong against everything except glass! ");
                 break;
             case "grenade":
                 itemButton = grenade;
+                newItem.SetMessage("Grenade ");
+                // newItem.SetMessage("Grenade - Annihilates everything! ");
                 break;
             default:
                 break;

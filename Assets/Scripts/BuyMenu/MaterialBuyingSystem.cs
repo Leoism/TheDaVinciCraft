@@ -21,12 +21,11 @@ public class MaterialBuyingSystem : MonoBehaviour
     [SerializeField] private Button metal;
     [SerializeField] private Button metalAdd;
     [SerializeField] private Button metalRemove;
-
+    [SerializeField] private BuyingSystem buySystem;
     // int variables
     private int totalMaterials;
     private int selectedMaterials = 0;
     // public static int round = 0;
-
 
     private void Awake() 
     {
@@ -39,7 +38,10 @@ public class MaterialBuyingSystem : MonoBehaviour
     }
     void Start()
     {
-        totalMaterials = 40;
+        buySystem.currentAdded = 0;
+        List<int> totalMaterialList = GameManager.globalManager.GetMaterialCountForRound();
+        int currentRound = buySystem.GetCurrentRound();
+        totalMaterials = totalMaterialList[currentRound];
         WoodCnt.woodCnt = 0;
         FebricCnt.febricCnt = 0;
         StoneCnt.stoneCnt = 0;
@@ -132,6 +134,7 @@ public class MaterialBuyingSystem : MonoBehaviour
         image.interactable = (selected < total);
         add.interactable = (selected < total);
         sub.interactable = (count > 0);
+        buySystem.incrementAdded();
         return count;
     }
     public int sub(Button image, Button add, Button sub, int total, int count, int selected)
@@ -140,6 +143,7 @@ public class MaterialBuyingSystem : MonoBehaviour
         add.interactable = (selected < total + 1);
         count -= 1;
         sub.interactable = (count > 0);
+        buySystem.decremenentAdded();
         return count;
     }
     private void inactiveAllButs()
@@ -206,20 +210,25 @@ public class MaterialBuyingSystem : MonoBehaviour
         newItem.SetCount(count);
         Button itemButton = null;
         switch(name) {
-            case "fabric": 
+            case "fabric":
                 itemButton = febric;
+                newItem.SetMessage("Fabric Material ");
                 break;
             case "wood":
                 itemButton = wood;
+                newItem.SetMessage("Wood Material ");
                 break;
             case "stone":
                 itemButton = stone;
+                newItem.SetMessage("Stone Material ");
                 break;
             case "glass":
                 itemButton = glass;
+                newItem.SetMessage("Glass Material ");
                 break;
             case "metal":
                 itemButton = metal;
+                newItem.SetMessage("Metal Material ");
                 break;
             default:
                 break;
@@ -228,6 +237,7 @@ public class MaterialBuyingSystem : MonoBehaviour
         Image newImage = newGameObject.AddComponent<Image>();
         newImage.sprite = itemSprite;
         Button newButton = newGameObject.AddComponent<Button>();
+        
         newButton.GetComponent<RectTransform>().sizeDelta = new Vector2(128, 128);
         newGameObject.AddComponent<ItemPreserver>();
         GameObject textCount = new GameObject();
