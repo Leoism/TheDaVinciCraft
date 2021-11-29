@@ -22,6 +22,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     [SerializeField] private Button metalAdd;
     [SerializeField] private Button metalRemove;
     [SerializeField] private BuyingSystem buySystem;
+    [SerializeField] private List<InputField> allInputFields;
     // int variables
     private int totalMaterials;
     private int selectedMaterials = 0;
@@ -67,23 +68,31 @@ public class MaterialBuyingSystem : MonoBehaviour
         selectedMaterials += 1;
         WoodCnt.woodCnt = add(wood, woodAdd, woodRemove, totalMaterials, WoodCnt.woodCnt, selectedMaterials);
         // woodCnt.woodCnt = add(wood, woodAdd, woodRemove, totalWoodCnt, woodCnt.woodCnt);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("WoodInput"));
+        inputField.SetTextWithoutNotify(WoodCnt.woodCnt.ToString());
     }
     public void RemoveWood()
     {
         WoodCnt.woodCnt = sub(wood, woodAdd, woodRemove, totalMaterials, WoodCnt.woodCnt, selectedMaterials);
         selectedMaterials -= 1;
         // woodCnt.woodCnt = sub(wood, woodAdd, woodRemove, totalWoodCnt, woodCnt.woodCnt);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("WoodInput"));
+        inputField.SetTextWithoutNotify(WoodCnt.woodCnt.ToString());
     }
     //------------------------------ Febric ----------------------------
     public void SelectFebric()
     {
         selectedMaterials += 1;
         FebricCnt.febricCnt = add(febric, febricAdd, febricRemove, totalMaterials, FebricCnt.febricCnt, selectedMaterials);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("FabricInput"));
+        inputField.SetTextWithoutNotify(FebricCnt.febricCnt.ToString());
     }
     public void RemoveFebric()
     {
         FebricCnt.febricCnt = sub(febric, febricAdd, febricRemove, totalMaterials, FebricCnt.febricCnt, selectedMaterials);
         selectedMaterials -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("FabricInput"));
+        inputField.SetTextWithoutNotify(FebricCnt.febricCnt.ToString());
     }
 
     //------------------------------ Stone -----------------------------
@@ -91,22 +100,30 @@ public class MaterialBuyingSystem : MonoBehaviour
     {
         selectedMaterials += 1;
         StoneCnt.stoneCnt = add(stone, stoneAdd, stoneRemove, totalMaterials, StoneCnt.stoneCnt, selectedMaterials);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("StoneInput"));
+        inputField.SetTextWithoutNotify(StoneCnt.stoneCnt.ToString());
     }
     public void RemoveStone()
     {
         StoneCnt.stoneCnt = sub(stone, stoneAdd, stoneRemove, totalMaterials, StoneCnt.stoneCnt, selectedMaterials);
         selectedMaterials -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("StoneInput"));
+        inputField.SetTextWithoutNotify(StoneCnt.stoneCnt.ToString());
     }
     //------------------------------ Glass -----------------------------
     public void SelectGlass()
     {
         selectedMaterials += 1;
         GlassCnt.glassCnt = add(glass, glassAdd, glassRemove, totalMaterials, GlassCnt.glassCnt, selectedMaterials);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("GlassInput"));
+        inputField.SetTextWithoutNotify(GlassCnt.glassCnt.ToString());
     }
     public void RemoveGlass()
     {
         GlassCnt.glassCnt = sub(glass, glassAdd, glassRemove, totalMaterials, GlassCnt.glassCnt, selectedMaterials);
         selectedMaterials -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("GlassInput"));
+        inputField.SetTextWithoutNotify(GlassCnt.glassCnt.ToString());
     }
 
     //------------------------------ Metal -----------------------------
@@ -114,11 +131,15 @@ public class MaterialBuyingSystem : MonoBehaviour
     {
         selectedMaterials += 1;
         MetalCnt.metalCnt = add(metal, metalAdd, metalRemove, totalMaterials, MetalCnt.metalCnt, selectedMaterials);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MetalInput"));
+        inputField.SetTextWithoutNotify(MetalCnt.metalCnt.ToString());
     }
     public void RemoveMetal()
     {
         MetalCnt.metalCnt = sub(metal, metalAdd, metalRemove, totalMaterials, MetalCnt.metalCnt, selectedMaterials);
         selectedMaterials -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MetalInput"));
+        inputField.SetTextWithoutNotify(MetalCnt.metalCnt.ToString());
     }
 
     //------------------------------ Getters ---------------------------
@@ -175,6 +196,58 @@ public class MaterialBuyingSystem : MonoBehaviour
         glassAdd.interactable = conditions;
         metal.interactable = conditions;
         metalAdd.interactable = conditions;
+    }
+
+        private int setCount(Button image, Button add, Button sub,
+                         int maxWeapons, ref int currentWeaponCount,
+                         ref int currentTotalSelected, int newValue)
+    {
+        // remove the current weapon count from the total
+        currentTotalSelected -= currentWeaponCount;
+        currentWeaponCount = 0;
+        // the new weapon count should be the value set
+        currentWeaponCount = newValue + currentTotalSelected > maxWeapons ? (maxWeapons - currentTotalSelected > 0 ? maxWeapons - currentTotalSelected : 0) : newValue;
+
+        selectedMaterials = currentTotalSelected + currentWeaponCount >= totalMaterials ? totalMaterials : currentTotalSelected + currentWeaponCount;
+        image.interactable = currentTotalSelected < maxWeapons;
+        add.interactable = currentTotalSelected < maxWeapons;
+        sub.interactable = currentWeaponCount > 0;
+        return currentWeaponCount;
+    }
+
+    public void OnInput_UpdateCount(string newCount)
+    {
+        InputField activeInputField = allInputFields.Find((inputField) => {
+            return inputField.isFocused;
+        });
+        GameObject parentOfInputField = activeInputField.transform.parent.gameObject;
+        // this is dependent on the order of the GameObjects in the inspector hierarchy
+        // better approach is to refactor buying system, for now this should suffice
+        // [Sprite, Add, Sub]
+        Button[] displayButtons = parentOfInputField.GetComponentsInChildren<Button>();
+        int count = 0;
+        int.TryParse(newCount, out count);
+        switch(parentOfInputField.name) {
+            case "WoodPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalMaterials, ref WoodCnt.woodCnt, ref selectedMaterials, count);
+                break;
+            case "FebricPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalMaterials, ref FebricCnt.febricCnt, ref selectedMaterials, count);
+                break;
+            case "StonePanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalMaterials, ref StoneCnt.stoneCnt, ref selectedMaterials, count);
+                break;
+            case "GlassPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalMaterials, ref GlassCnt.glassCnt, ref selectedMaterials, count);
+                break;
+            case "MetalPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalMaterials, ref MetalCnt.metalCnt, ref selectedMaterials, count);
+                break;
+            default:
+                break;
+        }
+
+        activeInputField.SetTextWithoutNotify(count.ToString());
     }
 
     public void SaveHumanInventory()
