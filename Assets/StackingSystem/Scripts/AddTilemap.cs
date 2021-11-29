@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Photon.Pun;
+using ExitGames.Client.Photon;
 /*
 namespace StackingSystem.Scripts
 {*/
@@ -23,7 +25,7 @@ public class AddTilemap : MonoBehaviour
     private Vector3Int oldTilePos;
     //[SerializeField] private Text indexText;
 
-    private TileBase CurrentTileToAdd => tilesToAdd[currentTileToAddIndex];
+    public TileBase CurrentTileToAdd => tilesToAdd[currentTileToAddIndex];
     private int CurrentTileToAddIndex
     {
         get => currentTileToAddIndex;
@@ -57,7 +59,7 @@ public class AddTilemap : MonoBehaviour
         tilesToAdd[currentTileToAddIndex] = newTile;
     }
 
-    private readonly HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
+    private HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
 
     private void HandleTileMapCreation()
     {
@@ -100,10 +102,33 @@ public class AddTilemap : MonoBehaviour
     public void CreateTileMap()
     {
         // Creates a new tilemap from the prefab as a child of this
-        var tilemap = Instantiate(tilemapPrefab, transform);
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            Vector3Int[] v3iArr = new Vector3Int[_addedTiles.Count];
+            Debug.Log("v3i: " + v3iArr.Length);
+            _addedTiles.CopyTo(v3iArr);
+            PhotonNetwork.Instantiate("Tilemap_Build", transform.position, transform.rotation, 0, new object[] {v3iArr});
+            _addedTiles.Clear();
+            tempTilemap.ClearAllTiles();
+            placed = false;
+            xDom = false;
+            yDom = false;
+        }
+        else
+        {
+            Tilemap newTilemap = ((GameObject)Resources.Load("Tilemap_Build")).GetComponent<Tilemap>();
+            newTilemap.transform.position = transform.position;
+            newTilemap.transform.rotation = transform.rotation;
+            newTilemap.transform.localScale = transform.localScale;
+            SetTileMap(newTilemap);
+        }
+    }
+
+    private void SetTileMap(Tilemap tilemap)
+    {
         tilemap.GetComponent<Split>().CurrentTileToAdd = CurrentTileToAdd;
         foreach (var pos in _addedTiles)
-        tilemap.SetTile(pos, CurrentTileToAdd);
+            tilemap.SetTile(pos, CurrentTileToAdd);
 
         _addedTiles.Clear();
         tempTilemap.ClearAllTiles();
@@ -135,6 +160,5 @@ public class AddTilemap : MonoBehaviour
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z);
     }
-
 }
 //}

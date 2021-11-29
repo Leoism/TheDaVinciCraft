@@ -833,10 +833,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayScene: {fileID: 1281474590}
   tilesToAdd:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 79f2c3003e2ab46478c7a1182604b049, type: 2}
   currentTileToAddIndex: 0
   tilemapPrefab: {fileID: 2263465392987367228, guid: be698c7c90727f14d82932dae02593eb, type: 3}
   tempTilemap: {fileID: 1690334347}
+  tileType: {fileID: 0}
 --- !u!156049354 &519856264
 Grid:
   m_ObjectHideFlags: 0
@@ -1868,6 +1869,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1281474588}
   - component: {fileID: 1281474590}
+  - component: {fileID: 1281474587}
   m_Layer: 0
   m_Name: GameWorld
   m_TagString: Untagged
@@ -1875,6 +1877,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1281474587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281474586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb589439a655a94aaa03aec1a4afcc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1281474588
 Transform:
   m_ObjectHideFlags: 0
