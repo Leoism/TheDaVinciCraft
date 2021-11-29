@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1803,7 +1803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451807814}
   - component: {fileID: 1451807813}
-  - component: {fileID: 1451807812}
+  - component: {fileID: 1451807815}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -1811,18 +1811,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1451807812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451807811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ba1ced03cd24aa5967ad281466cae3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1451807813
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1933,6 +1921,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1451807815
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451807811}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c1384caa5e244f2ca5069df57b1ac1c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1454893947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,6 +2725,7 @@ GameObject:
   - component: {fileID: 2071782858}
   - component: {fileID: 2071782857}
   - component: {fileID: 2071782861}
+  - component: {fileID: 2071782862}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2820,6 +2828,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1cba14af3aa445578ac7c9c3e165f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicAnim: {fileID: 1451807815}
+  waitTime: 2
+--- !u!95 &2071782862
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071782856}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90d12a1f0f5374a8a8def9ef97ac787c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2145687806
 GameObject:
   m_ObjectHideFlags: 0
