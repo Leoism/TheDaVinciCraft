@@ -41,7 +41,7 @@ public class ActionBarBehavior : MonoBehaviour
         if (itemsAvailable[tempIdx].GetComponent<Item>().GetCount() > 0) {
         gameplayScene.SetProjectile(item);
         }
-        lastSelectedItem.text = item.GetComponent<Item>().GetMessage();
+        lastSelectedItem.text = item.GetComponent<Item>().GetItemName();
         // UseItem(tempIdx);
         // item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
       });
