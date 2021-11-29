@@ -18,7 +18,7 @@ public class Split : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tl = GetComponent<Tilemap>();    
+        tl = GetComponent<Tilemap>();
         for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x; x++)
         {
             for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y; y++)
@@ -42,12 +42,36 @@ public class Split : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         _addedTiles.Clear();
         bool breaking = true;
-
         if (collision.gameObject.CompareTag("Weapon"))
         {
+            string projType = collision.gameObject.GetComponent<SpriteRenderer>().sprite.ToString();
+            switch (projType)
+            {
+                case ("deforestor"):
+                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                        return;
+                    break;
+                case ("deforestor"):
+                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                        return;
+                    break;
+                case ("deforestor"):
+                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                        return;
+                    break;
+                case ("deforestor"):
+                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                        return;
+                    break;
+                case ("deforestor"):
+                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                        return;
+                    break;
+
+            }
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             Vector3 hitPosition = Vector3.zero;
             int tilesDestroyed = 0;
@@ -58,21 +82,21 @@ public class Split : MonoBehaviour
                 hitPosition.y = hit.point.y + 2f * hit.normal.y;
 
                 t = tl.GetTile<Tile>(tl.WorldToCell(hitPosition));
-               // Debug.Log(t.sprite);
+                // Debug.Log(t.sprite);
                 if (tl.GetTile(tl.WorldToCell(hitPosition)) != null)
                 {
                     tl.SetTile(tl.WorldToCell(hitPosition), null);
                     hitPos.Add(tl.WorldToCell(hitPosition));
-                  
+
                     tilesDestroyed++;
                 }
-              
+
             }
             if (t != null)
             {
                 //shatter.GetComponent<SpriteRenderer>().sprite = t.sprite;
             }
-                  for (int i = 0; i <= tilesDestroyed - 1; i++)
+            for (int i = 0; i <= tilesDestroyed - 1; i++)
             {
                 Vector3 shattterPos = tl.GetCellCenterWorld(hitPos[i]);
                 // GameObject s = Instantiate(shatter, shattterPos, Quaternion.identity);
@@ -102,12 +126,12 @@ public class Split : MonoBehaviour
                             Instantiate(shatter, shattterPos, Quaternion.identity);
                             break;
                     }
-                    
+
                 }
-                    
-             /*   sb = s.GetComponent<ShatterableBehavior>();
-                sb.sr = s.GetComponent<SpriteRenderer>();
-                sb.triggerShatter();*/
+
+                /*   sb = s.GetComponent<ShatterableBehavior>();
+                   sb.sr = s.GetComponent<SpriteRenderer>();
+                   sb.triggerShatter();*/
             }
 
             Destroy(collision.gameObject);

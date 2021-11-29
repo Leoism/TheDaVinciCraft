@@ -57,6 +57,7 @@ public class Gameplay : MonoBehaviour
         newProjectile.AddComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
         newProjectile.AddComponent<Rigidbody2D>();
         newProjectile.AddComponent<BoxCollider2D>();
+        newProjectile.AddComponent<WeaponInteractions>();
         newProjectile.tag = "Weapon";
         newProjectile.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         // the game object is needed to be used as a prefab
