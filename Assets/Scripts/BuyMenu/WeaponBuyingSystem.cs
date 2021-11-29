@@ -34,6 +34,7 @@ public class WeaponBuyingSystem : MonoBehaviour
     [SerializeField] private Button grenadeAdd;
     [SerializeField] private Button grenadeSub;
     [SerializeField] private BuyingSystem buySystem;
+    [SerializeField] private List<InputField> allInputFields; 
     
     // int variables
     private int totalWeapons;
@@ -89,11 +90,15 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         selectedWeapons += 1;
         DeforestorCnt.deCnt = add(deforestor, deAdd, deSub, totalWeapons, DeforestorCnt.deCnt, selectedWeapons);
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("DeforestorInput"));
+        inputField.SetTextWithoutNotify(DeforestorCnt.deCnt.ToString());
+  }
     public void RemoveDeforestor()
     {
         DeforestorCnt.deCnt  = sub(deforestor, deAdd, deSub, totalWeapons, DeforestorCnt.deCnt , selectedWeapons);
         selectedWeapons -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("DeforestorInput"));
+        inputField.SetTextWithoutNotify(DeforestorCnt.deCnt.ToString());
     }
 
     //------------------------------ Mineral Extractor ------------------------
@@ -101,36 +106,48 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         selectedWeapons += 1;
         MECnt.meCnt = add(mExtractor, meAdd, meSub, totalWeapons, MECnt.meCnt, selectedWeapons);
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MineralExtractInput"));
+        inputField.SetTextWithoutNotify(MECnt.meCnt.ToString());
+  }
     public void RemoveMExtractor()
     {
         MECnt.meCnt = sub(mExtractor, meAdd, meSub, totalWeapons, MECnt.meCnt, selectedWeapons);
         selectedWeapons -= 1;
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MineralExtractInput"));
+        inputField.SetTextWithoutNotify(MECnt.meCnt.ToString());
+  }
 
     //------------------------------ Arrow ------------------------------------
     public void SelectArrow()
     {
         selectedWeapons += 1;
         ArrowCnt.arrCnt = add(arrow, arrAdd, arrSub, totalWeapons, ArrowCnt.arrCnt, selectedWeapons);
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("ArrowInput"));
+        inputField.SetTextWithoutNotify(ArrowCnt.arrCnt.ToString());
+  }
     public void RemoveArrow()
     {
         ArrowCnt.arrCnt = sub(arrow, arrAdd, arrSub, totalWeapons, ArrowCnt.arrCnt, selectedWeapons);
         selectedWeapons -= 1;
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("ArrowInput"));
+        inputField.SetTextWithoutNotify(ArrowCnt.arrCnt.ToString());
+  }
 
     //------------------------------ Ball ------------------------------------
     public void SelectBall()
     {
         selectedWeapons += 1;
         BallCnt.ballCnt = add(ball, ballAdd, ballSub, totalWeapons, BallCnt.ballCnt, selectedWeapons);
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BallInput"));
+        inputField.SetTextWithoutNotify(BallCnt.ballCnt.ToString());
+  }
     public void RemoveBall()
     {
         BallCnt.ballCnt = sub(ball, ballAdd, ballSub, totalWeapons, BallCnt.ballCnt, selectedWeapons);
         selectedWeapons -= 1;
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BallInput"));
+        inputField.SetTextWithoutNotify(BallCnt.ballCnt.ToString());
+  }
 
 
     //------------------------------ Boomerange ------------------------------------
@@ -138,12 +155,16 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         selectedWeapons += 1;
         BoomCnt.boomCnt = add(boomerange, boomAdd, boomSub, totalWeapons, BoomCnt.boomCnt, selectedWeapons);
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BoomerangInput"));
+        inputField.SetTextWithoutNotify(BoomCnt.boomCnt.ToString());
+  }
     public void RemoveBoom()
     {
         BoomCnt.boomCnt = sub(boomerange, boomAdd, boomSub, totalWeapons, BoomCnt.boomCnt, selectedWeapons);
         selectedWeapons -= 1;
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BoomerangInput"));
+        inputField.SetTextWithoutNotify(BoomCnt.boomCnt.ToString());
+  }
 
 
     //------------------------------ Magnet ------------------------------------
@@ -151,12 +172,16 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         selectedWeapons += 1;
         MagnetCnt.magCnt = add(magnet, magAdd, magSub, totalWeapons, MagnetCnt.magCnt, selectedWeapons);
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MagnetInput"));
+        inputField.SetTextWithoutNotify(MagnetCnt.magCnt.ToString());
+  }
     public void RemoveMag()
     {
         MagnetCnt.magCnt = sub(magnet, magAdd, magSub, totalWeapons, MagnetCnt.magCnt, selectedWeapons);
         selectedWeapons -= 1;
-    }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MagnetInput"));
+        inputField.SetTextWithoutNotify(MagnetCnt.magCnt.ToString());
+  }
 
 
     //------------------------------ Bomb ------------------------------------
@@ -164,11 +189,15 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         selectedWeapons += 1;
         BombCnt.bombCnt = add(bomb, bombAdd,bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BombInput"));
+        inputField.SetTextWithoutNotify(BombCnt.bombCnt.ToString());
     }
     public void RemoveBomb()
     {
         BombCnt.bombCnt = sub(bomb, bombAdd,bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
         selectedWeapons -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BombInput"));
+        inputField.SetTextWithoutNotify(BombCnt.bombCnt.ToString());
     }
 
     //------------------------------ Ray ------------------------------------
@@ -176,11 +205,15 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         selectedWeapons += 1;
         RayCnt.rayCnt = add(ray, rayAdd, raySub, totalWeapons, RayCnt.rayCnt, selectedWeapons);
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("RayInput"));
+        inputField.SetTextWithoutNotify(RayCnt.rayCnt.ToString());
     }
     public void RemoveRay()
     {
         RayCnt.rayCnt = sub(ray, rayAdd, raySub, totalWeapons, RayCnt.rayCnt, selectedWeapons);
         selectedWeapons -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("RayInput"));
+        inputField.SetTextWithoutNotify(RayCnt.rayCnt.ToString());
     }
 
     //------------------------------ Grenade ------------------------------------
@@ -194,11 +227,15 @@ public class WeaponBuyingSystem : MonoBehaviour
             grenade.interactable = false;
             grenadeAdd.interactable = false;
         }
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("GrenadeInput"));
+        inputField.SetTextWithoutNotify(GrenadeCnt.grCnt.ToString());
     }
     public void RemoveGrenade()
     {
         GrenadeCnt.grCnt = sub(grenade,grenadeAdd,grenadeSub, totalWeapons, GrenadeCnt.grCnt, selectedWeapons);
         selectedWeapons -= 1;
+        InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("GrenadeInput"));
+        inputField.SetTextWithoutNotify(GrenadeCnt.grCnt.ToString());
     }
 
     //------------------------------ helper method ---------------------
@@ -219,6 +256,81 @@ public class WeaponBuyingSystem : MonoBehaviour
         sub.interactable = (count > 0);
         buySystem.decremenentAdded();
         return count;
+    }
+
+    private int setCount(Button image, Button add, Button sub,
+                         int maxWeapons, ref int currentWeaponCount,
+                         ref int currentTotalSelected, int newValue)
+    {
+        // remove the current weapon count from the total
+        currentTotalSelected -= currentWeaponCount;
+        currentWeaponCount = 0;
+        // the new weapon count should be the value set
+        currentWeaponCount = newValue + currentTotalSelected > maxWeapons ? (maxWeapons - currentTotalSelected > 0 ? maxWeapons - currentTotalSelected : 0) : newValue;
+
+        selectedWeapons = currentTotalSelected + currentWeaponCount >= totalWeapons ? totalWeapons : currentTotalSelected + currentWeaponCount;
+        image.interactable = currentTotalSelected < maxWeapons;
+        add.interactable = currentTotalSelected < maxWeapons;
+        sub.interactable = currentWeaponCount > 0;
+        return currentWeaponCount;
+    }
+
+    public void OnInput_UpdateCount(string newCount)
+    {
+        InputField activeInputField = allInputFields.Find((inputField) => {
+            return inputField.isFocused;
+        });
+        GameObject parentOfInputField = activeInputField.transform.parent.gameObject;
+        // this is dependent on the order of the GameObjects in the inspector hierarchy
+        // better approach is to refactor buying system, for now this should suffice
+        // [Sprite, Add, Sub]
+        Button[] displayButtons = parentOfInputField.GetComponentsInChildren<Button>();
+        int count = 0;
+        int.TryParse(newCount, out count);
+        switch(parentOfInputField.name) {
+            case "DeforestorPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref DeforestorCnt.deCnt, ref selectedWeapons, count);
+                break;
+            case "MineralExtractorPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref MECnt.meCnt, ref selectedWeapons, count);
+                break;
+            case "ArrowPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref ArrowCnt.arrCnt, ref selectedWeapons, count);
+                break;
+            case "BallPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref BallCnt.ballCnt, ref selectedWeapons, count);
+                break;
+            case "BoomerangePanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref BoomCnt.boomCnt, ref selectedWeapons, count);
+                break;
+            case "MagnetPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref MagnetCnt.magCnt, ref selectedWeapons, count);
+                break;
+            case "BombPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref BombCnt.bombCnt, ref selectedWeapons, count);
+                break;
+            case "RayPanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref RayCnt.rayCnt, ref selectedWeapons, count);
+                break;
+            case "GrenadePanel":
+                count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref GrenadeCnt.grCnt, ref selectedWeapons, count);
+                // undo the total number input
+                selectedWeapons -= count;
+                // calculate whether to add 1 or 0
+                selectedWeapons += count >= 1 ? 1 : 0;
+                GrenadeCnt.grCnt = count >= 1 ? 1 : 0;
+                if (GrenadeCnt.grCnt > 0)
+                {
+                    grenade.interactable = false;
+                    grenadeAdd.interactable = false;
+                }
+                count = GrenadeCnt.grCnt;
+                break;
+            default:
+                break;
+        }
+
+        activeInputField.SetTextWithoutNotify(count.ToString());
     }
 
     private void activateAllAdds(bool condition)
