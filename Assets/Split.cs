@@ -18,8 +18,26 @@ public class Split : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tl = GetComponent<Tilemap>();
-        shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        tl = GetComponent<Tilemap>();    
+        for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x; x++)
+        {
+            for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y; y++)
+            {
+                if (tl.GetTile(new Vector3Int(x, y, 0)) != null)
+                {
+                    String shatterType = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite.ToString();
+                    shatterType = shatterType.Substring(0, 1);
+                    shatterType += "Shatter";
+                    Debug.Log(shatterType);
+                    shatter = Resources.Load(shatterType) as GameObject;
+                    shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    Debug.Log(shatter.name);
+                    return;
+                    /*Debug.Log(tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite);
+                    shatter.GetComponent<SpriteRenderer>().sprite = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite;*/
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -52,7 +70,7 @@ public class Split : MonoBehaviour
             }
             if (t != null)
             {
-                shatter.GetComponent<SpriteRenderer>().sprite = t.sprite;
+                //shatter.GetComponent<SpriteRenderer>().sprite = t.sprite;
             }
                   for (int i = 0; i <= tilesDestroyed - 1; i++)
             {
