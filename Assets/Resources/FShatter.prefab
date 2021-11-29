@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1366299487685945627}
   - component: {fileID: 231166673927524718}
   m_Layer: 0
-  m_Name: WoodShatter2
+  m_Name: FShatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5faf125625e17cc43869b0dd902ef9c2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1cfbc7d3717efed469289e66af9acddd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.096, y: 4.096}
+    oldSize: {x: 3.92, y: 3.936}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0
     drawMode: 0

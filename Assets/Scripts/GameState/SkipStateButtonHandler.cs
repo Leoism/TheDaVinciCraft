@@ -13,6 +13,10 @@ public class SkipStateButtonHandler : MonoBehaviour
         {
             closePanel();
         }
+        if (timer.battleSystem.state == BattleState.ALIENDESTROY)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
     // Skip to next state
     public void goNext()
