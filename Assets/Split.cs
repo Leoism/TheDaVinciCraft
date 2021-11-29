@@ -47,28 +47,51 @@ public class Split : MonoBehaviour
         bool breaking = true;
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            string projType = collision.gameObject.GetComponent<SpriteRenderer>().sprite.ToString();
+            string projType = collision.gameObject.GetComponent<SpriteRenderer>().sprite.name.ToString();
+            Debug.Log(projType);
             switch (projType)
             {
-                case ("deforestor"):
+                case ("deforestor"): 
                     if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                    {
+                        Destroy(collision.gameObject);
                         return;
+                    }
                     break;
-                case ("deforestor"):
-                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                case ("Ball"):
+                    if (shatter.name != "gShatter" || shatter.name != "SShatter")
+                    {
+                        Destroy(collision.gameObject);
                         return;
+                    }
                     break;
-                case ("deforestor"):
-                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                case ("Arrow"):
+                    if (shatter.name != "FShatter")
+                    {
+                        Destroy(collision.gameObject);
                         return;
+                    }
                     break;
-                case ("deforestor"):
-                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                case ("Magnet"):
+                    if (shatter.name != "MShatter" || shatter.name != "FShatter")
+                    {
+                        Destroy(collision.gameObject);
                         return;
+                    }
                     break;
-                case ("deforestor"):
-                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                case ("Boomerange"):
+                    if (shatter.name != "gShatter" || shatter.name != "FShatter")
+                    {
+                        Destroy(collision.gameObject);
                         return;
+                    }
+                    break;
+                case ("MineralExtractor"):
+                    if (shatter.name != "SShatter" || shatter.name != "FShatter")
+                    {
+                        Destroy(collision.gameObject);
+                        return;
+                    }
                     break;
 
             }
