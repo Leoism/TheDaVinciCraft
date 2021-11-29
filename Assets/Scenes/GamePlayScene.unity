@@ -676,6 +676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkipStateButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7154247854709933706, guid: 99f0ac9926c7c1247a17b9e4589bfa80, type: 3}
+      propertyPath: m_TagString
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 7154247854709933707, guid: 99f0ac9926c7c1247a17b9e4589bfa80, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
