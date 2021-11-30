@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class ActionBarBehavior : MonoBehaviour
 {
   [SerializeField]
   private List<GameObject> itemsAvailable = new List<GameObject>();
+  public TextMeshProUGUI lastSelectedItem = null;
   public Gameplay gameplayScene = null;
   void Start()
   {
@@ -37,7 +38,10 @@ public class ActionBarBehavior : MonoBehaviour
       // anonymous function to update count
       itemButton.onClick.AddListener(() =>
       {
+        if (itemsAvailable[tempIdx].GetComponent<Item>().GetCount() > 0) {
         gameplayScene.SetProjectile(item);
+        }
+        lastSelectedItem.text = item.GetComponent<Item>().GetItemName();
         // UseItem(tempIdx);
         // item.GetComponentInChildren<Text>().text = item.GetComponent<Item>().GetCount().ToString();
       });
@@ -51,6 +55,7 @@ public class ActionBarBehavior : MonoBehaviour
       Destroy(item);
     }
     itemsAvailable = null;
+    lastSelectedItem.text = string.Empty;
   }
 
   public void AddItem(GameObject newItem)
