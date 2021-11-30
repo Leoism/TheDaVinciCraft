@@ -463,8 +463,8 @@ public class WeaponBuyingSystem : MonoBehaviour
                 break;
             case "grenade":
                 itemButton = grenade;
-                newItem.SetItemName("Grenade ");
-                newItem.SetMessage("Grenade - Annihilates everything! ");
+                newItem.SetItemName("Alien Grenade ");
+                newItem.SetMessage("Alien Grenade - Annihilates everything! ");
                 break;
             default:
                 break;
