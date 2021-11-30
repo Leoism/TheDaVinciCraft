@@ -285,23 +285,28 @@ public class MaterialBuyingSystem : MonoBehaviour
         switch(name) {
             case "fabric":
                 itemButton = febric;
-                newItem.SetMessage("Fabric Material ");
+                newItem.SetItemName("Fabric");
+                newItem.SetMessage("Fabric - Don't run into any archers ");
                 break;
             case "wood":
                 itemButton = wood;
-                newItem.SetMessage("Wood Material ");
+                newItem.SetItemName("Wood");
+                newItem.SetMessage("Wood - The pioneer of minecraft houses ");
                 break;
             case "stone":
                 itemButton = stone;
-                newItem.SetMessage("Stone Material ");
+                newItem.SetItemName("Stone");
+                newItem.SetMessage("Stone - Cement, wow, very stronk! ");
                 break;
             case "glass":
                 itemButton = glass;
-                newItem.SetMessage("Glass Material ");
+                newItem.SetItemName("Glass");
+                newItem.SetMessage("Glass - Hopefully it's bulletproof ");
                 break;
             case "metal":
                 itemButton = metal;
-                newItem.SetMessage("Metal Material ");
+                newItem.SetItemName("Metal");
+                newItem.SetMessage("Metal - OP material, pls nerf! ");
                 break;
             default:
                 break;
