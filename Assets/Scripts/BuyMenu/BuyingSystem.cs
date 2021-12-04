@@ -24,9 +24,9 @@ public class BuyingSystem : MonoBehaviour
     {
         currentRound = GameManager.globalManager.timer.GetRound();
         if (weaponCountEcho)
-            weaponCountEcho.text = "Weapon Buy Limit: " + (GetWeaponBuyLimit() - currentAdded);
+            weaponCountEcho.text = "Weapon Buy Limit: " + (GetWeaponBuyLimit());
         if (materialCountEcho)
-            materialCountEcho.text = "Material Buy Limit: " + (GetMaterialBuyLimit() - currentAdded);
+            materialCountEcho.text = "Material Buy Limit: " + (GetMaterialBuyLimit());
     }
 
     public int GetCurrentRound()

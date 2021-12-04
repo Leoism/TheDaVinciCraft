@@ -12,7 +12,7 @@ public class ShootingBehavior : MonoBehaviour
   public GameObject powerBar = null;
   private GameObject[] trajectoryPoints;
   public Gameplay gameplayScene = null;
-  private int trajectoryPointCount = 20;
+  public int trajectoryPointCount = 20;
   private float trajectoryPointSpace = 0.0625f;
   // mouse settings
   private bool isAiming = false;
