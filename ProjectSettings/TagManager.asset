@@ -14,6 +14,7 @@ TagManager:
   - MetalTile
   - StoneTile
   - WoodTile
+  - Grid
   layers:
   - Default
   - TransparentFX

@@ -116,7 +116,7 @@ public class AddTilemap : MonoBehaviour
             Vector3Int[] v3iArr = new Vector3Int[_addedTiles.Count];
             Debug.Log("v3i: " + v3iArr.Length);
             _addedTiles.CopyTo(v3iArr);
-            PhotonNetwork.Instantiate("Tilemap_Build", transform.position, transform.rotation, 0, new object[] {v3iArr});
+            PhotonNetwork.Instantiate("Tilemap_Build", transform.position, transform.rotation, 0, new object[] {v3iArr, CurrentTileToAdd.name});
             _addedTiles.Clear();
             tempTilemap.ClearAllTiles();
             placed = false;
@@ -125,10 +125,13 @@ public class AddTilemap : MonoBehaviour
         }
         else
         {
-            Tilemap newTilemap = ((GameObject)Resources.Load("Tilemap_Build")).GetComponent<Tilemap>();
+            Tilemap newTilemap = Instantiate(((GameObject)Resources.Load("Tilemap_Build"))).GetComponent<Tilemap>();
+            // if you don't clear them, then the tilemap gets prebuilt tiles
+            newTilemap.ClearAllTiles();
             newTilemap.transform.position = transform.position;
             newTilemap.transform.rotation = transform.rotation;
             newTilemap.transform.localScale = transform.localScale;
+            newTilemap.transform.parent = transform;
             SetTileMap(newTilemap);
         }
     }
