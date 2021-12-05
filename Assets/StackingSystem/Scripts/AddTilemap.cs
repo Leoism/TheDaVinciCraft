@@ -55,7 +55,8 @@ public class AddTilemap : MonoBehaviour
     public void UpdateTileArt(Tile newTile)
     {
         tilesToAdd[currentTileToAddIndex] = newTile;
-        tilesToAdd[currentTileToAddIndex].name = newTile ? newTile.name : "None";
+        if (tilesToAdd[currentTileToAddIndex])
+            tilesToAdd[currentTileToAddIndex].name = newTile ? newTile.name : "None";
     }
 
     private readonly HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
