@@ -208,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 12581698}
   m_Layer: 5
-  m_Name: BoomerangePanel
+  m_Name: BoomerangPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,11 +231,11 @@ RectTransform:
   - {fileID: 966082957}
   - {fileID: 1152246611}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 379, y: 75}
+  m_AnchoredPosition: {x: -183, y: 75}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &14514463
@@ -426,12 +426,12 @@ RectTransform:
   - {fileID: 699501999}
   - {fileID: 2104230072}
   - {fileID: 2015465944}
-  - {fileID: 536602573}
+  - {fileID: 12581698}
   - {fileID: 187730670}
   - {fileID: 1722270313}
-  - {fileID: 12581698}
-  - {fileID: 572513486}
+  - {fileID: 536602573}
   - {fileID: 168494218}
+  - {fileID: 572513486}
   - {fileID: 124605761}
   - {fileID: 1389513142}
   - {fileID: 260613783}
@@ -1573,11 +1573,11 @@ RectTransform:
   - {fileID: 828019219}
   - {fileID: 1523939514}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: -117}
+  m_AnchoredPosition: {x: -368, y: -117}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &187730669
@@ -2287,6 +2287,7 @@ GameObject:
   - component: {fileID: 260518120}
   - component: {fileID: 260518124}
   - component: {fileID: 260518125}
+  - component: {fileID: 260518126}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2467,6 +2468,29 @@ MonoBehaviour:
   - {fileID: 1523939515}
   - {fileID: 1045421916}
   - {fileID: 980784849}
+--- !u!114 &260518126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260518119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aba1ae163bc149219d7a9b33099179f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  woodPanel: {fileID: 1704364940}
+  fabricPanel: {fileID: 2073167127}
+  stonePanel: {fileID: 1856723279}
+  glassPanel: {fileID: 587065492}
+  metalPanel: {fileID: 1630399143}
+  bBallPanel: {fileID: 1722270312}
+  bombPanel: {fileID: 168494217}
+  mePanel: {fileID: 536602572}
+  magnetPanel: {fileID: 572513485}
+  rayPanel: {fileID: 124605760}
+  grenadePanel: {fileID: 1389513141}
 --- !u!1 &260613780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,11 +4694,11 @@ RectTransform:
   - {fileID: 642436387}
   - {fileID: 514609125}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: 75}
+  m_AnchoredPosition: {x: 369, y: 75}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &548216635
@@ -4957,11 +4981,11 @@ RectTransform:
   - {fileID: 469473994}
   - {fileID: 553446670}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -368, y: -117}
+  m_AnchoredPosition: {x: -181, y: -117}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &575857311
@@ -14132,7 +14156,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Boomerange
+  m_Text: Boomerang
 --- !u!222 &1694630735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14416,7 +14440,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Febric
+  m_Text: Fabric
 --- !u!222 &1752184671
 CanvasRenderer:
   m_ObjectHideFlags: 0
