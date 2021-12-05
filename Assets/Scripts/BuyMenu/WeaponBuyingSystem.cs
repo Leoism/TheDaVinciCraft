@@ -50,6 +50,17 @@ public class WeaponBuyingSystem : MonoBehaviour
         bombSub.interactable = (BombCnt.bombCnt > 0);
         raySub.interactable = (RayCnt.rayCnt > 0);
         grenadeSub.interactable = (GrenadeCnt.grCnt > 0);
+        
+        activateAllAdds(false);
+        // round 1 only activate deforestor, arrow boomerang
+        if (GameManager.globalManager.GetCurrentRound() == 0) {
+            activeAddsForRoundOne(true);
+        }
+        // round 2 unblock ball, bomb, mineral extractor
+        else if (GameManager.globalManager.GetCurrentRound() == 1) {
+            activeAddsForRoundTwo(true);
+        }
+
     }
     void Start()
     {
@@ -76,7 +87,15 @@ public class WeaponBuyingSystem : MonoBehaviour
         }
 
         if (selectedWeapons < totalWeapons) {
-            activateAllAdds(true);
+            if (GameManager.globalManager.GetCurrentRound() == 0) {
+                activeAddsForRoundOne(true);
+            }
+            else if (GameManager.globalManager.GetCurrentRound() == 1) {
+                activeAddsForRoundTwo(true);
+            }
+            else{
+                activateAllAdds(true);
+            }
         }
 
         if (CountDownTimer.isTimeUp == true) {
@@ -108,14 +127,14 @@ public class WeaponBuyingSystem : MonoBehaviour
         MECnt.meCnt = add(mExtractor, meAdd, meSub, totalWeapons, MECnt.meCnt, selectedWeapons);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MineralExtractInput"));
         inputField.SetTextWithoutNotify(MECnt.meCnt.ToString());
-  }
+    }
     public void RemoveMExtractor()
     {
         MECnt.meCnt = sub(mExtractor, meAdd, meSub, totalWeapons, MECnt.meCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MineralExtractInput"));
         inputField.SetTextWithoutNotify(MECnt.meCnt.ToString());
-  }
+    }
 
     //------------------------------ Arrow ------------------------------------
     public void SelectArrow()
@@ -124,14 +143,14 @@ public class WeaponBuyingSystem : MonoBehaviour
         ArrowCnt.arrCnt = add(arrow, arrAdd, arrSub, totalWeapons, ArrowCnt.arrCnt, selectedWeapons);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("ArrowInput"));
         inputField.SetTextWithoutNotify(ArrowCnt.arrCnt.ToString());
-  }
+    }
     public void RemoveArrow()
     {
         ArrowCnt.arrCnt = sub(arrow, arrAdd, arrSub, totalWeapons, ArrowCnt.arrCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("ArrowInput"));
         inputField.SetTextWithoutNotify(ArrowCnt.arrCnt.ToString());
-  }
+    }
 
     //------------------------------ Ball ------------------------------------
     public void SelectBall()
@@ -140,14 +159,14 @@ public class WeaponBuyingSystem : MonoBehaviour
         BallCnt.ballCnt = add(ball, ballAdd, ballSub, totalWeapons, BallCnt.ballCnt, selectedWeapons);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BallInput"));
         inputField.SetTextWithoutNotify(BallCnt.ballCnt.ToString());
-  }
+    }
     public void RemoveBall()
     {
         BallCnt.ballCnt = sub(ball, ballAdd, ballSub, totalWeapons, BallCnt.ballCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BallInput"));
         inputField.SetTextWithoutNotify(BallCnt.ballCnt.ToString());
-  }
+    }
 
 
     //------------------------------ Boomerange ------------------------------------
@@ -157,14 +176,14 @@ public class WeaponBuyingSystem : MonoBehaviour
         BoomCnt.boomCnt = add(boomerange, boomAdd, boomSub, totalWeapons, BoomCnt.boomCnt, selectedWeapons);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BoomerangInput"));
         inputField.SetTextWithoutNotify(BoomCnt.boomCnt.ToString());
-  }
+    }
     public void RemoveBoom()
     {
         BoomCnt.boomCnt = sub(boomerange, boomAdd, boomSub, totalWeapons, BoomCnt.boomCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BoomerangInput"));
         inputField.SetTextWithoutNotify(BoomCnt.boomCnt.ToString());
-  }
+    }
 
 
     //------------------------------ Magnet ------------------------------------
@@ -174,14 +193,14 @@ public class WeaponBuyingSystem : MonoBehaviour
         MagnetCnt.magCnt = add(magnet, magAdd, magSub, totalWeapons, MagnetCnt.magCnt, selectedWeapons);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MagnetInput"));
         inputField.SetTextWithoutNotify(MagnetCnt.magCnt.ToString());
-  }
+    }
     public void RemoveMag()
     {
         MagnetCnt.magCnt = sub(magnet, magAdd, magSub, totalWeapons, MagnetCnt.magCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MagnetInput"));
         inputField.SetTextWithoutNotify(MagnetCnt.magCnt.ToString());
-  }
+    }
 
 
     //------------------------------ Bomb ------------------------------------
@@ -357,6 +376,28 @@ public class WeaponBuyingSystem : MonoBehaviour
         }
         // grenade.interactable = condition;
         // grenadeAdd.interactable = condition;
+    }
+    private void activeAddsForRoundOne(bool condition) {
+        deforestor.interactable = condition;
+        deAdd.interactable = condition;
+        arrow.interactable = condition;
+        arrAdd.interactable = condition;
+        boomerange.interactable = condition;
+        boomAdd.interactable = condition;
+    }
+    private void activeAddsForRoundTwo(bool condition) {
+        deforestor.interactable = condition;
+        deAdd.interactable = condition;
+        arrow.interactable = condition;
+        arrAdd.interactable = condition;
+        boomerange.interactable = condition;
+        boomAdd.interactable = condition;
+        ball.interactable = condition;
+        ballAdd.interactable = condition;
+        bomb.interactable = condition;
+        bombAdd.interactable = condition;
+        mExtractor.interactable = condition;
+        meAdd.interactable = condition;
     }
 
     private void activateAllSubs(bool condition)

@@ -235,7 +235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 379, y: 75}
+  m_AnchoredPosition: {x: -183, y: 75}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &14514463
@@ -411,7 +411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &33339783
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1577,7 +1577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: -117}
+  m_AnchoredPosition: {x: -368, y: -117}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &187730669
@@ -2287,6 +2287,7 @@ GameObject:
   - component: {fileID: 260518120}
   - component: {fileID: 260518124}
   - component: {fileID: 260518125}
+  - component: {fileID: 260518126}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2467,6 +2468,23 @@ MonoBehaviour:
   - {fileID: 1523939515}
   - {fileID: 1045421916}
   - {fileID: 980784849}
+--- !u!114 &260518126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260518119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aba1ae163bc149219d7a9b33099179f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  woodPanel: {fileID: 1704364940}
+  fabricPanel: {fileID: 2073167127}
+  stonePanel: {fileID: 1856723279}
+  glassPanel: {fileID: 587065492}
+  metalPanel: {fileID: 1630399143}
 --- !u!1 &260613780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,7 +4692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: 75}
+  m_AnchoredPosition: {x: 369, y: 75}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &548216635
@@ -4961,7 +4979,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -368, y: -117}
+  m_AnchoredPosition: {x: -181, y: -117}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &575857311
@@ -14416,7 +14434,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Febric
+  m_Text: Fabric
 --- !u!222 &1752184671
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16537,7 +16555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2087368307
 RectTransform:
   m_ObjectHideFlags: 0

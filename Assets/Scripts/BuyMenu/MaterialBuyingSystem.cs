@@ -36,6 +36,16 @@ public class MaterialBuyingSystem : MonoBehaviour
         stoneRemove.interactable = (StoneCnt.stoneCnt > 0);
         glassRemove.interactable = (GlassCnt.glassCnt > 0);
         metalRemove.interactable = (MetalCnt.metalCnt > 0);
+        
+        inactiveAllButs();
+        // round 1 only activate wood and fabric
+        if (GameManager.globalManager.GetCurrentRound() == 0) {
+            activeAddsForRoundOne(true);
+        }
+        // round 2 activate wood, fabric, and stone
+        else if (GameManager.globalManager.GetCurrentRound() == 1) {
+            activeAddsForRoundTwo(true);
+        }
     }
     void Start()
     {
@@ -54,11 +64,21 @@ public class MaterialBuyingSystem : MonoBehaviour
         if (CountDownTimer.isTimeUp == true) {
             inactiveAllButs();
         }
+        
         if (selectedMaterials >= totalMaterials) {
             activeAllAdds(false);
         }
+
         if (selectedMaterials < totalMaterials) {
-            activeAllAdds(true);
+            if (GameManager.globalManager.GetCurrentRound() == 0) {
+                activeAddsForRoundOne(true);
+            }
+            else if (GameManager.globalManager.GetCurrentRound() == 1) {
+                activeAddsForRoundTwo(true);
+            }
+            else{
+                activeAllAdds(true);
+            }            
         }
     }
 
@@ -197,6 +217,21 @@ public class MaterialBuyingSystem : MonoBehaviour
         metal.interactable = conditions;
         metalAdd.interactable = conditions;
     }
+    private void activeAddsForRoundOne(bool conditions) {
+        wood.interactable = conditions;
+        woodAdd.interactable = conditions;
+        febric.interactable = conditions;
+        febricAdd.interactable = conditions;
+    }
+    private void activeAddsForRoundTwo(bool conditions) {
+        wood.interactable = conditions;
+        woodAdd.interactable = conditions;
+        febric.interactable = conditions;
+        febricAdd.interactable = conditions;
+        stone.interactable = conditions;
+        stoneAdd.interactable = conditions;
+    }
+    
 
         private int setCount(Button image, Button add, Button sub,
                          int maxWeapons, ref int currentWeaponCount,
