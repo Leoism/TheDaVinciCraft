@@ -231,7 +231,7 @@ RectTransform:
   - {fileID: 966082957}
   - {fileID: 1152246611}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -426,12 +426,12 @@ RectTransform:
   - {fileID: 699501999}
   - {fileID: 2104230072}
   - {fileID: 2015465944}
-  - {fileID: 536602573}
+  - {fileID: 12581698}
   - {fileID: 187730670}
   - {fileID: 1722270313}
-  - {fileID: 12581698}
-  - {fileID: 572513486}
+  - {fileID: 536602573}
   - {fileID: 168494218}
+  - {fileID: 572513486}
   - {fileID: 124605761}
   - {fileID: 1389513142}
   - {fileID: 260613783}
@@ -1573,7 +1573,7 @@ RectTransform:
   - {fileID: 828019219}
   - {fileID: 1523939514}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2485,6 +2485,12 @@ MonoBehaviour:
   stonePanel: {fileID: 1856723279}
   glassPanel: {fileID: 587065492}
   metalPanel: {fileID: 1630399143}
+  bBallPanel: {fileID: 1722270312}
+  bombPanel: {fileID: 168494217}
+  mePanel: {fileID: 536602572}
+  magnetPanel: {fileID: 572513485}
+  rayPanel: {fileID: 124605760}
+  grenadePanel: {fileID: 1389513141}
 --- !u!1 &260613780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4688,7 +4694,7 @@ RectTransform:
   - {fileID: 642436387}
   - {fileID: 514609125}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4975,7 +4981,7 @@ RectTransform:
   - {fileID: 469473994}
   - {fileID: 553446670}
   m_Father: {fileID: 33339783}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
