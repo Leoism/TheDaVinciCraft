@@ -9,6 +9,11 @@ TagManager:
   - Button
   - block
   - Art
+  - FabricTile
+  - GlassTile
+  - MetalTile
+  - StoneTile
+  - WoodTile
   layers:
   - Default
   - TransparentFX

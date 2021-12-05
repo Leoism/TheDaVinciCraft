@@ -55,6 +55,7 @@ public class AddTilemap : MonoBehaviour
     public void UpdateTileArt(Tile newTile)
     {
         tilesToAdd[currentTileToAddIndex] = newTile;
+        tilesToAdd[currentTileToAddIndex].name = newTile ? newTile.name : "None";
     }
 
     private readonly HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
@@ -111,7 +112,7 @@ public class AddTilemap : MonoBehaviour
         tilemap.GetComponent<Split>().CurrentTileToAdd = CurrentTileToAdd;
         foreach (var pos in _addedTiles)
         tilemap.SetTile(pos, CurrentTileToAdd);
-
+        tilemap.tag = CurrentTileToAdd.name + "Tile";
         _addedTiles.Clear();
         tempTilemap.ClearAllTiles();
         placed = false;
