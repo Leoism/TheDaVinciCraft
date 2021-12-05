@@ -70,13 +70,14 @@ public class Timer : MonoBehaviour
                     isTimerRunning = true;
                     break;
                 case BattleState.ALIENDESTROY:
-                        secRemaining = 60f;
-                        isTimerRunning = true;
-                        isLastState = true;
-                        GameManager.globalManager.IncrementCurrRound();
-                        break;
+                    secRemaining = 60f;
+                    isTimerRunning = true;
+                    isLastState = true;
+                    GameManager.globalManager.IncrementCurrRound();
+                    break;
                 default: break;
             }
+            GameManager.globalManager.currentPlayer = GetCurrentPlayer();
         }
         else {
             if (secRemaining > 1)
