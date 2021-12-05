@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1366299487685945627}
   - component: {fileID: 231166673927524718}
   m_Layer: 0
-  m_Name: WShatter
+  m_Name: WoodTile
   m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

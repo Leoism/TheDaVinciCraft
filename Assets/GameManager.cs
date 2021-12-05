@@ -22,6 +22,7 @@ public class GameManager
   public Player humanPlayer = null;
   public bool isOnlineMode = false;
   public bool allPlayersReady = false;
+  public string currentPlayer = null;
   private List<List<Player>> rounds = null;
   private int currentRound;
   private GameManager()
@@ -122,7 +123,6 @@ public class GameManager
       materialBuyingCount.Add(materialCount);
       materialCount += 10;
     }
-
     return materialBuyingCount;
   }
   public List<int> GetWeaponCountForRound()
