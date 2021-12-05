@@ -38,8 +38,10 @@ public class Gameplay : MonoBehaviour
       mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, 50f, 40f * Time.smoothDeltaTime);
       if (currentItem != null)
       {
+        // Updates the tile image to use for tiles
         Tile currentTile = new Tile();
         currentTile.sprite = currentItem.GetComponent<Image>().sprite;
+        currentTile.name = currentItem.name;
         tilemapAdder.UpdateTileArt(currentTile);
       }
     }
@@ -105,5 +107,6 @@ public class Gameplay : MonoBehaviour
   {
     prevItem = currentItem;
     currentItem = newProjectile;
+    currentItem.name = newProjectile.name;
   }
 }

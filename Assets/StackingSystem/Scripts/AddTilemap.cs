@@ -55,20 +55,28 @@ public class AddTilemap : MonoBehaviour
     public void UpdateTileArt(Tile newTile)
     {
         tilesToAdd[currentTileToAddIndex] = newTile;
+        tilesToAdd[currentTileToAddIndex].name = newTile ? newTile.name : "None";
     }
 
     private readonly HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
 
     private void HandleTileMapCreation()
     {
-        if (CurrentTileToAdd != null && Input.GetMouseButtonUp(0))
+        if (CurrentTileToAdd == null) return;
+
+        Vector2 ray = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray, Vector2.zero);
+        if (hit.collider && hit.collider.CompareTag("Art")) return;
+        
+        if (Input.GetMouseButtonUp(0))
         {
             CreateTileMap();
         }
-       // Debug.Log(EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject.CompareTag(""));
-         if (CurrentTileToAdd != null && Input.GetMouseButton(0) && !(EventSystem.current.IsPointerOverGameObject () && 
-     EventSystem.current.currentSelectedGameObject != null && 
-     EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )) && GameManager.globalManager.humanInventory.TotalCount() != 0)
+        if (Input.GetMouseButton(0) &&
+            !(EventSystem.current.IsPointerOverGameObject () && 
+            EventSystem.current.currentSelectedGameObject != null && 
+            EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )) &&
+            GameManager.globalManager.humanInventory.TotalCount() != 0)
         {
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var newTilePos = _grid.WorldToCell(mousePos);
@@ -104,7 +112,7 @@ public class AddTilemap : MonoBehaviour
         tilemap.GetComponent<Split>().CurrentTileToAdd = CurrentTileToAdd;
         foreach (var pos in _addedTiles)
         tilemap.SetTile(pos, CurrentTileToAdd);
-
+        tilemap.tag = CurrentTileToAdd.name + "Tile";
         _addedTiles.Clear();
         tempTilemap.ClearAllTiles();
         placed = false;

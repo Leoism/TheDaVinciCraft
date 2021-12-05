@@ -25,10 +25,8 @@ public class Split : MonoBehaviour
             {
                 if (tl.GetTile(new Vector3Int(x, y, 0)) != null)
                 {
-                    String shatterType = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite.ToString();
-                    shatterType = shatterType.Substring(0, 1);
-                    shatterType += "Shatter";
-                    Debug.Log(shatterType);
+                    String shatterType = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite.name;
+                    shatterType += "Tile";
                     shatter = Resources.Load(shatterType) as GameObject;
                     shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     Debug.Log(shatter.name);
@@ -52,42 +50,42 @@ public class Split : MonoBehaviour
             switch (projType)
             {
                 case ("deforestor"): 
-                    if (shatter.name != "WShatter" || shatter.name != "FShatter")
+                    if (shatter.name != "WoodTile" || shatter.name != "FabricTile")
                     {
                         Destroy(collision.gameObject);
                         return;
                     }
                     break;
                 case ("Ball"):
-                    if (shatter.name != "gShatter" || shatter.name != "SShatter")
+                    if (shatter.name != "GlassTile" || shatter.name != "StoneTile")
                     {
                         Destroy(collision.gameObject);
                         return;
                     }
                     break;
                 case ("Arrow"):
-                    if (shatter.name != "FShatter")
+                    if (shatter.name != "FabricTile")
                     {
                         Destroy(collision.gameObject);
                         return;
                     }
                     break;
                 case ("Magnet"):
-                    if (shatter.name != "MShatter" || shatter.name != "FShatter")
+                    if (shatter.name != "MetalTile" || shatter.name != "FabricTile")
                     {
                         Destroy(collision.gameObject);
                         return;
                     }
                     break;
                 case ("Boomerange"):
-                    if (shatter.name != "gShatter" || shatter.name != "FShatter")
+                    if (shatter.name != "GlassTile" || shatter.name != "FabricTile")
                     {
                         Destroy(collision.gameObject);
                         return;
                     }
                     break;
                 case ("MineralExtractor"):
-                    if (shatter.name != "SShatter" || shatter.name != "FShatter")
+                    if (shatter.name != "StoneTile" || shatter.name != "FabricTile")
                     {
                         Destroy(collision.gameObject);
                         return;
