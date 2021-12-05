@@ -957,6 +957,23 @@ MonoBehaviour:
       m_Height: 109
     m_Scale: 1
     m_AtlasIndex: 0
+<<<<<<< Updated upstream
+=======
+  - m_Index: 15
+    m_Metrics:
+      m_Width: 29.71875
+      m_Height: 60.375
+      m_HorizontalBearingX: 23.046875
+      m_HorizontalBearingY: 37.234375
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 207
+      m_Y: 531
+      m_Width: 30
+      m_Height: 62
+    m_Scale: 1
+    m_AtlasIndex: 0
+>>>>>>> Stashed changes
   - m_Index: 10
     m_Metrics:
       m_Width: 14.09375
@@ -985,6 +1002,7 @@ MonoBehaviour:
       m_Height: 109
     m_Scale: 1
     m_AtlasIndex: 0
+<<<<<<< Updated upstream
   - m_Index: 15
     m_Metrics:
       m_Width: 29.71875
@@ -999,6 +1017,8 @@ MonoBehaviour:
       m_Height: 62
     m_Scale: 1
     m_AtlasIndex: 0
+=======
+>>>>>>> Stashed changes
   - m_Index: 78
     m_Metrics:
       m_Width: 76.53125
@@ -1247,6 +1267,13 @@ MonoBehaviour:
     m_GlyphIndex: 91
     m_Scale: 1
   - m_ElementType: 1
+<<<<<<< Updated upstream
+=======
+    m_Unicode: 44
+    m_GlyphIndex: 15
+    m_Scale: 1
+  - m_ElementType: 1
+>>>>>>> Stashed changes
     m_Unicode: 39
     m_GlyphIndex: 10
     m_Scale: 1
@@ -1255,10 +1282,13 @@ MonoBehaviour:
     m_GlyphIndex: 38
     m_Scale: 1
   - m_ElementType: 1
+<<<<<<< Updated upstream
     m_Unicode: 44
     m_GlyphIndex: 15
     m_Scale: 1
   - m_ElementType: 1
+=======
+>>>>>>> Stashed changes
     m_Unicode: 107
     m_GlyphIndex: 78
     m_Scale: 1
@@ -1496,6 +1526,13 @@ MonoBehaviour:
     m_Y: 780
     m_Width: 98
     m_Height: 130
+<<<<<<< Updated upstream
+=======
+  - m_X: 196
+    m_Y: 520
+    m_Width: 51
+    m_Height: 83
+>>>>>>> Stashed changes
   - m_X: 98
     m_Y: 618
     m_Width: 36
@@ -1504,10 +1541,13 @@ MonoBehaviour:
     m_Y: 260
     m_Width: 98
     m_Height: 130
+<<<<<<< Updated upstream
   - m_X: 196
     m_Y: 520
     m_Width: 51
     m_Height: 83
+=======
+>>>>>>> Stashed changes
   - m_X: 851
     m_Y: 260
     m_Width: 98
@@ -1561,10 +1601,13 @@ MonoBehaviour:
     m_Y: 390
     m_Width: 337
     m_Height: 633
+<<<<<<< Updated upstream
   - m_X: 134
     m_Y: 618
     m_Width: 31
     m_Height: 68
+=======
+>>>>>>> Stashed changes
   - m_X: 196
     m_Y: 603
     m_Width: 67
@@ -1573,6 +1616,13 @@ MonoBehaviour:
     m_Y: 520
     m_Width: 16
     m_Height: 98
+<<<<<<< Updated upstream
+=======
+  - m_X: 134
+    m_Y: 618
+    m_Width: 31
+    m_Height: 68
+>>>>>>> Stashed changes
   - m_X: 949
     m_Y: 260
     m_Width: 74
