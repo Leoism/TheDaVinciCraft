@@ -319,7 +319,7 @@ public class WeaponBuyingSystem : MonoBehaviour
             case "BallPanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref BallCnt.ballCnt, ref selectedWeapons, count);
                 break;
-            case "BoomerangePanel":
+            case "BoomerangPanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref BoomCnt.boomCnt, ref selectedWeapons, count);
                 break;
             case "MagnetPanel":
