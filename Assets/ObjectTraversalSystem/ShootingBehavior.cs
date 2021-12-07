@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 public class ShootingBehavior : MonoBehaviour
 {
   // projectile settings
@@ -13,6 +14,7 @@ public class ShootingBehavior : MonoBehaviour
   private GameObject[] trajectoryPoints;
   public Gameplay gameplayScene = null;
   public int trajectoryPointCount = 20;
+  public string projectileName = "";
   private float trajectoryPointSpace = 0.0625f;
   // mouse settings
   private bool isAiming = false;
@@ -45,19 +47,16 @@ public class ShootingBehavior : MonoBehaviour
     if (!(EventSystem.current.IsPointerOverGameObject() &&
          EventSystem.current.currentSelectedGameObject != null &&
          EventSystem.current.currentSelectedGameObject.CompareTag("Button")))
-        {
-            DetectOnAim();
-            OnAim();
-        }
+    {
+      DetectOnAim();
+      OnAim();
+    }
   }
 
   void DetectOnAim()
   {
     if (gameplayScene.IsItemEmpty()) return;
 
-      /*  if (CurrentTileToAdd != null && Input.GetMouseButton(0) && !(EventSystem.current.IsPointerOverGameObject() &&
-         EventSystem.current.currentSelectedGameObject != null &&
-         EventSystem.current.currentSelectedGameObject.CompareTag("Button")))*/
     if (Input.GetMouseButtonDown(0))
     {
       isAiming = true;
@@ -96,7 +95,15 @@ public class ShootingBehavior : MonoBehaviour
 
   void Shoot()
   {
-    GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+    GameObject newProjectile = null;
+    if (GameManager.globalManager.isOnlineMode)
+    {
+      newProjectile = PhotonNetwork.Instantiate("GamePlayScene/Projectile", projectileSpawnPoint.position, projectileSpawnPoint.rotation, 0, new object[] { projectileName });
+    }
+    else
+    {
+      newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+    }
     newProjectile.transform.up = direction;
     newProjectile.GetComponent<Rigidbody2D>().velocity = direction * shootStrength * dragStrength;
   }

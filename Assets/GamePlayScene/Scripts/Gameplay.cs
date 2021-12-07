@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using Photon.Pun;
 public class Gameplay : MonoBehaviour
 {
   public Timer gameTimer = null;
@@ -54,17 +55,11 @@ public class Gameplay : MonoBehaviour
         alienship.Init();
       if (currentItem != null && currentItem != prevItem)
       {
-        GameObject newProjectile = new GameObject();
-        newProjectile.name = "Projectile";
-        newProjectile.AddComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
-        newProjectile.AddComponent<Rigidbody2D>();
-        newProjectile.AddComponent<BoxCollider2D>();
-        newProjectile.AddComponent<WeaponInteractions>();
-        newProjectile.tag = "Weapon";
-        newProjectile.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        // the game object is needed to be used as a prefab
-        newProjectile.transform.position = new Vector3(-5000, -5000, -5000);
+        GameObject newProjectile = (GameObject)Resources.Load("GamePlayScene/Projectile");
+        newProjectile.transform.localScale = new Vector3(5f, 5f, 5f);
+        newProjectile.GetComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
         shootingBehavior.projectilePrefab = newProjectile;
+        shootingBehavior.projectileName = currentItem.name;
         prevItem = currentItem;
       }
     }
