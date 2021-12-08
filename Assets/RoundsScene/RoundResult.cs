@@ -9,5 +9,6 @@ public class RoundResult : MonoBehaviour
   void Awake()
   {
     GameManager.globalManager.SaveRound(humanScore, alienScore);
+    GameManager.globalManager.allPlayersReady = false;
   }
 }

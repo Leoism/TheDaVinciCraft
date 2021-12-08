@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 public class Alienship : MonoBehaviour
 {
     bool isInitialized = false;
     private float currentTime = 0;
     public GameObject powerBar = null;
     public ShootingBehavior shootingBehavior = null;
+    public PhotonView canvasPhotonView = null;
     
     void Start()
     {
@@ -37,13 +39,26 @@ public class Alienship : MonoBehaviour
         // but they were able to keep shooting and win.
         if (Timer.secRemaining <= 0)
         {
-            SceneManager.LoadScene("HumanWin");
+            if (GameManager.globalManager.isOnlineMode)
+            {
+                PhotonNetwork.LoadLevel("HumanWin");
+            } else
+            {
+                SceneManager.LoadScene("HumanWin");
+            }
         }
         
         // add timer about 10 sec
         if (GameManager.globalManager.alienInventory.TotalCount() <= 0)
         {
-            CountTenSec();
+            // In online mode, we only want to run the timer on the alien side
+            if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+            {
+                CountTenSec();
+            } else if (!GameManager.globalManager.isOnlineMode)
+            {
+                CountTenSec();
+            }
         }
     }
     private void CountTenSec()
@@ -57,7 +72,13 @@ public class Alienship : MonoBehaviour
         if (currentTime <= 0)
         {
             currentTime = 8;
-            SceneManager.LoadScene("HumanWin");
+            if (GameManager.globalManager.isOnlineMode)
+            {
+                canvasPhotonView.RPC("RPC_AlienOutOfWeapons", RpcTarget.MasterClient);
+            } else
+            {
+                SceneManager.LoadScene("HumanWin");
+            }
         }
     }
 }

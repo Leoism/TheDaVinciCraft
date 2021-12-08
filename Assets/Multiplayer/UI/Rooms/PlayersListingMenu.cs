@@ -55,7 +55,6 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
       PhotonNetwork.CurrentRoom.IsVisible = false;
       // send RPCs to other player
       base.photonView.RPC("RPC_SendGameInfo", RpcTarget.Others, mode);
-      PhotonNetwork.LoadLevel("BuyingMenu");
     }
   }
 
@@ -88,9 +87,9 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
     Player myself = new Player();
     Player other = new Player();
     myself.name = PhotonNetwork.LocalPlayer.NickName;
-    other.name = PhotonNetwork.CurrentRoom.Players[1].NickName;
+    other.name = PhotonNetwork.PlayerListOthers[0].NickName;
     myself.type = PhotonNetwork.IsMasterClient ? "(Human)" : "(Alien)";
-    myself.type = PhotonNetwork.IsMasterClient ? "(Alien)" : "(Human)";
+    other.type = PhotonNetwork.IsMasterClient ? "(Alien)" : "(Human)";
     return new Player[] { myself, other };
   }
 
@@ -102,6 +101,13 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
     Player[] players = CreatePlayers();
     GameManager.globalManager.SetPlayers(players[1], players[0]);
     GameManager.globalManager.SetGameType((GameMode)mode);
+    base.photonView.RPC("RPC_AlienFinishSettingPlayers", RpcTarget.MasterClient);
+  }
+
+  [PunRPC]
+  public void RPC_AlienFinishSettingPlayers()
+  {
+    PhotonNetwork.LoadLevel("BuyingMenu");
   }
 
   public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)

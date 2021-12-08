@@ -16,7 +16,7 @@ public class NetworkProjectile : MonoBehaviourPunCallbacks, IPunInstantiateMagic
     GameObject spritePrefab = null;
     switch (name)
     {
-      case "Alien Grenade":
+      case "Alien Grenade ":
         spritePrefab = (GameObject)Resources.Load("Weapons/AlienGrenade");
         break;
       case "Arrow":
@@ -41,7 +41,7 @@ public class NetworkProjectile : MonoBehaviourPunCallbacks, IPunInstantiateMagic
         spritePrefab = (GameObject)Resources.Load("Weapons/MineralExtractor");
         break;
       case "Raygun ":
-        spritePrefab = (GameObject)Resources.Load("Weapons/Raygun");
+        spritePrefab = (GameObject)Resources.Load("Weapons/Ray");
         break;
       default:
         spritePrefab = null;

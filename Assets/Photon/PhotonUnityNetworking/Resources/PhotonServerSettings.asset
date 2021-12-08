@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: usw
     Server: 
     Port: 0
     ProxyServer: 
@@ -45,6 +45,10 @@ MonoBehaviour:
   - RPC_SendGamerInfo
   - RPC_SendGameInfo
   - RPC_SendSelectedArt
+  - RPC_OnArtDestruction
+  - RPC_OnClick_Done
+  - RPC_AlienOutOfWeapons
+  - RPC_AlienFinishSettingPlayers
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
