@@ -20,6 +20,8 @@ public class GameManager
   public BattleSystem battleSystem;
   public Player alienPlayer = null;
   public Player humanPlayer = null;
+  public bool isOnlineMode = false;
+  public bool allPlayersReady = false;
   public string currentPlayer = null;
   private List<List<Player>> rounds = null;
   private int currentRound;
@@ -39,6 +41,7 @@ public class GameManager
     GameManager.globalManager.alienPlayer = null;
     GameManager.globalManager.humanPlayer = null;
     GameManager.globalManager.rounds = null;
+    GameManager.globalManager.isOnlineMode = false;
     currentRound = 0;
   }
 
