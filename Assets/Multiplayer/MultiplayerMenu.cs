@@ -32,6 +32,7 @@ public class MultiplayerMenu : MonoBehaviourPunCallbacks
     if (!PhotonNetwork.IsConnected)
     {
       PhotonNetwork.GameVersion = version;
+      PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "usw";
       PhotonNetwork.ConnectUsingSettings();
     }
     PhotonNetwork.NickName = "Player " + GenerateRandomID(4) + GenerateRandomID(6);

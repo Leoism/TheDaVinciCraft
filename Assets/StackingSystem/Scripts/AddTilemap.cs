@@ -114,7 +114,6 @@ public class AddTilemap : MonoBehaviour
         if (GameManager.globalManager.isOnlineMode)
         {
             Vector3Int[] v3iArr = new Vector3Int[_addedTiles.Count];
-            Debug.Log("v3i: " + v3iArr.Length);
             _addedTiles.CopyTo(v3iArr);
             PhotonNetwork.Instantiate("Tilemap_Build", transform.position, transform.rotation, 0, new object[] {v3iArr, CurrentTileToAdd.name});
             _addedTiles.Clear();

@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 public class SkipStateButtonHandler : MonoBehaviour
 {
     public GameObject confirmBox = null;
     public Timer timer = null;
+    public PhotonView canvasPhotonView;
 
+    public void Start()
+    {
+        // Deactivate for the alien
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+        {
+            gameObject.SetActive(false);
+        }
+    }
     public void Update()
     {
         if (timer.IsTimeUp())
@@ -25,6 +35,7 @@ public class SkipStateButtonHandler : MonoBehaviour
         {
             timer.finishState();
             confirmBox.SetActive(false);
+            canvasPhotonView.RPC("RPC_OnClick_Done", RpcTarget.Others);
         }
     }
 

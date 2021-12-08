@@ -27,7 +27,6 @@ public class NetworkTilemap : MonoBehaviourPunCallbacks, IPunInstantiateMagicCal
 
     foreach (Vector3Int pos in _addedTiles)
     {
-      Debug.Log(pos);
       currentTileMap.SetTile(pos, splitBehavior.CurrentTileToAdd);
     }
   }
