@@ -58,17 +58,19 @@ public class Split : MonoBehaviour
              * In this, it only destroys the weapon if it hits a type it can destroy otherwise it bounces off
              * and destroys after 3 seconds (waiter subroutine)
              */
+            Debug.Log("Projectile: " + projType);
+            Debug.Log("Shatter" + shatter.name);
             switch (projType)
             {
                 case ("deforestor"): 
-                    if (shatter.name != "WoodTile" || shatter.name != "FabricTile")
+                    if (shatter.name != "WoodTile" && shatter.name != "FabricTile")
                     {
                         StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Ball"):
-                    if (shatter.name != "GlassTile" || shatter.name != "StoneTile")
+                    if (shatter.name != "GlassTile" && shatter.name != "StoneTile")
                     {
                         StartCoroutine(waiter(collision.gameObject));
                         return;
@@ -82,14 +84,14 @@ public class Split : MonoBehaviour
                     }
                     break;
                 case ("Magnet"):
-                    if (shatter.name != "MetalTile" || shatter.name != "FabricTile")
+                    if (shatter.name != "MetalTile" && shatter.name != "FabricTile")
                     {
                         StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Boomerange"):
-                    if (shatter.name != "GlassTile" || shatter.name != "FabricTile")
+                    if (shatter.name != "GlassTile" && shatter.name != "FabricTile")
                     {
                         StartCoroutine(waiter(collision.gameObject));
 
@@ -97,7 +99,7 @@ public class Split : MonoBehaviour
                     }
                     break;
                 case ("MineralExtractor"):
-                    if (shatter.name != "StoneTile" || shatter.name != "FabricTile")
+                    if (shatter.name != "StoneTile" && shatter.name != "FabricTile")
                     {
                         StartCoroutine(waiter(collision.gameObject));  
                         return;
