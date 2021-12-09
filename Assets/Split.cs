@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -52,42 +53,43 @@ public class Split : MonoBehaviour
                 case ("deforestor"): 
                     if (shatter.name != "WoodTile" || shatter.name != "FabricTile")
                     {
-                        Destroy(collision.gameObject);
+                        StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Ball"):
                     if (shatter.name != "GlassTile" || shatter.name != "StoneTile")
                     {
-                        Destroy(collision.gameObject);
+                        StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Arrow"):
                     if (shatter.name != "FabricTile")
                     {
-                        Destroy(collision.gameObject);
+                        StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Magnet"):
                     if (shatter.name != "MetalTile" || shatter.name != "FabricTile")
                     {
-                        Destroy(collision.gameObject);
+                        StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Boomerange"):
                     if (shatter.name != "GlassTile" || shatter.name != "FabricTile")
                     {
-                        Destroy(collision.gameObject);
+                        StartCoroutine(waiter(collision.gameObject));
+
                         return;
                     }
                     break;
                 case ("MineralExtractor"):
                     if (shatter.name != "StoneTile" || shatter.name != "FabricTile")
                     {
-                        Destroy(collision.gameObject);
+                        StartCoroutine(waiter(collision.gameObject));  
                         return;
                     }
                     break;
@@ -155,7 +157,7 @@ public class Split : MonoBehaviour
                    sb.triggerShatter();*/
             }
 
-            Destroy(collision.gameObject);
+           // Destroy(collision.gameObject);
             for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x && breaking; x++)
             {
                 for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y && breaking; y++)
@@ -200,5 +202,11 @@ public class Split : MonoBehaviour
             tilemap.SetTile(pos, CurrentTileToAdd);
         _addedTiles.Clear();
         create = false;
+    }
+    IEnumerator waiter(GameObject collision)
+    {
+        //Wait for 4 seconds
+        yield return new WaitForSeconds(3);
+        Destroy(collision);
     }
 }
