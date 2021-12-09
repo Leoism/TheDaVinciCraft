@@ -35,7 +35,10 @@ public class SkipStateButtonHandler : MonoBehaviour
         {
             timer.finishState();
             confirmBox.SetActive(false);
-            canvasPhotonView.RPC("RPC_OnClick_Done", RpcTarget.Others);
+            if (GameManager.globalManager.isOnlineMode)
+            {
+                canvasPhotonView.RPC("RPC_OnClick_Done", RpcTarget.Others);
+            }
         }
     }
 
