@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 public class Split : MonoBehaviour
 {
-    public TileBase CurrentTileToAdd;
+    public TileBase CurrentTileToAdd; 
     public GameObject shatter;
     private Tilemap tl;
     private Tile t;
@@ -19,7 +19,11 @@ public class Split : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tl = GetComponent<Tilemap>();
+        tl = GetComponent<Tilemap>(); //Reference to tilemap
+        /*
+         * Goes through tilemap until it encounters a non-null tile, grabs that tile type
+         * and sets the shatter type accordingly. I.e. if tilemap is wood, shatter will be wood.
+        */
         for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x; x++)
         {
             for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y; y++)
@@ -30,10 +34,7 @@ public class Split : MonoBehaviour
                     shatterType += "Tile";
                     shatter = Resources.Load(shatterType) as GameObject;
                     shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                    Debug.Log(shatter.name);
-                    return;
-                    /*Debug.Log(tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite);
-                    shatter.GetComponent<SpriteRenderer>().sprite = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite;*/
+                    return; // Returns upon finding a non-nulltile
                 }
             }
         }
@@ -41,13 +42,22 @@ public class Split : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        //Resets added tile hashset so that it can be used later to track split tilemaps
         _addedTiles.Clear();
+        //Variable tracking whether the tilemap is continous (ie is there a big break between tiles)
+        //Counterintuatively, true means there is not
         bool breaking = true;
+        //When hit by weapon projectile
         if (collision.gameObject.CompareTag("Weapon"))
         {
+            //Gets the projectile type using the sprite attatched to it
             string projType = collision.gameObject.GetComponent<SpriteRenderer>().sprite.name.ToString();
-            Debug.Log(projType);
+            //Debug.Log(projType);
+            /*
+             * Switch statement which allows material-weapon interaction
+             * In this, it only destroys the weapon if it hits a type it can destroy otherwise it bounces off
+             * and destroys after 3 seconds (waiter subroutine)
+             */
             switch (projType)
             {
                 case ("deforestor"): 
@@ -95,34 +105,39 @@ public class Split : MonoBehaviour
                     break;
 
             }
+            //Make the rigidbody of the tilemap static so that it does not move on hit
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            //Vector tracking hit position on the tilemap
             Vector3 hitPosition = Vector3.zero;
+            //Num tile destroyed by hit
             int tilesDestroyed = 0;
+            //A list containing all the tiles hit in tilemap space
             List<Vector3Int> hitPos = new List<Vector3Int>();
             foreach (ContactPoint2D hit in collision.contacts)
             {
+                //Hit point is offset so that it refers to center of cell rather than edge
                 hitPosition.x = hit.point.x + 2f * hit.normal.x;
                 hitPosition.y = hit.point.y + 2f * hit.normal.y;
-
+                //Get the tile at the hitpoint
                 t = tl.GetTile<Tile>(tl.WorldToCell(hitPosition));
-                // Debug.Log(t.sprite);
+                //If there is a tile placed tile there
                 if (tl.GetTile(tl.WorldToCell(hitPosition)) != null)
                 {
+                    //Clear that tile
                     tl.SetTile(tl.WorldToCell(hitPosition), null);
+                    //Add that tile to the hit tiles list
                     hitPos.Add(tl.WorldToCell(hitPosition));
-
+                    //Up the num tiles destroyed
                     tilesDestroyed++;
                 }
 
             }
-            if (t != null)
-            {
-                //shatter.GetComponent<SpriteRenderer>().sprite = t.sprite;
-            }
+            //Goes through the tiles destroyed and applies shatter
             for (int i = 0; i <= tilesDestroyed - 1; i++)
             {
                 Vector3 shattterPos = tl.GetCellCenterWorld(hitPos[i]);
-                // GameObject s = Instantiate(shatter, shattterPos, Quaternion.identity);
+                //Creates three smaller blocks that have the same sprite as tile destroyed at the hit pos
+                //Offsets each shatter spawn a small amount so that one shatter spawns per quadrant
                 for (int z = 0; z < 3; z++)
                 {
                     shattterPos = tl.GetCellCenterWorld(hitPos[i]);
@@ -151,13 +166,11 @@ public class Split : MonoBehaviour
                     }
 
                 }
-
-                /*   sb = s.GetComponent<ShatterableBehavior>();
-                   sb.sr = s.GetComponent<SpriteRenderer>();
-                   sb.triggerShatter();*/
             }
-
-           // Destroy(collision.gameObject);
+            /*
+             * Goes through tilemap, searches for non-continous portions.
+             * When found, it saves the tiles left, destroyes the tilemap, and recreates it as 2 seperate tilemaps
+             */
             for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x && breaking; x++)
             {
                 for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y && breaking; y++)
@@ -185,10 +198,15 @@ public class Split : MonoBehaviour
                 }
             }
         }
+        // If there has been a break, create new tilemaps
         if (create)
             createTileMap();
+        //Reset rigidbody type so that it can interact with world again
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
+    /*
+     * Positive distance between two vector points
+     */
     public int ManhattanDistance(Vector3Int a, Vector3Int b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z);
