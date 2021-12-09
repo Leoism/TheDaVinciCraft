@@ -205,7 +205,7 @@ public class Split : MonoBehaviour
     }
     IEnumerator waiter(GameObject collision)
     {
-        //Wait for 4 seconds
+        //Wait for 3 seconds
         yield return new WaitForSeconds(3);
         Destroy(collision);
     }

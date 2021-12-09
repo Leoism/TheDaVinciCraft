@@ -16,7 +16,13 @@ public class WeaponInteractions : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("block"))
-            Destroy(collision.gameObject);
+        if (collision.gameObject.CompareTag("floor"))
+            StartCoroutine(waiter(this.gameObject));
+    }
+    IEnumerator waiter(GameObject collision)
+    {
+        //Wait for 3 seconds
+        yield return new WaitForSeconds(3);
+        Destroy(collision);
     }
 }
