@@ -15,6 +15,7 @@ TagManager:
   - StoneTile
   - WoodTile
   - Grid
+  - floor
   layers:
   - Default
   - TransparentFX
