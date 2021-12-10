@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 public class FinalRoundResults : MonoBehaviour
 {
   public Text resultsText = null;
@@ -18,6 +19,11 @@ public class FinalRoundResults : MonoBehaviour
     Player winner = GameManager.globalManager.GetWinner();
     resultsStr += "Winner: " + winner.name + " " + winner.type;
     resultsText.text = resultsStr;
+    if (GameManager.globalManager.isOnlineMode)
+    {
+      // After final scene, we want to disconnect the two players
+      PhotonNetwork.Disconnect();
+    }
   }
 
   private Player RoundWinner(List<Player> players)
