@@ -10,7 +10,6 @@ public class ShootingBehavior : MonoBehaviour
     public Inventory alienInventory;
     public BoomerangShooter boom = null;
     public RayShooter ray = null;
-    public GameObject aim = null;
     public GameObject trajectoryPointPrefab = null;
     public Transform projectileSpawnPoint = null;
     public GameObject powerBar = null;
@@ -38,6 +37,7 @@ public class ShootingBehavior : MonoBehaviour
         projectilePrefab = null;
         boom.enabled = false;
         boom.gameplayScene = gameplayScene;
+        ray.gameplayScene = gameplayScene;
         trajectoryPoints = new GameObject[trajectoryPointCount];
         for (int i = 0; i < trajectoryPointCount; i++)
         {
@@ -55,10 +55,16 @@ public class ShootingBehavior : MonoBehaviour
         if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Boomerange")
         {
             boom.enabled = true;
+            ray.Activate();
+        }
+        else if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Ray")
+        {
+            boom.Deactivate();
+            ray.Activate();
         }
         else
         {
-            boom.enabled = false;
+            boom.Deactivate();
             if (!(EventSystem.current.IsPointerOverGameObject() &&
                          EventSystem.current.currentSelectedGameObject != null &&
                          EventSystem.current.currentSelectedGameObject.CompareTag("Button")))

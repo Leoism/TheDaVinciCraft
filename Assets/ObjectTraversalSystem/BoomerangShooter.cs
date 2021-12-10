@@ -80,6 +80,13 @@ public class BoomerangShooter : MonoBehaviour
         bb.SetLifespan(5f * multiplier);
     }
 
+    public void Deactivate()
+    {
+        SetTrajectoryPointStatus(false);
+        isFirstClick = true;
+        enabled = false;
+    }
+
     void SetTrajectoryPointStatus(bool isOn)
     {
         for (int i = 0; i < trajectoryPointCount; i++)

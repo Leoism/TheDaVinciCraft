@@ -347,6 +347,63 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1061570918646657404, guid: 3525bb91ce4a96748b4e10df0f977eee, type: 3}
   m_PrefabInstance: {fileID: 974930438}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &180231453
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 76.268196
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27535558
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012259, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171130938638012261, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+      propertyPath: m_Name
+      value: AimTarget
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
 --- !u!1001 &322885941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1618,6 +1675,11 @@ MonoBehaviour:
   confirmBox: {fileID: 156492866}
   timer: {fileID: 1876572932}
   canvasPhotonView: {fileID: 418612267}
+--- !u!1 &953616967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2171130938638012261, guid: a701afdc9e44e9f4db856234f37cdc0b, type: 3}
+  m_PrefabInstance: {fileID: 180231453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &974930438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2235,7 +2297,6 @@ MonoBehaviour:
   shootingBehavior: {fileID: 1317540227}
   tilemapAdder: {fileID: 519856263}
   currentItem: {fileID: 0}
-  prevItem: {fileID: 0}
 --- !u!1 &1317540223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,6 +2310,7 @@ GameObject:
   - component: {fileID: 1317540226}
   - component: {fileID: 1317540227}
   - component: {fileID: 1317540228}
+  - component: {fileID: 1317540229}
   m_Layer: 0
   m_Name: Alienship
   m_TagString: Untagged
@@ -2351,8 +2413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 0}
   boom: {fileID: 1317540228}
-  ray: {fileID: 0}
-  aim: {fileID: 0}
+  ray: {fileID: 1317540229}
   trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   projectileSpawnPoint: {fileID: 2147219063}
   powerBar: {fileID: 734583843}
@@ -2374,6 +2435,24 @@ MonoBehaviour:
   boomerangPrefab: {fileID: 5825397763046974317, guid: aa9b8e8bf7b1a384395039006eabff3e, type: 3}
   spawnPoint: {fileID: 2147219063}
   trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
+  trajectoryPoints: []
+  gameplayScene: {fileID: 0}
+--- !u!114 &1317540229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317540223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc84c199803b1e14ea97363909021d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayPrefab: {fileID: 5417275941265449733, guid: e8a165b510800854ab89a08740003d69, type: 3}
+  spawnPoint: {fileID: 2147219063}
+  aimTarget: {fileID: 953616967}
+  gameplayScene: {fileID: 0}
 --- !u!224 &1396258002 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2268119830247311201, guid: b89e1dbb0dcab40c2891ed42badf2e64, type: 3}

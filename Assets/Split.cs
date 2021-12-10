@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 public class Split : MonoBehaviour
 {
-    public TileBase CurrentTileToAdd; 
+    public TileBase CurrentTileToAdd;
     public GameObject shatter;
     private Tilemap tl;
     private Tile t;
@@ -62,7 +62,7 @@ public class Split : MonoBehaviour
             Debug.Log("Shatter" + shatter.name);
             switch (projType)
             {
-                case ("deforestor"): 
+                case ("deforestor"):
                     if (shatter.name != "WoodTile" && shatter.name != "FabricTile")
                     {
                         //StartCoroutine(waiter(collision.gameObject));
@@ -86,20 +86,28 @@ public class Split : MonoBehaviour
                 case ("Magnet"):
                     if (shatter.name != "MetalTile" && shatter.name != "FabricTile")
                     {
-                       // StartCoroutine(waiter(collision.gameObject));
+                        // StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Boomerange"):
                     if (shatter.name != "GlassTile" && shatter.name != "FabricTile")
                     {
-                       // StartCoroutine(waiter(collision.gameObject));
+                        // StartCoroutine(waiter(collision.gameObject));
 
                         return;
                     }
                     break;
                 case ("MineralExtractor"):
                     if (shatter.name != "StoneTile" && shatter.name != "FabricTile")
+                    {
+                        //StartCoroutine(waiter(collision.gameObject));  
+                        return;
+                    }
+                    break;
+                // Ray uses a square sprite
+                case ("Square"):
+                    if (shatter.name == "GlassTile")
                     {
                         //StartCoroutine(waiter(collision.gameObject));  
                         return;
