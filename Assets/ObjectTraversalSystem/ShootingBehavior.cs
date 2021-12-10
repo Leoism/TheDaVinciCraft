@@ -35,7 +35,9 @@ public class ShootingBehavior : MonoBehaviour
         // Debug.Assert(projectilePrefab != null);
         Debug.Assert(trajectoryPointPrefab != null);
         Debug.Assert(projectileSpawnPoint != null);
+        projectilePrefab = null;
         boom.enabled = false;
+        boom.gameplayScene = gameplayScene;
         trajectoryPoints = new GameObject[trajectoryPointCount];
         for (int i = 0; i < trajectoryPointCount; i++)
         {
@@ -49,13 +51,14 @@ public class ShootingBehavior : MonoBehaviour
     void Update()
     {
         if (projectilePrefab == null) return;
-       // Debug.Log(projectilePrefab.GetComponent<SpriteRenderer>().sprite.ToString());
+        Debug.Log(projectilePrefab.GetComponent<SpriteRenderer>().sprite.ToString());
         if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Boomerange")
         {
             boom.enabled = true;
         }
         else
         {
+            boom.enabled = false;
             if (!(EventSystem.current.IsPointerOverGameObject() &&
                          EventSystem.current.currentSelectedGameObject != null &&
                          EventSystem.current.currentSelectedGameObject.CompareTag("Button")))
@@ -63,8 +66,7 @@ public class ShootingBehavior : MonoBehaviour
                 DetectOnAim();
                 OnAim();
             }
-        }
-        
+        }     
     }
 
     void DetectOnAim()
@@ -120,6 +122,7 @@ public class ShootingBehavior : MonoBehaviour
         }
         newProjectile.transform.up = direction;
         newProjectile.GetComponent<Rigidbody2D>().velocity = direction * shootStrength * dragStrength;
+        newProjectile.AddComponent<WeaponInteractions>();
     }
 
     void SetTrajectoryPointStatus(bool isOn)

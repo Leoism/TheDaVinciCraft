@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.EventSystems;
 public class BoomerangShooter : MonoBehaviour
 {
     public GameObject boomerangPrefab = null;
@@ -13,14 +14,13 @@ public class BoomerangShooter : MonoBehaviour
     // trajectory settings
     private int trajectoryPointCount = 15;
     public GameObject[] trajectoryPoints;
-
+    public Gameplay gameplayScene = null;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(boomerangPrefab != null);
         Debug.Assert(spawnPoint != null);
         Debug.Assert(trajectoryPointPrefab != null);
-
         trajectoryPoints = new GameObject[trajectoryPointCount];
         for (int i = 0; i < trajectoryPointCount; i++)
         {
@@ -33,6 +33,12 @@ public class BoomerangShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if ((EventSystem.current.IsPointerOverGameObject() &&
+            EventSystem.current.currentSelectedGameObject != null &&
+            EventSystem.current.currentSelectedGameObject.CompareTag("Button"))) 
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos3d = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -42,7 +48,7 @@ public class BoomerangShooter : MonoBehaviour
                 firstClickPos = mousePos;
                 SetTrajectoryPointStatus(true);
             }
-            else
+            else 
             {
                 secondClickPos = mousePos;
                 Shoot();
@@ -66,6 +72,7 @@ public class BoomerangShooter : MonoBehaviour
         {
             newProjectile = Instantiate(boomerangPrefab, spawnPoint.position, spawnPoint.rotation);
         }
+        gameplayScene.UseItem();
         BoomerangBehavior bb = newProjectile.AddComponent<BoomerangBehavior>();
         bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
         bb.SetLifespan(5f * multiplier);
