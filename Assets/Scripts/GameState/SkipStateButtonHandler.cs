@@ -45,6 +45,7 @@ public class SkipStateButtonHandler : MonoBehaviour
     public void showPanel()
     {
         confirmBox.SetActive(true);
+        confirmBox.tag = "Button";
     }
     public void closePanel()
     {

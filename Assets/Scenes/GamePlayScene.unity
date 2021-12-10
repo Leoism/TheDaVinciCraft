@@ -402,6 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
 --- !u!1 &342234765
@@ -613,6 +617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
 --- !u!1 &418612262
@@ -816,6 +824,10 @@ PrefabInstance:
     - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
       propertyPath: m_Name
       value: Floor (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
@@ -1358,6 +1370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
 --- !u!114 &717962862
@@ -1510,6 +1526,10 @@ PrefabInstance:
     - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
       propertyPath: m_Name
       value: Floor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
@@ -1856,6 +1876,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
 --- !u!1001 &1147833437
@@ -1912,6 +1936,10 @@ PrefabInstance:
     - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
       propertyPath: m_Name
       value: Floor (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
@@ -2048,6 +2076,10 @@ PrefabInstance:
     - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
       propertyPath: m_Name
       value: Floor (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
@@ -2216,6 +2248,7 @@ GameObject:
   - component: {fileID: 1317540224}
   - component: {fileID: 1317540226}
   - component: {fileID: 1317540227}
+  - component: {fileID: 1317540228}
   m_Layer: 0
   m_Name: Alienship
   m_TagString: Untagged
@@ -2317,12 +2350,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 0}
+  boom: {fileID: 1317540228}
+  ray: {fileID: 0}
+  aim: {fileID: 0}
   trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   projectileSpawnPoint: {fileID: 2147219063}
   powerBar: {fileID: 734583843}
   gameplayScene: {fileID: 1281474590}
   trajectoryPointCount: 27
   projectileName: 
+--- !u!114 &1317540228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317540223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531c53f9b320c0e46be2869b50985cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boomerangPrefab: {fileID: 5825397763046974317, guid: aa9b8e8bf7b1a384395039006eabff3e, type: 3}
+  spawnPoint: {fileID: 2147219063}
+  trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
 --- !u!224 &1396258002 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2268119830247311201, guid: b89e1dbb0dcab40c2891ed42badf2e64, type: 3}
@@ -2619,6 +2670,10 @@ PrefabInstance:
     - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
@@ -3045,6 +3100,10 @@ PrefabInstance:
     - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
       propertyPath: m_Name
       value: Floor (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066016845284054394, guid: ca52148a22f67d8498f921a2eed88338, type: 3}
+      propertyPath: m_TagString
+      value: floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca52148a22f67d8498f921a2eed88338, type: 3}

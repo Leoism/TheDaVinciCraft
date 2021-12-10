@@ -3,7 +3,10 @@ guid: 531c53f9b320c0e46be2869b50985cf9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - boomerangPrefab: {fileID: 5825397763046974317, guid: aa9b8e8bf7b1a384395039006eabff3e, type: 3}
+  - spawnPoint: {instanceID: 0}
+  - trajectoryPointPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
