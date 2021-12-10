@@ -35,18 +35,18 @@ public class RayShooter : MonoBehaviour
     void Shoot()
     {
         GameObject newRay;
-        // TODO: network
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (GameManager.globalManager.isOnlineMode)
         {
-            newRay = PhotonNetwork.Instantiate("GamePlayScene/Ray", spawnPoint.position, spawnPoint.rotation);
+            newRay = PhotonNetwork.Instantiate("GamePlayScene/Ray", spawnPoint.position, spawnPoint.rotation, 0, new object[] { mousePos });
         }
         else
         {
             newRay = Instantiate(rayPrefab, spawnPoint.position, spawnPoint.rotation);
+            RayBehavior rb = newRay.AddComponent<RayBehavior>();
+            rb.SetTarget(mousePos);
         }
         gameplayScene.UseItem();
-        RayBehavior rb = newRay.AddComponent<RayBehavior>();
-        rb.SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
     }
 
     public void Deactivate()
