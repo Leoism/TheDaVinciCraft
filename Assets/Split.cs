@@ -65,35 +65,35 @@ public class Split : MonoBehaviour
                 case ("deforestor"): 
                     if (shatter.name != "WoodTile" && shatter.name != "FabricTile")
                     {
-                        StartCoroutine(waiter(collision.gameObject));
+                        //StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Ball"):
                     if (shatter.name != "GlassTile" && shatter.name != "StoneTile")
                     {
-                        StartCoroutine(waiter(collision.gameObject));
+                        //StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Arrow"):
                     if (shatter.name != "FabricTile")
                     {
-                        StartCoroutine(waiter(collision.gameObject));
+                        //StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Magnet"):
                     if (shatter.name != "MetalTile" && shatter.name != "FabricTile")
                     {
-                        StartCoroutine(waiter(collision.gameObject));
+                       // StartCoroutine(waiter(collision.gameObject));
                         return;
                     }
                     break;
                 case ("Boomerange"):
                     if (shatter.name != "GlassTile" && shatter.name != "FabricTile")
                     {
-                        StartCoroutine(waiter(collision.gameObject));
+                       // StartCoroutine(waiter(collision.gameObject));
 
                         return;
                     }
@@ -101,7 +101,7 @@ public class Split : MonoBehaviour
                 case ("MineralExtractor"):
                     if (shatter.name != "StoneTile" && shatter.name != "FabricTile")
                     {
-                        StartCoroutine(waiter(collision.gameObject));  
+                        //StartCoroutine(waiter(collision.gameObject));  
                         return;
                     }
                     break;
@@ -140,37 +140,31 @@ public class Split : MonoBehaviour
                 Vector3 shattterPos = tl.GetCellCenterWorld(hitPos[i]);
                 //Creates three smaller blocks that have the same sprite as tile destroyed at the hit pos
                 //Offsets each shatter spawn a small amount so that one shatter spawns per quadrant
-                for (int z = 0; z < 3; z++)
+                for (int z = 0; z < 4; z++)
                 {
+                    // resets to cell world center
                     shattterPos = tl.GetCellCenterWorld(hitPos[i]);
                     switch (z)
                     {
                         case 0:
                             shattterPos.y = shattterPos.y + 0.5f;
                             shattterPos.x = shattterPos.x - 0.5f;
-                            GameObject s1 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
-                            s1.AddComponent<shatterDestroy>();
                             break;
                         case 1:
                             shattterPos.y = shattterPos.y + 0.5f;
                             shattterPos.x = shattterPos.x + 0.5f;
-                            GameObject s2 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
-                            s2.AddComponent<shatterDestroy>();
                             break;
                         case 2:
                             shattterPos.y = shattterPos.y - 0.5f;
                             shattterPos.x = shattterPos.x - 0.5f;
-                            GameObject s3 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
-                            s3.AddComponent<shatterDestroy>();
                             break;
                         case 3:
                             shattterPos.y = shattterPos.y - 0.5f;
                             shattterPos.x = shattterPos.x + 0.5f;
-                            GameObject s4 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
-                            s4.AddComponent<shatterDestroy>();
                             break;
                     }
-
+                    GameObject shatterTile = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                    shatterTile.AddComponent<shatterDestroy>();
                 }
             }
             /*

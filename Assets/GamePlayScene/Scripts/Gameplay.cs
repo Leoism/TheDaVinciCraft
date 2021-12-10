@@ -48,7 +48,6 @@ public class Gameplay : MonoBehaviour
     }
     else
     {
-
       mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, alienZone.position, 86f * Time.smoothDeltaTime);
       mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, 108f, 40f * Time.smoothDeltaTime);
       if (mainCamera.transform.position == alienZone.position)
@@ -66,13 +65,16 @@ public class Gameplay : MonoBehaviour
 
     if (gameTimer.IsTimeUp() && gameTimer.GetCurrentPlayer().Equals("Alien"))
     {
+      Debug.Log("Switching to Alien old: " + currentItem);
+      currentItem = null; 
+      Debug.Log("Switching to Alien After Null: " + currentItem);
       foreach (GameObject go in GameManager.globalManager.alienInventory.GetInventoryList())
       {
         go.transform.parent = mainCanvas.transform;
         go.transform.localScale = new Vector3(1, 1, 1);
         go.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(go.GetComponent<RectTransform>().anchoredPosition3D.x, go.GetComponent<RectTransform>().anchoredPosition3D.y, 1);
       }
-      currentItem = null;
+
       actionBarBehavior.Reset();
       GameManager.globalManager.alienInventory.actionBar = actionBarBehavior;
       actionBarBehavior.SetList(GameManager.globalManager.alienInventory.GetInventoryList());

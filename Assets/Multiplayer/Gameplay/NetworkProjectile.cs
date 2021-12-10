@@ -9,6 +9,8 @@ public class NetworkProjectile : MonoBehaviourPunCallbacks, IPunInstantiateMagic
     GameObject photonGameObj = info.photonView.gameObject;
     string projectileName = (string)info.photonView.InstantiationData[0];
     photonGameObj.GetComponent<SpriteRenderer>().sprite = GetProjectileSpritePrefab(projectileName).sprite;
+    if (!projectileName.Equals("Boomerang"))
+      photonGameObj.AddComponent<WeaponInteractions>();
   }
 
   private SpriteRenderer GetProjectileSpritePrefab(string name)

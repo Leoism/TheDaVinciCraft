@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1366299487685945625}
   - component: {fileID: 1366299487685945620}
   - component: {fileID: 1366299487685945627}
-  - component: {fileID: 231166673927524718}
   m_Layer: 0
   m_Name: WoodTile
   m_TagString: block
@@ -132,15 +131,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &231166673927524718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366299487685945622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1397590fb628c6e44861cb2b5aba6e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
