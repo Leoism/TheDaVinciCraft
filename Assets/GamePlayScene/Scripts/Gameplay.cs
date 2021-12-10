@@ -50,11 +50,6 @@ public class Gameplay : MonoBehaviour
       mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, alienZone.position, 86f * Time.smoothDeltaTime);
       mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, 108f, 40f * Time.smoothDeltaTime);
       alienship.Init();
-      // if (mainCamera.transform.position == alienZone.position)
-      // {
-        
-      // }
-      //   alienship.Init();
     }
 
     if (gameTimer.IsTimeUp() && gameTimer.GetCurrentPlayer().Equals("Alien"))
