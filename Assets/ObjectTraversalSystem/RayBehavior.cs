@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class RayBehavior : MonoBehaviour
 {
@@ -17,10 +18,20 @@ public class RayBehavior : MonoBehaviour
   {
     transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.smoothDeltaTime);
     transform.up = (targetPosition - transform.position).normalized;
+    if(transform.position == targetPosition)
+    {
+      if (GameManager.globalManager.isOnlineMode)
+      {
+        PhotonNetwork.Destroy(GetComponent<PhotonView>());
+      } else
+      {
+        Destroy(gameObject);
+      }      
+    }
   }
 
   public void SetTarget(Vector3 target)
   {
-    targetPosition = target;
+    targetPosition = (Vector2)target;
   }
 }
