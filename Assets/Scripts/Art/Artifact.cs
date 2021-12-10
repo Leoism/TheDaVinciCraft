@@ -35,7 +35,8 @@ public class Artifact : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            if (GameManager.globalManager.isOnlineMode)
+            // Only the alien should send over this RPC
+            if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
             {
                 canvasPhotonView.RPC("RPC_OnArtDestruction", RpcTarget.MasterClient);
             } else

@@ -39,11 +39,11 @@ public class MaterialBuyingSystem : MonoBehaviour
         
         inactiveAllButs();
         // round 1 only activate wood and fabric
-        if (GameManager.globalManager.GetCurrentRound() == 0) {
+        if (GameManager.globalManager.GetCurrentRound() == 1) {
             activeAddsForRoundOne(true);
         }
         // round 2 activate wood, fabric, and stone
-        else if (GameManager.globalManager.GetCurrentRound() == 1) {
+    else if (GameManager.globalManager.GetCurrentRound() == 2) {
             activeAddsForRoundTwo(true);
         }
     }
@@ -51,8 +51,8 @@ public class MaterialBuyingSystem : MonoBehaviour
     {
         buySystem.currentAdded = 0;
         List<int> totalMaterialList = GameManager.globalManager.GetMaterialCountForRound();
-        int currentRound = buySystem.GetCurrentRound();
-        totalMaterials = totalMaterialList[currentRound];
+        int currentRoundIdx = buySystem.GetCurrentRoundIdx();
+        totalMaterials = totalMaterialList[currentRoundIdx];
         WoodCnt.woodCnt = 0;
         FebricCnt.febricCnt = 0;
         StoneCnt.stoneCnt = 0;
@@ -70,10 +70,10 @@ public class MaterialBuyingSystem : MonoBehaviour
         }
 
         if (selectedMaterials < totalMaterials) {
-            if (GameManager.globalManager.GetCurrentRound() == 0) {
+            if (GameManager.globalManager.GetCurrentRound() == 1) {
                 activeAddsForRoundOne(true);
             }
-            else if (GameManager.globalManager.GetCurrentRound() == 1) {
+            else if (GameManager.globalManager.GetCurrentRound() == 2) {
                 activeAddsForRoundTwo(true);
             }
             else{

@@ -53,7 +53,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         
         activateAllAdds(false);
         // round 1 only activate deforestor, arrow boomerang
-        if (GameManager.globalManager.GetCurrentRound() == 0) {
+        if (GameManager.globalManager.GetCurrentRound() == 1) {
             activeAddsForRoundOne(true);
         }
         // round 2 unblock ball, bomb, mineral extractor
@@ -66,8 +66,8 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         buySystem.currentAdded = 0;
         List<int> totalWeaponsList = GameManager.globalManager.GetWeaponCountForRound();
-        int currentRound = buySystem.GetCurrentRound();
-        totalWeapons = totalWeaponsList[currentRound];
+        int currentRoundIdx = buySystem.GetCurrentRoundIdx();
+        totalWeapons = totalWeaponsList[currentRoundIdx];
         DeforestorCnt.deCnt = 0;
         MECnt.meCnt = 0;
         ArrowCnt.arrCnt = 0;
@@ -87,10 +87,10 @@ public class WeaponBuyingSystem : MonoBehaviour
         }
 
         if (selectedWeapons < totalWeapons) {
-            if (GameManager.globalManager.GetCurrentRound() == 0) {
+            if (GameManager.globalManager.GetCurrentRound() == 1) {
                 activeAddsForRoundOne(true);
             }
-            else if (GameManager.globalManager.GetCurrentRound() == 1) {
+            else if (GameManager.globalManager.GetCurrentRound() == 2) {
                 activeAddsForRoundTwo(true);
             }
             else{

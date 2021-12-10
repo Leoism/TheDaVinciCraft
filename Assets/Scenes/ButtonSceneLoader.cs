@@ -13,7 +13,8 @@ public class ButtonSceneLoader : MonoBehaviour
     if (GameManager.globalManager.isOnlineMode)
     {
       PhotonNetwork.LoadLevel(scene);
-    } else
+    }
+    else
     {
       SceneManager.LoadScene(scene);
     }

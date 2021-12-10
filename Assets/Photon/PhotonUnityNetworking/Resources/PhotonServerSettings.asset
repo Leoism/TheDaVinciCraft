@@ -49,6 +49,7 @@ MonoBehaviour:
   - RPC_OnClick_Done
   - RPC_AlienOutOfWeapons
   - RPC_AlienFinishSettingPlayers
+  - RPC_ResetRoundLock
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

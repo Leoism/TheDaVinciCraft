@@ -35,7 +35,8 @@ public class SkipStateButtonHandler : MonoBehaviour
         {
             timer.finishState();
             confirmBox.SetActive(false);
-            if (GameManager.globalManager.isOnlineMode)
+            // Only the human should send this rpc
+            if (GameManager.globalManager.isOnlineMode && PhotonNetwork.IsMasterClient)
             {
                 canvasPhotonView.RPC("RPC_OnClick_Done", RpcTarget.Others);
             }

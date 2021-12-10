@@ -23,12 +23,12 @@ public class GameManager
   public bool isOnlineMode = false;
   public bool allPlayersReady = false;
   public string currentPlayer = null;
+  public bool isRoundSaved = false;
   private List<List<Player>> rounds = null;
-  private int currentRound;
+
   private GameManager()
   {
     timer = new Timer();
-    currentRound = 0;
   }
 
   public void Reset()
@@ -42,7 +42,8 @@ public class GameManager
     GameManager.globalManager.humanPlayer = null;
     GameManager.globalManager.rounds = null;
     GameManager.globalManager.isOnlineMode = false;
-    currentRound = 0;
+    GameManager.globalManager.allPlayersReady = false;
+    GameManager.globalManager.currentPlayer = null;
   }
 
   // Sets the weapons that the alien selected
@@ -139,16 +140,6 @@ public class GameManager
 
   public int GetCurrentRound()
   {
-    return currentRound;
-  }
-
-  public void IncrementCurrRound()
-  {
-    currentRound++;
-  }
-
-  public void ResetRound()
-  {
-    currentRound = 0;
+    return GetRounds().Count + 1;
   }
 }
