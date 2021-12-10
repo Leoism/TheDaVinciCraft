@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BackgroundLooping : MonoBehaviour
 {
     [Range(-1f,1f)]
@@ -8,7 +8,7 @@ public class BackgroundLooping : MonoBehaviour
     private Material mat;
     void Start()
     {
-        mat = GetComponent<Renderer>().material;
+        mat = GetComponent<Image>().material;
     }
 
     // Update is called once per frame
