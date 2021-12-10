@@ -39,6 +39,8 @@ public class BoomerangShooter : MonoBehaviour
         {
             return;
         }
+       if (gameplayScene.IsItemEmpty()) { return; }
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos3d = Camera.main.ScreenToWorldPoint(Input.mousePosition);
