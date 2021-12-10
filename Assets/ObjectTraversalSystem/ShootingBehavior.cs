@@ -55,7 +55,7 @@ public class ShootingBehavior : MonoBehaviour
         if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Boomerange")
         {
             boom.enabled = true;
-            ray.Activate();
+            ray.Deactivate();
         }
         else if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Ray")
         {
@@ -65,6 +65,7 @@ public class ShootingBehavior : MonoBehaviour
         else
         {
             boom.Deactivate();
+            ray.Deactivate();
             if (!(EventSystem.current.IsPointerOverGameObject() &&
                          EventSystem.current.currentSelectedGameObject != null &&
                          EventSystem.current.currentSelectedGameObject.CompareTag("Button")))
