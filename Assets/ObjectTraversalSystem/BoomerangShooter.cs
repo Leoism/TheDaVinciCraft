@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class BoomerangShooter : MonoBehaviour
 {
     public GameObject boomerangPrefab = null;
@@ -57,7 +57,15 @@ public class BoomerangShooter : MonoBehaviour
     {
         // cap boomerang speed multiplier at 1
         float multiplier = Mathf.Min(CalculateMaxDistance() / 150f, 1f);
-        GameObject newProjectile = Instantiate(boomerangPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject newProjectile = null;
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            newProjectile = PhotonNetwork.Instantiate("GamePlayScene/Projectile", spawnPoint.position, spawnPoint.rotation, 0, new object[] { "Boomerang" });
+        }
+        else
+        {
+            newProjectile = Instantiate(boomerangPrefab, spawnPoint.position, spawnPoint.rotation);
+        }
         BoomerangBehavior bb = newProjectile.AddComponent<BoomerangBehavior>();
         bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
         bb.SetLifespan(5f * multiplier);

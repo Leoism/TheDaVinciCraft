@@ -148,22 +148,26 @@ public class Split : MonoBehaviour
                         case 0:
                             shattterPos.y = shattterPos.y + 0.5f;
                             shattterPos.x = shattterPos.x - 0.5f;
-                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            GameObject s1 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                            s1.AddComponent<shatterDestroy>();
                             break;
                         case 1:
                             shattterPos.y = shattterPos.y + 0.5f;
                             shattterPos.x = shattterPos.x + 0.5f;
-                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            GameObject s2 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                            s2.AddComponent<shatterDestroy>();
                             break;
                         case 2:
                             shattterPos.y = shattterPos.y - 0.5f;
                             shattterPos.x = shattterPos.x - 0.5f;
-                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            GameObject s3 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                            s3.AddComponent<shatterDestroy>();
                             break;
                         case 3:
                             shattterPos.y = shattterPos.y - 0.5f;
                             shattterPos.x = shattterPos.x + 0.5f;
-                            Instantiate(shatter, shattterPos, Quaternion.identity);
+                            GameObject s4 = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                            s4.AddComponent<shatterDestroy>();
                             break;
                     }
 
