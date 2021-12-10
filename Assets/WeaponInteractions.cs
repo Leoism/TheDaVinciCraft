@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class WeaponInteractions : MonoBehaviour
 {
-    // Start is called before the first frame updat
+  bool isCoroutineRunning = false;
+  // Start is called before the first frame updat
 
-    // Update is called once per frame
-    void Update()
+  // Update is called once per frame
+  void Update()
+  {
+    float speed = Mathf.Round(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude);
+    if (speed == 0)
     {
-        if(Mathf.Round(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude) == 0) {
-            StartCoroutine(waiter(gameObject));
-        }
+      StartCoroutine(waiter(gameObject));
     }
+    else if (speed > 0 && isCoroutineRunning)
+    {
+      StopCoroutine(waiter(gameObject));
+      isCoroutineRunning = false;
+    }
+  }
 
-    IEnumerator waiter(GameObject collision)
-    {
-        //Wait for 1.5 seconds
-        yield return new WaitForSeconds(1.5f);
-        Destroy(collision);
-    }
+  IEnumerator waiter(GameObject collision)
+  {
+    isCoroutineRunning = true;
+    //Wait for 1.5 seconds
+    yield return new WaitForSeconds(1.5f);
+    if (isCoroutineRunning)
+      Destroy(collision);
+  }
 }
