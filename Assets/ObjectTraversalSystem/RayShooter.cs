@@ -52,9 +52,11 @@ public class RayShooter : MonoBehaviour
     public void Deactivate()
     {
         aimTarget.SetActive(false);
+        enabled = false;
     }
     public void Activate()
     {
         aimTarget.SetActive(true);
+        enabled = true;
     }
 }
