@@ -16,7 +16,6 @@ public class Gameplay : MonoBehaviour
   public ShootingBehavior shootingBehavior = null;
   public AddTilemap tilemapAdder = null;
   public GameObject currentItem = null;
-  public GameObject prevItem = null;
   // Start is called before the first frame update
   void Start()
   {
@@ -50,24 +49,12 @@ public class Gameplay : MonoBehaviour
     {
       mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, alienZone.position, 86f * Time.smoothDeltaTime);
       mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, 108f, 40f * Time.smoothDeltaTime);
-      if (mainCamera.transform.position == alienZone.position)
-        alienship.Init();
-      if (currentItem != null && currentItem != prevItem)
-      {
-        GameObject newProjectile = (GameObject)Resources.Load("GamePlayScene/Projectile");
-        newProjectile.transform.localScale = new Vector3(5f, 5f, 5f);
-        newProjectile.GetComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
-        shootingBehavior.projectilePrefab = newProjectile;
-        shootingBehavior.projectileName = currentItem.name;
-        prevItem = currentItem;
-      }
+      alienship.Init();
     }
 
     if (gameTimer.IsTimeUp() && gameTimer.GetCurrentPlayer().Equals("Alien"))
     {
-      Debug.Log("Switching to Alien old: " + currentItem);
       currentItem = null; 
-      Debug.Log("Switching to Alien After Null: " + currentItem);
       foreach (GameObject go in GameManager.globalManager.alienInventory.GetInventoryList())
       {
         go.transform.parent = mainCanvas.transform;
@@ -102,8 +89,15 @@ public class Gameplay : MonoBehaviour
 
   public void SetProjectile(GameObject newProjectile)
   {
-    prevItem = currentItem;
     currentItem = newProjectile;
     currentItem.name = newProjectile.name;
+    if (currentItem != null)
+    {
+        GameObject newProj = (GameObject)Resources.Load("GamePlayScene/Projectile");
+        newProj.transform.localScale = new Vector3(5f, 5f, 5f);
+        newProj.GetComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
+        shootingBehavior.projectilePrefab = newProj;
+        shootingBehavior.projectileName = currentItem.name;
+    }
   }
 }

@@ -28,7 +28,7 @@ public class ShootingBehavior : MonoBehaviour
     private float shootStrength = 64f;
     private float dragStrength = 1f;
     private float dragCap = 40f;
-
+    
     // Start is called before the first frame update
     void Start()
     {
