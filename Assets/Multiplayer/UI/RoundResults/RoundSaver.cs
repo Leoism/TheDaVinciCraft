@@ -12,7 +12,11 @@ public class RoundSaver : MonoBehaviour
   }
   public void OnClick_ResetRoundLock()
   {
-    if (!GameManager.globalManager.isOnlineMode) return;
+    if (!GameManager.globalManager.isOnlineMode)
+    {
+      GameManager.globalManager.isRoundSaved = false;
+      return;
+    }
     // The master should tell alien to unlock round saving
     if (PhotonNetwork.IsMasterClient)
     {

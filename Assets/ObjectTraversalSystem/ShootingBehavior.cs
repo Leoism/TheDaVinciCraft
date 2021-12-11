@@ -38,6 +38,7 @@ public class ShootingBehavior : MonoBehaviour
         boom.enabled = false;
         boom.gameplayScene = gameplayScene;
         ray.gameplayScene = gameplayScene;
+        ray.enabled = false;
         trajectoryPoints = new GameObject[trajectoryPointCount];
         for (int i = 0; i < trajectoryPointCount; i++)
         {

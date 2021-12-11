@@ -58,8 +58,6 @@ public class Split : MonoBehaviour
              * In this, it only destroys the weapon if it hits a type it can destroy otherwise it bounces off
              * and destroys after 3 seconds (waiter subroutine)
              */
-            Debug.Log("Projectile: " + projType);
-            Debug.Log("Shatter" + shatter.name);
             switch (projType)
             {
                 case ("deforestor"):

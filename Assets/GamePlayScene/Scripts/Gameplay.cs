@@ -54,7 +54,7 @@ public class Gameplay : MonoBehaviour
 
     if (gameTimer.IsTimeUp() && gameTimer.GetCurrentPlayer().Equals("Alien"))
     {
-      currentItem = null; 
+      currentItem = null;
       foreach (GameObject go in GameManager.globalManager.alienInventory.GetInventoryList())
       {
         go.transform.parent = mainCanvas.transform;
@@ -71,6 +71,7 @@ public class Gameplay : MonoBehaviour
 
   public void UseItem()
   {
+    if (currentItem == null) return;
     if (currentItem.GetComponent<Item>().DecreaseCount() == 0)
     {
       if (gameTimer.GetCurrentPlayer().Equals("Human"))
@@ -93,11 +94,11 @@ public class Gameplay : MonoBehaviour
     currentItem.name = newProjectile.name;
     if (currentItem != null)
     {
-        GameObject newProj = (GameObject)Resources.Load("GamePlayScene/Projectile");
-        newProj.transform.localScale = new Vector3(5f, 5f, 5f);
-        newProj.GetComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
-        shootingBehavior.projectilePrefab = newProj;
-        shootingBehavior.projectileName = currentItem.name;
+      GameObject newProj = (GameObject)Resources.Load("GamePlayScene/Projectile");
+      newProj.transform.localScale = new Vector3(5f, 5f, 5f);
+      newProj.GetComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
+      shootingBehavior.projectilePrefab = newProj;
+      shootingBehavior.projectileName = currentItem.name;
     }
   }
 }

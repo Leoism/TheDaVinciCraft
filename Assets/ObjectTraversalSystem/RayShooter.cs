@@ -20,16 +20,17 @@ public class RayShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if ((EventSystem.current.IsPointerOverGameObject() &&
-            EventSystem.current.currentSelectedGameObject != null &&
-            EventSystem.current.currentSelectedGameObject.CompareTag("Button"))) 
-        {
-            return;
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-        }
+        if (gameplayScene.IsItemEmpty()) return;
+        if ((EventSystem.current.IsPointerOverGameObject() &&
+                EventSystem.current.currentSelectedGameObject != null &&
+                EventSystem.current.currentSelectedGameObject.CompareTag("Button"))) 
+            {
+                return;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+            }
     }
 
     void Shoot()
