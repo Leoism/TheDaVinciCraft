@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MultiplayerStartScene.unity
     guid: 465a79b6653cab648b1bc16e94b8faa1
+  - enabled: 1
+    path: Assets/Scenes/NetworkDisconnected.unity
+    guid: f82fac36ee4b6fb4985d141b59f84f5b
   m_configObjects: {}
