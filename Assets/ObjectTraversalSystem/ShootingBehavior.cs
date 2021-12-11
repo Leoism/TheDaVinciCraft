@@ -58,8 +58,9 @@ public class ShootingBehavior : MonoBehaviour
         Debug.Log(projectilePrefab.GetComponent<SpriteRenderer>().sprite.ToString());
         if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Boomerange")
         {
-            boom.enabled = true;
+            // order matters so audio doesn't null
             ray.Deactivate();
+            boom.Activate();
         }
         else if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Ray")
         {
@@ -70,6 +71,7 @@ public class ShootingBehavior : MonoBehaviour
         {
             boom.Deactivate();
             ray.Deactivate();
+            audioSource.loop = false;
             audioSource.clip = shootingSound;
             if (!(EventSystem.current.IsPointerOverGameObject() &&
                          EventSystem.current.currentSelectedGameObject != null &&

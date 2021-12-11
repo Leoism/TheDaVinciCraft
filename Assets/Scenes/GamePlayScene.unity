@@ -2439,6 +2439,7 @@ MonoBehaviour:
   trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   trajectoryPoints: []
   gameplayScene: {fileID: 0}
+  shootingSound: {fileID: 8300000, guid: d69b32978cb4299458b14984e468f6c4, type: 3}
 --- !u!114 &1317540229
 MonoBehaviour:
   m_ObjectHideFlags: 0
