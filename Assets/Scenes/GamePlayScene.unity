@@ -2421,6 +2421,7 @@ MonoBehaviour:
   gameplayScene: {fileID: 1281474590}
   trajectoryPointCount: 27
   projectileName: 
+  shootingSound: {fileID: 8300000, guid: b6776370839b68e4a9d6252642495d8d, type: 3}
 --- !u!114 &1317540228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2454,7 +2455,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 2147219063}
   aimTarget: {fileID: 953616967}
   gameplayScene: {fileID: 0}
-  shootingSound: {fileID: 0}
+  shootingSound: {fileID: 8300000, guid: 05464722af815fe4d9630f8df795aa1d, type: 3}
 --- !u!82 &1317540230
 AudioSource:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class ShootingBehavior : MonoBehaviour
     public Gameplay gameplayScene = null;
     public int trajectoryPointCount = 20;
     public string projectileName = "";
+    public AudioClip shootingSound = null;
     private float trajectoryPointSpace = 0.0625f;
     // mouse settings
     private bool isAiming = false;
@@ -27,6 +28,7 @@ public class ShootingBehavior : MonoBehaviour
     private float shootStrength = 64f;
     private float dragStrength = 1f;
     private float dragCap = 40f;
+    private AudioSource audioSource = null;
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class ShootingBehavior : MonoBehaviour
         ray.gameplayScene = gameplayScene;
         ray.enabled = false;
         trajectoryPoints = new GameObject[trajectoryPointCount];
+        audioSource = GetComponent<AudioSource>();
         for (int i = 0; i < trajectoryPointCount; i++)
         {
             trajectoryPoints[i] = Instantiate(trajectoryPointPrefab, projectileSpawnPoint.position, Quaternion.identity);
@@ -67,6 +70,7 @@ public class ShootingBehavior : MonoBehaviour
         {
             boom.Deactivate();
             ray.Deactivate();
+            audioSource.clip = shootingSound;
             if (!(EventSystem.current.IsPointerOverGameObject() &&
                          EventSystem.current.currentSelectedGameObject != null &&
                          EventSystem.current.currentSelectedGameObject.CompareTag("Button")))
@@ -131,6 +135,7 @@ public class ShootingBehavior : MonoBehaviour
         newProjectile.transform.up = direction;
         newProjectile.GetComponent<Rigidbody2D>().velocity = direction * shootStrength * dragStrength;
         newProjectile.AddComponent<WeaponInteractions>();
+        audioSource.Play();
     }
 
     void SetTrajectoryPointStatus(bool isOn)

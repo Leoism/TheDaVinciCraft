@@ -57,11 +57,15 @@ public class RayShooter : MonoBehaviour
 
     public void Deactivate()
     {
+        if (!enabled) return;
+        audioSource.clip = null;
         aimTarget.SetActive(false);
         enabled = false;
     }
     public void Activate()
     {
+        if (enabled) return;
+        audioSource.clip = shootingSound;
         aimTarget.SetActive(true);
         enabled = true;
     }
