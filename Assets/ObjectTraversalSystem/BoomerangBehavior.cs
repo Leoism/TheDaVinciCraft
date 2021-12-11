@@ -5,6 +5,7 @@ using Photon.Pun;
 public class BoomerangBehavior : MonoBehaviour
 {
     public AudioSource audioSource;
+    public PhotonView canvasPhotonView;
     // bezier curve settings
     private Vector3 start;
     private Vector3 point1;
@@ -19,6 +20,12 @@ public class BoomerangBehavior : MonoBehaviour
         audioSource.loop = true;
         audioSource.Stop();
         audioSource.Play();
+        // Only the alien can send audio
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+        {
+            canvasPhotonView.RPC("RPC_StopAudio", RpcTarget.Others);
+            canvasPhotonView.RPC("RPC_PlayBoomerang", RpcTarget.Others);
+        }
     }
     // Update is called once per frame
     void Update()
@@ -70,5 +77,10 @@ public class BoomerangBehavior : MonoBehaviour
     {
         audioSource.loop = false;
         audioSource.Stop();
+        // Only the alien should send projectile audio updates
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+        {
+            canvasPhotonView.RPC("RPC_StopAudio", RpcTarget.Others);
+        }
     }
 }

@@ -694,6 +694,8 @@ GameObject:
   - component: {fileID: 418612263}
   - component: {fileID: 418612267}
   - component: {fileID: 418612268}
+  - component: {fileID: 418612269}
+  - component: {fileID: 418612270}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -827,6 +829,118 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 1876572932}
+  networkSFXPlayer: {fileID: 418612269}
+--- !u!114 &418612269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418612262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f67289bbee1c744ca5cd7000b23dd5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raySFX: {fileID: 8300000, guid: 05464722af815fe4d9630f8df795aa1d, type: 3}
+  boomerangSFX: {fileID: 8300000, guid: d69b32978cb4299458b14984e468f6c4, type: 3}
+  catapultSFX: {fileID: 8300000, guid: b6776370839b68e4a9d6252642495d8d, type: 3}
+--- !u!82 &418612270
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418612262}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &429695616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2312,6 +2426,7 @@ GameObject:
   - component: {fileID: 1317540228}
   - component: {fileID: 1317540229}
   - component: {fileID: 1317540230}
+  - component: {fileID: 1317540231}
   m_Layer: 0
   m_Name: Alienship
   m_TagString: Untagged
@@ -2422,6 +2537,7 @@ MonoBehaviour:
   trajectoryPointCount: 27
   projectileName: 
   shootingSound: {fileID: 8300000, guid: b6776370839b68e4a9d6252642495d8d, type: 3}
+  canvasPhotonView: {fileID: 418612267}
 --- !u!114 &1317540228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2440,6 +2556,7 @@ MonoBehaviour:
   trajectoryPoints: []
   gameplayScene: {fileID: 0}
   shootingSound: {fileID: 8300000, guid: d69b32978cb4299458b14984e468f6c4, type: 3}
+  canvasPhotonView: {fileID: 418612267}
 --- !u!114 &1317540229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2457,6 +2574,7 @@ MonoBehaviour:
   aimTarget: {fileID: 953616967}
   gameplayScene: {fileID: 0}
   shootingSound: {fileID: 8300000, guid: 05464722af815fe4d9630f8df795aa1d, type: 3}
+  canvasPhotonView: {fileID: 418612267}
 --- !u!82 &1317540230
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2553,6 +2671,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1317540231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317540223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f67289bbee1c744ca5cd7000b23dd5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raySFX: {fileID: 0}
+  boomerangSFX: {fileID: 0}
+  catapultSFX: {fileID: 0}
 --- !u!224 &1396258002 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2268119830247311201, guid: b89e1dbb0dcab40c2891ed42badf2e64, type: 3}

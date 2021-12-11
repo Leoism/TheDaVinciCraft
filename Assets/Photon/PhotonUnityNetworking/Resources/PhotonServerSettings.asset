@@ -50,6 +50,11 @@ MonoBehaviour:
   - RPC_AlienOutOfWeapons
   - RPC_AlienFinishSettingPlayers
   - RPC_ResetRoundLock
+  - RPC_PlayBoomerang
+  - RPC_PlayCatapult
+  - RPC_PlayRay
+  - RPC_Stop
+  - RPC_StopAudio
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

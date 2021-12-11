@@ -16,6 +16,7 @@ public class BoomerangShooter : MonoBehaviour
     public GameObject[] trajectoryPoints;
     public Gameplay gameplayScene = null;
     public AudioClip shootingSound = null;
+    public PhotonView canvasPhotonView = null;
     private AudioSource audioSource = null;
     // Start is called before the first frame update
     void Start()
@@ -80,6 +81,7 @@ public class BoomerangShooter : MonoBehaviour
         gameplayScene.UseItem();
         BoomerangBehavior bb = newProjectile.AddComponent<BoomerangBehavior>();
         bb.audioSource = audioSource;
+        bb.canvasPhotonView = canvasPhotonView;
         bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
         bb.SetLifespan(5f * multiplier);
     }

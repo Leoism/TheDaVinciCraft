@@ -18,6 +18,7 @@ public class ShootingBehavior : MonoBehaviour
     public int trajectoryPointCount = 20;
     public string projectileName = "";
     public AudioClip shootingSound = null;
+    public PhotonView canvasPhotonView = null;
     private float trajectoryPointSpace = 0.0625f;
     // mouse settings
     private bool isAiming = false;
@@ -138,6 +139,11 @@ public class ShootingBehavior : MonoBehaviour
         newProjectile.GetComponent<Rigidbody2D>().velocity = direction * shootStrength * dragStrength;
         newProjectile.AddComponent<WeaponInteractions>();
         audioSource.Play();
+        // Only the alien can send audio
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+        {
+            canvasPhotonView.RPC("RPC_PlayCatapult", RpcTarget.Others);
+        }
     }
 
     void SetTrajectoryPointStatus(bool isOn)

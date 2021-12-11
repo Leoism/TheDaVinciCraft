@@ -11,6 +11,7 @@ public class RayShooter : MonoBehaviour
     public GameObject aimTarget = null;
     public Gameplay gameplayScene = null;
     public AudioClip shootingSound = null;
+    public PhotonView canvasPhotonView = null;
     private AudioSource audioSource = null;
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,11 @@ public class RayShooter : MonoBehaviour
         }
         gameplayScene.UseItem();
         audioSource.Play();
+        // Only the alien can send audio
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+        {
+            canvasPhotonView.RPC("RPC_PlayRay", RpcTarget.Others);
+        }
     }
 
     public void Deactivate()
