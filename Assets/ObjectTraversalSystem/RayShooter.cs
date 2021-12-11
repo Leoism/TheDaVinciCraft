@@ -10,11 +10,15 @@ public class RayShooter : MonoBehaviour
     public Transform spawnPoint = null;
     public GameObject aimTarget = null;
     public Gameplay gameplayScene = null;
+    public AudioClip shootingSound = null;
+    private AudioSource audioSource = null;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(rayPrefab != null);
         Debug.Assert(spawnPoint != null);
+        Debug.Log("hi");
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +52,7 @@ public class RayShooter : MonoBehaviour
             rb.SetTarget(mousePos);
         }
         gameplayScene.UseItem();
+        audioSource.Play();
     }
 
     public void Deactivate()
