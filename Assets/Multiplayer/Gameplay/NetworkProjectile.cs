@@ -9,8 +9,15 @@ public class NetworkProjectile : MonoBehaviourPunCallbacks, IPunInstantiateMagic
     GameObject photonGameObj = info.photonView.gameObject;
     string projectileName = (string)info.photonView.InstantiationData[0];
     photonGameObj.GetComponent<SpriteRenderer>().sprite = GetProjectileSpritePrefab(projectileName).sprite;
-    if (!projectileName.Equals("Boomerang"))
+    // Only interactions should happen on the alien side
+    if (!projectileName.Equals("Boomerang") && info.photonView.IsMine)
       photonGameObj.AddComponent<WeaponInteractions>();
+    // the human should not affect anything, it should only spectate
+    if (!info.photonView.IsMine)
+    {
+      Destroy(photonGameObj.GetComponent<BoxCollider2D>());
+      Destroy(photonGameObj.GetComponent<Rigidbody2D>());
+    }
   }
 
   private SpriteRenderer GetProjectileSpritePrefab(string name)

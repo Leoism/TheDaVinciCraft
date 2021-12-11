@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class shatterDestroy : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -9,7 +9,14 @@ public class shatterDestroy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            Destroy(gameObject);
+            if (GameManager.globalManager.isOnlineMode)
+            {
+                PhotonNetwork.Destroy(GetComponent<PhotonView>());
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

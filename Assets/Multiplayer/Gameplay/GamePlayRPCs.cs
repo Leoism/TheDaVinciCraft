@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Photon.Pun;
 public class GamePlayRPCs : MonoBehaviourPunCallbacks
 {
@@ -17,7 +20,6 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
   [PunRPC]
   void RPC_OnClick_Done()
   {
-    Debug.Log("Hello");
     timer.finishState();
   }
 
@@ -25,6 +27,16 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
   void RPC_AlienOutOfWeapons()
   {
     PhotonNetwork.LoadLevel("HumanWin");
+  }
+
+  [PunRPC]
+  void RPC_OnTilemapHit(Vector3Int[] tilePositionsToDestory, Vector3Int[] _addedTiles, int viewID)
+  {
+    Tilemap targetTilemap = PhotonView.Find(viewID).gameObject.GetComponent<Tilemap>();
+    foreach (Vector3Int pos in tilePositionsToDestory)
+    {
+      targetTilemap.SetTile(pos, null);
+    }
   }
 
   [PunRPC]
@@ -49,5 +61,13 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
   void RPC_StopAudio()
   {
     networkSFXPlayer.Stop();
+  }
+
+  /*
+ * Positive distance between two vector points
+ */
+  private int ManhattanDistance(Vector3Int a, Vector3Int b)
+  {
+    return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z);
   }
 }

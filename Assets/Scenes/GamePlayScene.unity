@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 418612270}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2515,6 +2515,7 @@ MonoBehaviour:
   powerBar: {fileID: 1999188319}
   shootingBehavior: {fileID: 1317540227}
   canvasPhotonView: {fileID: 418612267}
+  grid: {fileID: 519856262}
 --- !u!114 &1317540227
 MonoBehaviour:
   m_ObjectHideFlags: 0
