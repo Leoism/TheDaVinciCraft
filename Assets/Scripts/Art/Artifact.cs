@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 public class Artifact : MonoBehaviour
 {
     public ArtDB artsDB;
     public SpriteRenderer artWorkSprite;
+    public PhotonView canvasPhotonView;
     private int selectedArt = 0;
     void Start()
     {
@@ -33,7 +35,13 @@ public class Artifact : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            SceneManager.LoadScene("AlienWin");
+            if (GameManager.globalManager.isOnlineMode)
+            {
+                canvasPhotonView.RPC("RPC_OnArtDestruction", RpcTarget.MasterClient);
+            } else
+            {
+                SceneManager.LoadScene("AlienWin");
+            }
             Destroy(this.gameObject);
         }
     }

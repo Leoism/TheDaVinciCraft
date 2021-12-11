@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Photon.Pun;
+using ExitGames.Client.Photon;
 /*
 namespace StackingSystem.Scripts
 {*/
@@ -23,7 +25,7 @@ public class AddTilemap : MonoBehaviour
     private Vector3Int oldTilePos;
     //[SerializeField] private Text indexText;
 
-    private TileBase CurrentTileToAdd => tilesToAdd[currentTileToAddIndex];
+    public TileBase CurrentTileToAdd => tilesToAdd[currentTileToAddIndex];
     private int CurrentTileToAddIndex
     {
         get => currentTileToAddIndex;
@@ -55,20 +57,29 @@ public class AddTilemap : MonoBehaviour
     public void UpdateTileArt(Tile newTile)
     {
         tilesToAdd[currentTileToAddIndex] = newTile;
+        if (tilesToAdd[currentTileToAddIndex])
+            tilesToAdd[currentTileToAddIndex].name = newTile ? newTile.name : "None";
     }
 
-    private readonly HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
+    private HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
 
     private void HandleTileMapCreation()
     {
-        if (CurrentTileToAdd != null && Input.GetMouseButtonUp(0))
+        if (CurrentTileToAdd == null) return;
+
+        Vector2 ray = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray, Vector2.zero);
+        if (hit.collider && hit.collider.CompareTag("Art")) return;
+        
+        if (Input.GetMouseButtonUp(0))
         {
             CreateTileMap();
         }
-       // Debug.Log(EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject.CompareTag(""));
-         if (CurrentTileToAdd != null && Input.GetMouseButton(0) && !(EventSystem.current.IsPointerOverGameObject () && 
-     EventSystem.current.currentSelectedGameObject != null && 
-     EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )) && GameManager.globalManager.humanInventory.TotalCount() != 0)
+        if (Input.GetMouseButton(0) &&
+            !(EventSystem.current.IsPointerOverGameObject () && 
+            EventSystem.current.currentSelectedGameObject != null && 
+            EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )) &&
+            GameManager.globalManager.humanInventory.TotalCount() != 0)
         {
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var newTilePos = _grid.WorldToCell(mousePos);
@@ -100,11 +111,36 @@ public class AddTilemap : MonoBehaviour
     public void CreateTileMap()
     {
         // Creates a new tilemap from the prefab as a child of this
-        var tilemap = Instantiate(tilemapPrefab, transform);
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            Vector3Int[] v3iArr = new Vector3Int[_addedTiles.Count];
+            _addedTiles.CopyTo(v3iArr);
+            PhotonNetwork.Instantiate("Tilemap_Build", transform.position, transform.rotation, 0, new object[] {v3iArr, CurrentTileToAdd.name});
+            _addedTiles.Clear();
+            tempTilemap.ClearAllTiles();
+            placed = false;
+            xDom = false;
+            yDom = false;
+        }
+        else
+        {
+            Tilemap newTilemap = Instantiate(((GameObject)Resources.Load("Tilemap_Build"))).GetComponent<Tilemap>();
+            // if you don't clear them, then the tilemap gets prebuilt tiles
+            newTilemap.ClearAllTiles();
+            newTilemap.transform.position = transform.position;
+            newTilemap.transform.rotation = transform.rotation;
+            newTilemap.transform.localScale = transform.localScale;
+            newTilemap.transform.parent = transform;
+            SetTileMap(newTilemap);
+        }
+    }
+
+    private void SetTileMap(Tilemap tilemap)
+    {
         tilemap.GetComponent<Split>().CurrentTileToAdd = CurrentTileToAdd;
         foreach (var pos in _addedTiles)
-        tilemap.SetTile(pos, CurrentTileToAdd);
-
+            tilemap.SetTile(pos, CurrentTileToAdd);
+        tilemap.tag = CurrentTileToAdd.name + "Tile";
         _addedTiles.Clear();
         tempTilemap.ClearAllTiles();
         placed = false;
@@ -135,6 +171,5 @@ public class AddTilemap : MonoBehaviour
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z);
     }
-
 }
 //}

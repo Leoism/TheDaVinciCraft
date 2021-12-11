@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
 
 public class ArtsManager : MonoBehaviour
 {
@@ -35,7 +35,13 @@ public class ArtsManager : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            PhotonNetwork.LoadLevel(scene);
+        } else
+        {
+            SceneManager.LoadScene(scene);
+        }
     }
     public void Next()
     {

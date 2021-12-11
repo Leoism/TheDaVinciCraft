@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using Photon.Pun;
 public class Gameplay : MonoBehaviour
 {
   public Timer gameTimer = null;
@@ -15,7 +16,6 @@ public class Gameplay : MonoBehaviour
   public ShootingBehavior shootingBehavior = null;
   public AddTilemap tilemapAdder = null;
   public GameObject currentItem = null;
-  public GameObject prevItem = null;
   // Start is called before the first frame update
   void Start()
   {
@@ -38,43 +38,30 @@ public class Gameplay : MonoBehaviour
       mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, 50f, 40f * Time.smoothDeltaTime);
       if (currentItem != null)
       {
+        // Updates the tile image to use for tiles
         Tile currentTile = new Tile();
         currentTile.sprite = currentItem.GetComponent<Image>().sprite;
+        currentTile.name = currentItem.name;
         tilemapAdder.UpdateTileArt(currentTile);
       }
     }
     else
     {
-
       mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, alienZone.position, 86f * Time.smoothDeltaTime);
       mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, 108f, 40f * Time.smoothDeltaTime);
-      if (mainCamera.transform.position == alienZone.position)
-        alienship.Init();
-      if (currentItem != null && currentItem != prevItem)
-      {
-        GameObject newProjectile = new GameObject();
-        newProjectile.name = "Projectile";
-        newProjectile.AddComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
-        newProjectile.AddComponent<Rigidbody2D>();
-        newProjectile.AddComponent<BoxCollider2D>();
-        newProjectile.tag = "Weapon";
-        newProjectile.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        // the game object is needed to be used as a prefab
-        newProjectile.transform.position = new Vector3(-5000, -5000, -5000);
-        shootingBehavior.projectilePrefab = newProjectile;
-        prevItem = currentItem;
-      }
+      alienship.Init();
     }
 
     if (gameTimer.IsTimeUp() && gameTimer.GetCurrentPlayer().Equals("Alien"))
     {
+      currentItem = null; 
       foreach (GameObject go in GameManager.globalManager.alienInventory.GetInventoryList())
       {
         go.transform.parent = mainCanvas.transform;
         go.transform.localScale = new Vector3(1, 1, 1);
         go.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(go.GetComponent<RectTransform>().anchoredPosition3D.x, go.GetComponent<RectTransform>().anchoredPosition3D.y, 1);
       }
-      currentItem = null;
+
       actionBarBehavior.Reset();
       GameManager.globalManager.alienInventory.actionBar = actionBarBehavior;
       actionBarBehavior.SetList(GameManager.globalManager.alienInventory.GetInventoryList());
@@ -102,7 +89,15 @@ public class Gameplay : MonoBehaviour
 
   public void SetProjectile(GameObject newProjectile)
   {
-    prevItem = currentItem;
     currentItem = newProjectile;
+    currentItem.name = newProjectile.name;
+    if (currentItem != null)
+    {
+        GameObject newProj = (GameObject)Resources.Load("GamePlayScene/Projectile");
+        newProj.transform.localScale = new Vector3(5f, 5f, 5f);
+        newProj.GetComponent<SpriteRenderer>().sprite = currentItem.GetComponent<Image>().sprite;
+        shootingBehavior.projectilePrefab = newProj;
+        shootingBehavior.projectileName = currentItem.name;
+    }
   }
 }

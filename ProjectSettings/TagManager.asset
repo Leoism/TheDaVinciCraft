@@ -7,6 +7,15 @@ TagManager:
   - Weapon
   - tm
   - Button
+  - block
+  - Art
+  - FabricTile
+  - GlassTile
+  - MetalTile
+  - StoneTile
+  - WoodTile
+  - Grid
+  - floor
   layers:
   - Default
   - TransparentFX

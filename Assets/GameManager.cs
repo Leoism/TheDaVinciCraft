@@ -20,6 +20,9 @@ public class GameManager
   public BattleSystem battleSystem;
   public Player alienPlayer = null;
   public Player humanPlayer = null;
+  public bool isOnlineMode = false;
+  public bool allPlayersReady = false;
+  public string currentPlayer = null;
   private List<List<Player>> rounds = null;
   private int currentRound;
   private GameManager()
@@ -38,6 +41,7 @@ public class GameManager
     GameManager.globalManager.alienPlayer = null;
     GameManager.globalManager.humanPlayer = null;
     GameManager.globalManager.rounds = null;
+    GameManager.globalManager.isOnlineMode = false;
     currentRound = 0;
   }
 
@@ -111,40 +115,40 @@ public class GameManager
   }
 
   public List<int> GetMaterialCountForRound()
+  {
+    List<int> materialBuyingCount = new List<int>();
+    int materialCount = 30;
+    for (int i = 0; i < 13; i++)
     {
-        List<int> materialBuyingCount = new List<int>();
-        int materialCount = 20;
-        for (int i = 0; i < 13; i++)
-        {
-            materialBuyingCount.Add(materialCount);
-            materialCount += 10;
-        }
-        return materialBuyingCount;
+      materialBuyingCount.Add(materialCount);
+      materialCount += 10;
     }
-    public List<int> GetWeaponCountForRound()
+    return materialBuyingCount;
+  }
+  public List<int> GetWeaponCountForRound()
+  {
+    List<int> weaponBuyingCount = new List<int>();
+    int weaponCount = 6;
+    for (int i = 0; i < 13; i++)
     {
-        List<int> weaponBuyingCount = new List<int>();
-        int weaponCount = 6;
-        for (int i = 0; i < 13; i++)
-        {
-            weaponBuyingCount.Add(weaponCount);
-            weaponCount += 3;
-        }
-        return weaponBuyingCount;
+      weaponBuyingCount.Add(weaponCount);
+      weaponCount += 3;
     }
+    return weaponBuyingCount;
+  }
 
-    public int GetCurrentRound()
-    {
-        return currentRound;
-    }
+  public int GetCurrentRound()
+  {
+    return currentRound;
+  }
 
-    public void IncrementCurrRound()
-    {
-        currentRound++;
-    }
+  public void IncrementCurrRound()
+  {
+    currentRound++;
+  }
 
-    public void ResetRound()
-    {
-        currentRound = 0;
-    }
+  public void ResetRound()
+  {
+    currentRound = 0;
+  }
 }

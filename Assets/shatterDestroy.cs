@@ -9,7 +9,7 @@ public class shatterDestroy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
-    }
+}

@@ -5,20 +5,20 @@ using UnityEngine;
 public class ModeAnimation : MonoBehaviour
 {
     private Vector3 initPosition;
-    [SerializeField] private Vector3 finalPosition;
+    [SerializeField] private RectTransform finalRect;
     void Awake()
     {
-        initPosition = transform.position;
+        initPosition = GetComponent<RectTransform>().anchoredPosition3D;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, finalPosition, 0.05f);
+        GetComponent<RectTransform>().anchoredPosition3D = Vector3.Lerp(GetComponent<RectTransform>().anchoredPosition3D, finalRect.anchoredPosition3D, 5f * Time.smoothDeltaTime);
     }
 
     private void OnDisable() 
     {
-        transform.position = initPosition;
+        GetComponent<RectTransform>().anchoredPosition3D = initPosition;
     }
 }
