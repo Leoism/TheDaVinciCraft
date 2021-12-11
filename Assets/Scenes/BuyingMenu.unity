@@ -5521,7 +5521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1e3535f8769ff4abb0f0268cc312ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Wood:<br>>- Weaker against deforestors, bombs, rays, etc. <br>- What
+  description: Wood:<br>- Weaker against deforestors, bombs, rays, etc. <br>- What
     do you call a wood that is scared? ...Petrified!
 --- !u!1 &587065492
 GameObject:
