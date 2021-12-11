@@ -18,7 +18,6 @@ public class RayShooter : MonoBehaviour
     {
         Debug.Assert(rayPrefab != null);
         Debug.Assert(spawnPoint != null);
-        Debug.Log("hi");
         audioSource = GetComponent<AudioSource>();
     }
 

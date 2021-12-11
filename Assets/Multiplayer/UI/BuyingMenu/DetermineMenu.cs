@@ -19,10 +19,12 @@ public class DetermineMenu : MonoBehaviour
     if (PhotonNetwork.IsMasterClient)
     {
       humanMessage.SetActive(true);
+      GameManager.globalManager.SetAlienInventory(new List<GameObject>());
     }
     else
     {
       alienMessage.SetActive(true);
+      GameManager.globalManager.SetHumanInventory(new List<GameObject>());
     }
   }
 
