@@ -75,12 +75,10 @@ public class AddTilemap : MonoBehaviour
         {
             CreateTileMap();
         }
-        if (Input.GetMouseButton(0) &&
-            !(EventSystem.current.IsPointerOverGameObject () && 
-            EventSystem.current.currentSelectedGameObject != null && 
-            EventSystem.current.currentSelectedGameObject.CompareTag( "Button" )) &&
-            GameManager.globalManager.humanInventory.TotalCount() != 0)
+        if (Input.GetMouseButton(0) && GameManager.globalManager.humanInventory.TotalCount() != 0)
         {
+            if (EventSystem.current.IsPointerOverGameObject ())
+                return;
             var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var newTilePos = _grid.WorldToCell(mousePos);
             // If none of the tiles are adjacent, then do not place newTilePos
