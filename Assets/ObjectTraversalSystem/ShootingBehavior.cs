@@ -10,6 +10,7 @@ public class ShootingBehavior : MonoBehaviour
     public Inventory alienInventory;
     public BoomerangShooter boom = null;
     public RayShooter ray = null;
+    public GrappleShooter grapple = null;
     public GameObject trajectoryPointPrefab = null;
     public Transform projectileSpawnPoint = null;
     public GameObject powerBar = null;
@@ -42,6 +43,8 @@ public class ShootingBehavior : MonoBehaviour
         boom.gameplayScene = gameplayScene;
         ray.gameplayScene = gameplayScene;
         ray.enabled = false;
+        grapple.gameplayScene = gameplayScene;
+        grapple.enabled = false;
         trajectoryPoints = new GameObject[trajectoryPointCount];
         audioSource = GetComponent<AudioSource>();
         for (int i = 0; i < trajectoryPointCount; i++)
@@ -61,17 +64,26 @@ public class ShootingBehavior : MonoBehaviour
         {
             // order matters so audio doesn't null
             ray.Deactivate();
+            grapple.Deactivate();
             boom.Activate();
         }
         else if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "Ray")
         {
             boom.Deactivate();
+            grapple.Deactivate();
             ray.Activate();
+        }
+        else if (projectilePrefab.GetComponent<SpriteRenderer>().sprite.name.ToString() == "GrappleHook")
+        {
+            boom.Deactivate();
+            ray.Deactivate();
+            grapple.Activate();
         }
         else
         {
             boom.Deactivate();
             ray.Deactivate();
+            grapple.Deactivate();
             audioSource.loop = false;
             audioSource.clip = shootingSound;
             if (!(EventSystem.current.IsPointerOverGameObject() &&

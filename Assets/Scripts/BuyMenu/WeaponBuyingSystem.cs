@@ -33,9 +33,10 @@ public class WeaponBuyingSystem : MonoBehaviour
     [SerializeField] private Button grenade;
     [SerializeField] private Button grenadeAdd;
     [SerializeField] private Button grenadeSub;
+    [SerializeField] private Button grapple;
     [SerializeField] private BuyingSystem buySystem;
-    [SerializeField] private List<InputField> allInputFields; 
-    
+    [SerializeField] private List<InputField> allInputFields;
+
     // int variables
     private int totalWeapons;
     private int selectedWeapons = 0;
@@ -50,14 +51,17 @@ public class WeaponBuyingSystem : MonoBehaviour
         bombSub.interactable = (BombCnt.bombCnt > 0);
         raySub.interactable = (RayCnt.rayCnt > 0);
         grenadeSub.interactable = (GrenadeCnt.grCnt > 0);
-        
+
+
         activateAllAdds(false);
         // round 1 only activate deforestor, arrow boomerang
-        if (GameManager.globalManager.GetCurrentRound() == 1) {
+        if (GameManager.globalManager.GetCurrentRound() == 1)
+        {
             activeAddsForRoundOne(true);
         }
         // round 2 unblock ball, bomb, mineral extractor
-        else if (GameManager.globalManager.GetCurrentRound() == 1) {
+        else if (GameManager.globalManager.GetCurrentRound() == 1)
+        {
             activeAddsForRoundTwo(true);
         }
 
@@ -77,28 +81,35 @@ public class WeaponBuyingSystem : MonoBehaviour
         BombCnt.bombCnt = 0;
         RayCnt.rayCnt = 0;
         GrenadeCnt.grCnt = 0;
+        GrappleCnt.grappleCnt = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (selectedWeapons >= totalWeapons) {
+        if (selectedWeapons >= totalWeapons)
+        {
             activateAllAdds(false);
         }
 
-        if (selectedWeapons < totalWeapons) {
-            if (GameManager.globalManager.GetCurrentRound() == 1) {
+        if (selectedWeapons < totalWeapons)
+        {
+            if (GameManager.globalManager.GetCurrentRound() == 1)
+            {
                 activeAddsForRoundOne(true);
             }
-            else if (GameManager.globalManager.GetCurrentRound() == 2) {
+            else if (GameManager.globalManager.GetCurrentRound() == 2)
+            {
                 activeAddsForRoundTwo(true);
             }
-            else{
+            else
+            {
                 activateAllAdds(true);
             }
         }
 
-        if (CountDownTimer.isTimeUp == true) {
+        if (CountDownTimer.isTimeUp == true)
+        {
             activateAllAdds(false);
             activateAllSubs(false);
         }
@@ -111,10 +122,10 @@ public class WeaponBuyingSystem : MonoBehaviour
         DeforestorCnt.deCnt = add(deforestor, deAdd, deSub, totalWeapons, DeforestorCnt.deCnt, selectedWeapons);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("DeforestorInput"));
         inputField.SetTextWithoutNotify(DeforestorCnt.deCnt.ToString());
-  }
+    }
     public void RemoveDeforestor()
     {
-        DeforestorCnt.deCnt  = sub(deforestor, deAdd, deSub, totalWeapons, DeforestorCnt.deCnt , selectedWeapons);
+        DeforestorCnt.deCnt = sub(deforestor, deAdd, deSub, totalWeapons, DeforestorCnt.deCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("DeforestorInput"));
         inputField.SetTextWithoutNotify(DeforestorCnt.deCnt.ToString());
@@ -207,13 +218,13 @@ public class WeaponBuyingSystem : MonoBehaviour
     public void SelectBomb()
     {
         selectedWeapons += 1;
-        BombCnt.bombCnt = add(bomb, bombAdd,bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
+        BombCnt.bombCnt = add(bomb, bombAdd, bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BombInput"));
         inputField.SetTextWithoutNotify(BombCnt.bombCnt.ToString());
     }
     public void RemoveBomb()
     {
-        BombCnt.bombCnt = sub(bomb, bombAdd,bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
+        BombCnt.bombCnt = sub(bomb, bombAdd, bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BombInput"));
         inputField.SetTextWithoutNotify(BombCnt.bombCnt.ToString());
@@ -238,11 +249,13 @@ public class WeaponBuyingSystem : MonoBehaviour
     //------------------------------ Grenade ------------------------------------
     public void SelectGrenade()
     {
-        if (GrenadeCnt.grCnt < 1) {
+        if (GrenadeCnt.grCnt < 1)
+        {
             selectedWeapons += 1;
-            GrenadeCnt.grCnt = add(grenade,grenadeAdd,grenadeSub, totalWeapons, GrenadeCnt.grCnt, selectedWeapons);
+            GrenadeCnt.grCnt = add(grenade, grenadeAdd, grenadeSub, totalWeapons, GrenadeCnt.grCnt, selectedWeapons);
         }
-        if (GrenadeCnt.grCnt > 0) {
+        if (GrenadeCnt.grCnt > 0)
+        {
             grenade.interactable = false;
             grenadeAdd.interactable = false;
         }
@@ -251,7 +264,7 @@ public class WeaponBuyingSystem : MonoBehaviour
     }
     public void RemoveGrenade()
     {
-        GrenadeCnt.grCnt = sub(grenade,grenadeAdd,grenadeSub, totalWeapons, GrenadeCnt.grCnt, selectedWeapons);
+        GrenadeCnt.grCnt = sub(grenade, grenadeAdd, grenadeSub, totalWeapons, GrenadeCnt.grCnt, selectedWeapons);
         selectedWeapons -= 1;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("GrenadeInput"));
         inputField.SetTextWithoutNotify(GrenadeCnt.grCnt.ToString());
@@ -296,7 +309,8 @@ public class WeaponBuyingSystem : MonoBehaviour
 
     public void OnInput_UpdateCount(string newCount)
     {
-        InputField activeInputField = allInputFields.Find((inputField) => {
+        InputField activeInputField = allInputFields.Find((inputField) =>
+        {
             return inputField.isFocused;
         });
         GameObject parentOfInputField = activeInputField.transform.parent.gameObject;
@@ -306,7 +320,8 @@ public class WeaponBuyingSystem : MonoBehaviour
         Button[] displayButtons = parentOfInputField.GetComponentsInChildren<Button>();
         int count = 0;
         int.TryParse(newCount, out count);
-        switch(parentOfInputField.name) {
+        switch (parentOfInputField.name)
+        {
             case "DeforestorPanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref DeforestorCnt.deCnt, ref selectedWeapons, count);
                 break;
@@ -370,14 +385,16 @@ public class WeaponBuyingSystem : MonoBehaviour
         bombAdd.interactable = condition;
         ray.interactable = condition;
         rayAdd.interactable = condition;
-        if (GrenadeCnt.grCnt < 1) {
+        if (GrenadeCnt.grCnt < 1)
+        {
             grenade.interactable = condition;
             grenadeAdd.interactable = condition;
         }
         // grenade.interactable = condition;
         // grenadeAdd.interactable = condition;
     }
-    private void activeAddsForRoundOne(bool condition) {
+    private void activeAddsForRoundOne(bool condition)
+    {
         deforestor.interactable = condition;
         deAdd.interactable = condition;
         arrow.interactable = condition;
@@ -385,7 +402,8 @@ public class WeaponBuyingSystem : MonoBehaviour
         boomerange.interactable = condition;
         boomAdd.interactable = condition;
     }
-    private void activeAddsForRoundTwo(bool condition) {
+    private void activeAddsForRoundTwo(bool condition)
+    {
         deforestor.interactable = condition;
         deAdd.interactable = condition;
         arrow.interactable = condition;
@@ -412,7 +430,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         raySub.interactable = condition;
         grenadeSub.interactable = condition;
     }
-    
+
     public void SaveAlienInventory()
     {
         List<GameObject> alienInventory = new List<GameObject>();
@@ -452,6 +470,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         {
             alienInventory.Add(CreateSprite(GrenadeCnt.grCnt, "grenade"));
         }
+        alienInventory.Add(CreateSprite(GrappleCnt.grappleCnt, "grapple"));
         GameManager.globalManager.SetAlienInventory(alienInventory);
     }
 
@@ -461,8 +480,9 @@ public class WeaponBuyingSystem : MonoBehaviour
         Item newItem = newGameObject.AddComponent<Item>();
         newItem.SetCount(count);
         Button itemButton = null;
-        switch(name) {
-            case "deforestor": 
+        switch (name)
+        {
+            case "deforestor":
                 itemButton = deforestor;
                 newItem.SetItemName("Deforestor");
                 newItem.SetMessage("Deforestor - Strong against Wood! ");
@@ -506,6 +526,11 @@ public class WeaponBuyingSystem : MonoBehaviour
                 itemButton = grenade;
                 newItem.SetItemName("Alien Grenade ");
                 newItem.SetMessage("Alien Grenade - Annihilates everything! ");
+                break;
+            case "grapple":
+                itemButton = grapple;
+                newItem.SetItemName("Grapple Hook ");
+                newItem.SetMessage("Grapple Hook - Nabs the Art! ");
                 break;
             default:
                 break;

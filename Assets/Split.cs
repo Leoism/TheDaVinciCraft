@@ -126,7 +126,8 @@ public class Split : MonoBehaviour
                         return;
                     }
                     break;
-
+                case "GrappleHook":
+                    return;
             }
 
             if (projType == "Square" || projType == "MineralExtractor")

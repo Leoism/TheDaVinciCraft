@@ -2425,6 +2425,7 @@ GameObject:
   - component: {fileID: 1317540227}
   - component: {fileID: 1317540228}
   - component: {fileID: 1317540229}
+  - component: {fileID: 1317540232}
   - component: {fileID: 1317540230}
   - component: {fileID: 1317540231}
   m_Layer: 0
@@ -2531,6 +2532,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   boom: {fileID: 1317540228}
   ray: {fileID: 1317540229}
+  grapple: {fileID: 1317540232}
   trajectoryPointPrefab: {fileID: 7418134505665303796, guid: 62b57dc1e1f4cea46a72fba72c1935e6, type: 3}
   projectileSpawnPoint: {fileID: 2147219063}
   powerBar: {fileID: 734583843}
@@ -2687,6 +2689,24 @@ MonoBehaviour:
   raySFX: {fileID: 0}
   boomerangSFX: {fileID: 0}
   catapultSFX: {fileID: 0}
+--- !u!114 &1317540232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317540223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610743685c06cb84aac7676825e524d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grapplePrefab: {fileID: 5417275941265449733, guid: 979d51aa9121ff64cbd9fda04539e87c, type: 3}
+  spawnPoint: {fileID: 2147219063}
+  aimTarget: {fileID: 953616967}
+  gameplayScene: {fileID: 0}
+  shootingSound: {fileID: 8300000, guid: d69b32978cb4299458b14984e468f6c4, type: 3}
+  canvasPhotonView: {fileID: 418612267}
 --- !u!224 &1396258002 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2268119830247311201, guid: b89e1dbb0dcab40c2891ed42badf2e64, type: 3}

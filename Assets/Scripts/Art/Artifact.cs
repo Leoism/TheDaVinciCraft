@@ -33,7 +33,7 @@ public class Artifact : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Weapon"))
+        if (collision.gameObject.CompareTag("Grapple"))
         {
             // Only the alien should send over this RPC
             if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)

@@ -17,6 +17,7 @@ TagManager:
   - Grid
   - floor
   - Canvas
+  - Grapple
   layers:
   - Default
   - TransparentFX
