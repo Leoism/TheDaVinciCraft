@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using Photon.Pun;
 public class Split : MonoBehaviour
 {
     public TileBase CurrentTileToAdd;
@@ -16,10 +17,13 @@ public class Split : MonoBehaviour
     private Vector3Int oldTilePos;
     [SerializeField] private Tilemap tilemapPrefab;
     private readonly HashSet<Vector3Int> _addedTiles = new HashSet<Vector3Int>();
+    private string tileType = "";
+    private PhotonView canvasPhotonView = null;
     // Start is called before the first frame update
     void Start()
     {
         tl = GetComponent<Tilemap>(); //Reference to tilemap
+        canvasPhotonView = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PhotonView>();
         /*
          * Goes through tilemap until it encounters a non-null tile, grabs that tile type
          * and sets the shatter type accordingly. I.e. if tilemap is wood, shatter will be wood.
@@ -33,6 +37,7 @@ public class Split : MonoBehaviour
                     String shatterType = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite.name;
                     shatterType += "Tile";
                     shatter = Resources.Load(shatterType) as GameObject;
+                    tileType = shatter.name;
                     shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     return; // Returns upon finding a non-nulltile
                 }
@@ -42,11 +47,15 @@ public class Split : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // If this does not belong to me (alien) to do not split
+        if (GameManager.globalManager.isOnlineMode && !GetComponent<PhotonView>().IsMine) return;
         //Resets added tile hashset so that it can be used later to track split tilemaps
         _addedTiles.Clear();
         //Variable tracking whether the tilemap is continous (ie is there a big break between tiles)
         //Counterintuatively, true means there is not
         bool breaking = true;
+        HashSet<Vector3Int> tilesToDestroy = new HashSet<Vector3Int>();
+
         //When hit by weapon projectile
         if (collision.gameObject.CompareTag("Weapon"))
         {
@@ -135,11 +144,12 @@ public class Split : MonoBehaviour
                     tl.SetTile(tl.WorldToCell(hitPosition), null);
                     //Add that tile to the hit tiles list
                     hitPos.Add(tl.WorldToCell(hitPosition));
+                    tilesToDestroy.Add(tl.WorldToCell(hitPosition));
                     //Up the num tiles destroyed
                     tilesDestroyed++;
                 }
-
             }
+
             //Goes through the tiles destroyed and applies shatter
             for (int i = 0; i <= tilesDestroyed - 1; i++)
             {
@@ -169,7 +179,16 @@ public class Split : MonoBehaviour
                             shattterPos.x = shattterPos.x + 0.5f;
                             break;
                     }
-                    GameObject shatterTile = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+
+                    GameObject shatterTile = null;
+                    if (GameManager.globalManager.isOnlineMode)
+                    {
+                        shatterTile = PhotonNetwork.Instantiate(tileType, shattterPos, Quaternion.identity);
+                    }
+                    else
+                    {
+                        shatterTile = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                    }
                     shatterTile.AddComponent<shatterDestroy>();
                 }
             }
@@ -189,6 +208,7 @@ public class Split : MonoBehaviour
                             breaking = false;
                             foreach (var pos in _addedTiles)
                             {
+                                tilesToDestroy.Add(pos);
                                 tl.SetTile(pos, null);
                             }
                             create = true;
@@ -203,6 +223,13 @@ public class Split : MonoBehaviour
 
                 }
             }
+        }
+
+        // Sends over to the human what tiles to destroy
+        //   - sends positions and the photon view id to find the tilemap
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            canvasPhotonView.RPC("RPC_OnTilemapHit", RpcTarget.MasterClient, new object[] { tilesToDestroy.ToArray(), _addedTiles.ToArray(), GetComponent<PhotonView>().ViewID });
         }
         // If there has been a break, create new tilemaps
         if (create)
@@ -220,10 +247,25 @@ public class Split : MonoBehaviour
 
     private void createTileMap()
     {
-        var tilemap = Instantiate(tilemapPrefab, transform.parent);
-        tilemap.ClearAllTiles();
-        foreach (var pos in _addedTiles)
-            tilemap.SetTile(pos, CurrentTileToAdd);
+        // Creates a new tilemap from the prefab as a child of this
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            Vector3Int[] v3iArr = new Vector3Int[_addedTiles.Count];
+            _addedTiles.CopyTo(v3iArr);
+            PhotonNetwork.Instantiate("Tilemap_Build", transform.position, transform.rotation, 0, new object[] { v3iArr, tileType.Substring(0, tileType.IndexOf("Tile")), GetComponent<PhotonView>().ViewID, transform.position, transform.rotation, transform.localScale });
+        }
+        else
+        {
+            Tilemap newTilemap = Instantiate(((GameObject)Resources.Load("Tilemap_Build"))).GetComponent<Tilemap>();
+            // if you don't clear them, then the tilemap gets prebuilt tiles
+            newTilemap.ClearAllTiles();
+            newTilemap.transform.position = transform.position;
+            newTilemap.transform.rotation = transform.rotation;
+            newTilemap.transform.localScale = transform.localScale;
+            newTilemap.transform.parent = transform;
+            foreach (var pos in _addedTiles)
+                newTilemap.SetTile(pos, CurrentTileToAdd);
+        }
         _addedTiles.Clear();
         create = false;
     }

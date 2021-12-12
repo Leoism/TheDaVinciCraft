@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class WeaponInteractions : MonoBehaviour
 {
   bool isCoroutineRunning = false;
@@ -28,6 +28,15 @@ public class WeaponInteractions : MonoBehaviour
     //Wait for 1.5 seconds
     yield return new WaitForSeconds(1.5f);
     if (isCoroutineRunning)
-      Destroy(collision);
+    {
+      if (GameManager.globalManager.isOnlineMode)
+      {
+        PhotonNetwork.Destroy(collision.GetPhotonView());
+      }
+      else
+      {
+        Destroy(collision);
+      }
+    }
   }
 }

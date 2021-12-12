@@ -16,6 +16,7 @@ TagManager:
   - WoodTile
   - Grid
   - floor
+  - Canvas
   layers:
   - Default
   - TransparentFX

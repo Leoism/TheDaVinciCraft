@@ -55,6 +55,7 @@ MonoBehaviour:
   - RPC_PlayRay
   - RPC_Stop
   - RPC_StopAudio
+  - RPC_OnTilemapHit
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -5,14 +5,51 @@ using UnityEngine.Tilemaps;
 using Photon.Pun;
 public class NetworkTilemap : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
+  void Update()
+  {
+    if (!GameManager.globalManager.isOnlineMode) return;
+    Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+    TilemapCollider2D bc = gameObject.GetComponent<TilemapCollider2D>();
+
+    if (gameObject.GetPhotonView().IsMine)
+    {
+      if (rb == null && bc == null)
+      {
+        gameObject.AddComponent<Rigidbody2D>();
+        gameObject.AddComponent<TilemapCollider2D>();
+      }
+    }
+    else
+    {
+      if (rb != null && bc != null)
+      {
+        Destroy(rb);
+        Destroy(bc);
+      }
+    }
+  }
   public void OnPhotonInstantiate(PhotonMessageInfo info)
   {
-    GameObject gridGameObj = GameObject.FindGameObjectWithTag("Grid");
     GameObject networkPhotonGameObj = info.photonView.gameObject;
-    networkPhotonGameObj.transform.parent = gridGameObj.transform;
-    networkPhotonGameObj.transform.position = gridGameObj.transform.position;
-    networkPhotonGameObj.transform.rotation = gridGameObj.transform.rotation;
-    networkPhotonGameObj.transform.localScale = gridGameObj.transform.localScale;
+    if (info.photonView.InstantiationData.Length > 2)
+    {
+      int viewID = (int)info.photonView.InstantiationData[2];
+      Vector3 pos = (Vector3)info.photonView.InstantiationData[3];
+      Quaternion rot = (Quaternion)info.photonView.InstantiationData[4];
+      Vector3 scale = (Vector3)info.photonView.InstantiationData[5];
+      networkPhotonGameObj.transform.parent = PhotonView.Find(viewID).gameObject.transform;
+      networkPhotonGameObj.transform.position = pos;
+      networkPhotonGameObj.transform.rotation = rot;
+      networkPhotonGameObj.transform.localScale = scale;
+    }
+    else
+    {
+      GameObject gridGameObj = GameObject.FindGameObjectWithTag("Grid");
+      networkPhotonGameObj.transform.parent = gridGameObj.transform;
+      networkPhotonGameObj.transform.position = gridGameObj.transform.position;
+      networkPhotonGameObj.transform.rotation = gridGameObj.transform.rotation;
+      networkPhotonGameObj.transform.localScale = gridGameObj.transform.localScale;
+    }
 
     Tilemap currentTileMap = networkPhotonGameObj.GetComponent<Tilemap>();
     currentTileMap.ClearAllTiles();

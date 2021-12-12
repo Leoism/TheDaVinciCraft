@@ -10,6 +10,7 @@ public class Alienship : MonoBehaviour
     public GameObject powerBar = null;
     public ShootingBehavior shootingBehavior = null;
     public PhotonView canvasPhotonView = null;
+    public GameObject grid = null;
     
     void Start()
     {
@@ -24,6 +25,14 @@ public class Alienship : MonoBehaviour
         gameObject.SetActive(true);
         Vector3 windowCorner = Camera.main.ViewportToWorldPoint(new Vector3(0.8f, 0.85f, 1));
         transform.position = windowCorner;
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+        {
+            PhotonView[] tilemapPhotonViews = grid.GetComponentsInChildren<PhotonView>();
+            foreach (PhotonView tilemapPhotonView in tilemapPhotonViews)
+            {
+                tilemapPhotonView.RequestOwnership();
+            }
+        }
     }
 
     public void UnInit()
