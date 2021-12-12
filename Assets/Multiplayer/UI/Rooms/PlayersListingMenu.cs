@@ -37,8 +37,6 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
 
   public void OnClick_StartGame()
   {
-    Debug.Log(_roomsCanvases.ModeGroup.toggleGroup.GetFirstActiveToggle().name);
-
     if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2)
     {
       // set up game manager
@@ -101,12 +99,14 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
     Player[] players = CreatePlayers();
     GameManager.globalManager.SetPlayers(players[1], players[0]);
     GameManager.globalManager.SetGameType((GameMode)mode);
+    new GameObject().AddComponent<MonitorConnection>();
     base.photonView.RPC("RPC_AlienFinishSettingPlayers", RpcTarget.MasterClient);
   }
 
   [PunRPC]
   public void RPC_AlienFinishSettingPlayers()
   {
+    new GameObject().AddComponent<MonitorConnection>();
     PhotonNetwork.LoadLevel("BuyingMenu");
   }
 
