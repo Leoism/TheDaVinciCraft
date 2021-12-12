@@ -82,7 +82,9 @@ public class BoomerangShooter : MonoBehaviour
         BoomerangBehavior bb = newProjectile.AddComponent<BoomerangBehavior>();
         bb.audioSource = audioSource;
         bb.canvasPhotonView = canvasPhotonView;
-        bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
+        float scaleVector = (firstClickPos - spawnPoint.position).normalized.magnitude * 2f;
+        float mouseScale = ((secondClickPos - spawnPoint.position).normalized).normalized.magnitude * 2f;
+        bb.SetPoints(spawnPoint.position, firstClickPos * scaleVector, secondClickPos * mouseScale);
         bb.SetLifespan(5f * multiplier);
     }
 
@@ -123,9 +125,11 @@ public class BoomerangShooter : MonoBehaviour
     {
         if (isFirstClick) return;
         float interval = 1f / trajectoryPointCount;
+        float scaleVector = (firstClickPos - spawnPoint.position).normalized.magnitude * 2f;
+        float mouseScale = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - spawnPoint.position).normalized).normalized.magnitude * 2f;
         for (int i = 0; i < trajectoryPointCount; i++)
         {
-            trajectoryPoints[i].transform.position = CalculatePosition(i * interval, spawnPoint.position, firstClickPos, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            trajectoryPoints[i].transform.position = (Vector2)CalculatePosition(i * interval, spawnPoint.position, firstClickPos * scaleVector, Camera.main.ScreenToWorldPoint(Input.mousePosition) * mouseScale);
         }
     }
 
