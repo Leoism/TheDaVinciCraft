@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NetworkDisconnected.unity
     guid: f82fac36ee4b6fb4985d141b59f84f5b
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 0052902dc958a47118e25f192c4c4ff5
   m_configObjects: {}
