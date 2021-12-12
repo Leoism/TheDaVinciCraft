@@ -47,7 +47,6 @@ public class WeaponInteractions : MonoBehaviour
     string name = "";
     if (GetComponent<SpriteRenderer>().sprite.name == "bumb")
     {
-      Debug.Log("boomb");
       particleSystem = particleSystemHandler.PlayByName("Bomb");
       GetComponent<ProjectileSFXHandler>().PlayClipByName("Bomb");
       name = "Bomb";
@@ -57,6 +56,13 @@ public class WeaponInteractions : MonoBehaviour
       particleSystem = particleSystemHandler.PlayByName("Alien Grenade");
       GetComponent<ProjectileSFXHandler>().PlayClipByName("Bomb");
       name = "Alien Grenade";
+    }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "Square")
+    {
+      particleSystem = GetComponentInChildren<ParticleSystem>();
+      particleSystem.Play();
+      GetComponent<ProjectileSFXHandler>().PlayClipAtIndex(0);
+      name = "Ray";
     }
 
     if (name == "") return;
