@@ -1,14 +1,24 @@
 using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Photon.Pun;
 namespace StackingSystem.Scripts
 {
     public class ByeBye : MonoBehaviour
     {
         private void OnBecameInvisible()
         {
-            Destroy(gameObject);
+            Debug.Log(GetComponent<PhotonView>().IsMine);
+            if (GameManager.globalManager.isOnlineMode && GetComponent<PhotonView>().IsMine)
+            {
+                PhotonNetwork.Destroy(GetComponent<PhotonView>());
+            }
+            else if (!GameManager.globalManager.isOnlineMode)
+            {
+                Destroy(gameObject);
+            }
         }
+        
         void OnMouseOver()
         {
             // this object was clicked - do something
