@@ -25,5 +25,13 @@ MonoBehaviour:
     artSprite: {fileID: 21300000, guid: 9404dddb9019148f392fc82a168db618, type: 3}
   - artName: Gachet
     artSprite: {fileID: 21300000, guid: 5b0f4a99ee52040e6b0ba4c16050525a, type: 3}
+  - artName: Starry Night
+    artSprite: {fileID: 21300000, guid: ef76d3f4331b34110bbe621b273f7d53, type: 3}
   - artName: The Scream
     artSprite: {fileID: 21300000, guid: 4b183355a04f84a7c97199b471548317, type: 3}
+  - artName: David
+    artSprite: {fileID: 21300000, guid: de09fadd2b1df467d9b41230114af140, type: 3}
+  - artName: Venus
+    artSprite: {fileID: 21300000, guid: 9427292733c0d4781be386915b977868, type: 3}
+  - artName: Rick Roll Astley
+    artSprite: {fileID: 21300000, guid: 1d9fab24bf4d14b3c95259d7234e127e, type: 3}
