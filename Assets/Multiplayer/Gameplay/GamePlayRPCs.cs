@@ -64,6 +64,11 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
   {
     networkSFXPlayer.PlayClip("Ray");
   }
+   [PunRPC]
+  void RPC_PlayGrapple()
+  {
+    networkSFXPlayer.PlayClip("Boomerang");
+  }
 
   [PunRPC]
   void RPC_PlayCatapult()
