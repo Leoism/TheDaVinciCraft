@@ -134,8 +134,15 @@ public class WeaponBuyingSystem : MonoBehaviour
     //------------------------------ Mineral Extractor ------------------------
     public void SelectMExtractor()
     {
-        selectedWeapons += 1;
-        MECnt.meCnt = add(mExtractor, meAdd, meSub, totalWeapons, MECnt.meCnt, selectedWeapons);
+        // limit the minerla extractor selecting amount to at most 3
+        if (MECnt.meCnt < 3) {
+            selectedWeapons += 1;
+            MECnt.meCnt = add(mExtractor, meAdd, meSub, totalWeapons, MECnt.meCnt, selectedWeapons);
+        }
+        if (MECnt.meCnt > 2) {
+            mExtractor.interactable = false;
+            meAdd.interactable = false;
+        }
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MineralExtractInput"));
         inputField.SetTextWithoutNotify(MECnt.meCnt.ToString());
     }
@@ -184,7 +191,7 @@ public class WeaponBuyingSystem : MonoBehaviour
     public void SelectBoom()
     {
         selectedWeapons += 1;
-        BoomCnt.boomCnt = add(boomerange, boomAdd, boomSub, totalWeapons, BoomCnt.boomCnt, selectedWeapons);
+        BoomCnt.boomCnt = add(boomerange, boomAdd, boomSub, totalWeapons, BoomCnt.boomCnt, selectedWeapons);     
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BoomerangInput"));
         inputField.SetTextWithoutNotify(BoomCnt.boomCnt.ToString());
     }
@@ -217,8 +224,15 @@ public class WeaponBuyingSystem : MonoBehaviour
     //------------------------------ Bomb ------------------------------------
     public void SelectBomb()
     {
-        selectedWeapons += 1;
-        BombCnt.bombCnt = add(bomb, bombAdd, bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
+        // limit the bomb selecting amount to at most 4
+        if(BombCnt.bombCnt < 4) {
+            selectedWeapons += 1;
+            BombCnt.bombCnt = add(bomb, bombAdd, bombSub, totalWeapons, BombCnt.bombCnt, selectedWeapons);
+        }
+        if(BombCnt.bombCnt > 3){
+            bomb.interactable = false;
+            bombAdd.interactable = false;
+        }
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("BombInput"));
         inputField.SetTextWithoutNotify(BombCnt.bombCnt.ToString());
     }
@@ -233,8 +247,15 @@ public class WeaponBuyingSystem : MonoBehaviour
     //------------------------------ Ray ------------------------------------
     public void SelectRay()
     {
-        selectedWeapons += 1;
-        RayCnt.rayCnt = add(ray, rayAdd, raySub, totalWeapons, RayCnt.rayCnt, selectedWeapons);
+        // limit the ray selecting amount to at most 2
+        if (RayCnt.rayCnt < 2) {
+            selectedWeapons += 1;
+            RayCnt.rayCnt = add(ray, rayAdd, raySub, totalWeapons, RayCnt.rayCnt, selectedWeapons);
+        }
+        if (RayCnt.rayCnt > 1){
+            ray.interactable = false;
+            rayAdd.interactable = false;
+        }
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("RayInput"));
         inputField.SetTextWithoutNotify(RayCnt.rayCnt.ToString());
     }
@@ -249,6 +270,7 @@ public class WeaponBuyingSystem : MonoBehaviour
     //------------------------------ Grenade ------------------------------------
     public void SelectGrenade()
     {
+        // limit the grenade selecting amout to at most 1
         if (GrenadeCnt.grCnt < 1)
         {
             selectedWeapons += 1;
@@ -371,8 +393,6 @@ public class WeaponBuyingSystem : MonoBehaviour
     {
         deforestor.interactable = condition;
         deAdd.interactable = condition;
-        mExtractor.interactable = condition;
-        meAdd.interactable = condition;
         arrow.interactable = condition;
         arrAdd.interactable = condition;
         ball.interactable = condition;
@@ -381,10 +401,22 @@ public class WeaponBuyingSystem : MonoBehaviour
         boomAdd.interactable = condition;
         magnet.interactable = condition;
         magAdd.interactable = condition;
-        bomb.interactable = condition;
-        bombAdd.interactable = condition;
-        ray.interactable = condition;
-        rayAdd.interactable = condition;
+        
+        if(BombCnt.bombCnt < 4){
+            bomb.interactable = condition;
+            bombAdd.interactable = condition;
+        }
+
+        if (MECnt.meCnt < 3) {
+            mExtractor.interactable = condition;
+            meAdd.interactable = condition;
+        }
+        
+        if (RayCnt.rayCnt < 2) {
+            ray.interactable = condition;
+            rayAdd.interactable = condition;
+        }
+        
         if (GrenadeCnt.grCnt < 1)
         {
             grenade.interactable = condition;
@@ -412,10 +444,16 @@ public class WeaponBuyingSystem : MonoBehaviour
         boomAdd.interactable = condition;
         ball.interactable = condition;
         ballAdd.interactable = condition;
-        bomb.interactable = condition;
-        bombAdd.interactable = condition;
-        mExtractor.interactable = condition;
-        meAdd.interactable = condition;
+
+        if(BombCnt.bombCnt < 4){
+            bomb.interactable = condition;
+            bombAdd.interactable = condition;
+        }
+
+        if (MECnt.meCnt < 3) {
+            mExtractor.interactable = condition;
+            meAdd.interactable = condition;
+        }
     }
 
     private void activateAllSubs(bool condition)
