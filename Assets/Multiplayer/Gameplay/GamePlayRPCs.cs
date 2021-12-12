@@ -43,7 +43,7 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
   void RPC_OnCollisionPlayExplosion(int viewID, string name)
   {
     GameObject photonGameObj = PhotonView.Find(viewID).gameObject;
-    photonGameObj.GetComponent<ParticleSystem>().Play();
+    photonGameObj.GetComponent<ParticleSystemHandler>().PlayByName(name);
     photonGameObj.GetComponent<ProjectileSFXHandler>().PlayClipByName(name);
   }
 

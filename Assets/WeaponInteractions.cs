@@ -42,21 +42,33 @@ public class WeaponInteractions : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D collision)
   {
+    ParticleSystemHandler particleSystemHandler = GetComponent<ParticleSystemHandler>();
+    ParticleSystem particleSystem = null;
+    string name = "";
     if (GetComponent<SpriteRenderer>().sprite.name == "bumb")
     {
-      ParticleSystem particleSystem = GetComponent<ParticleSystem>();
-      particleSystem.Play();
+      Debug.Log("boomb");
+      particleSystem = particleSystemHandler.PlayByName("Bomb");
       GetComponent<ProjectileSFXHandler>().PlayClipByName("Bomb");
-      if (GameManager.globalManager.isOnlineMode)
-      {
-        Debug.Log("I am here");
-        PhotonView.Find(2)/* canvas photon view*/.RPC("RPC_OnCollisionPlayExplosion", RpcTarget.Others, new object[] { gameObject.GetPhotonView().ViewID, "Bomb" });
-        StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
-      }
-      else
-      {
-        Destroy(gameObject, particleSystem.main.duration);
-      }
+      name = "Bomb";
+    }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "alien grenade")
+    {
+      particleSystem = particleSystemHandler.PlayByName("Alien Grenade");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Bomb");
+      name = "Alien Grenade";
+    }
+
+    if (name == "") return;
+
+    if (GameManager.globalManager.isOnlineMode)
+    {
+      PhotonView.Find(2)/* canvas photon view*/.RPC("RPC_OnCollisionPlayExplosion", RpcTarget.Others, new object[] { gameObject.GetPhotonView().ViewID, name });
+      StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
+    }
+    else
+    {
+      Destroy(gameObject, particleSystem.main.duration);
     }
   }
 

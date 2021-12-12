@@ -128,6 +128,21 @@ public class Split : MonoBehaviour
                     break;
 
             }
+
+            if (projType == "Square" || projType == "MineralExtractor")
+            {
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                CompletelyShatter();
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                return;
+            }
+            if (projType == "alien grenade")
+            {
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                CompletelyDestory();
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                return;
+            }
             //Make the rigidbody of the tilemap static so that it does not move on hit
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             //Vector tracking hit position on the tilemap
@@ -242,6 +257,107 @@ public class Split : MonoBehaviour
             createTileMap();
         //Reset rigidbody type so that it can interact with world again
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    private void CompletelyDestory()
+    {
+        HashSet<Vector3Int> tilesToDestroy = new HashSet<Vector3Int>();
+        List<Vector3Int> hitPos = new List<Vector3Int>();
+        int tilesDestroyed = 0;
+        for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x; x++)
+        {
+            for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y; y++)
+            {
+                if (tl.GetTile(new Vector3Int(x, y, 0)) != null)
+                {
+                    //Clear that tile
+                    tl.SetTile(new Vector3Int(x, y, 0), null);
+                    //Add that tile to the hit tiles list
+                    hitPos.Add(new Vector3Int(x, y, 0));
+                    tilesToDestroy.Add(new Vector3Int(x, y, 0));
+                    //Up the num tiles destroyed
+                    tilesDestroyed++;
+                }
+            }
+        }
+        // Sends over to the human what tiles to destroy
+        //   - sends positions and the photon view id to find the tilemap
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            canvasPhotonView.RPC("RPC_OnTilemapHit", RpcTarget.MasterClient, new object[] { tilesToDestroy.ToArray(), _addedTiles.ToArray(), GetComponent<PhotonView>().ViewID });
+        }
+    }
+    private void CompletelyShatter()
+    {
+        HashSet<Vector3Int> tilesToDestroy = new HashSet<Vector3Int>();
+        List<Vector3Int> hitPos = new List<Vector3Int>();
+        int tilesDestroyed = 0;
+        for (int x = tl.cellBounds.min.x; x < tl.cellBounds.max.x; x++)
+        {
+            for (int y = tl.cellBounds.min.y; y < tl.cellBounds.max.y; y++)
+            {
+                if (tl.GetTile(new Vector3Int(x, y, 0)) != null)
+                {
+                    //Clear that tile
+                    tl.SetTile(new Vector3Int(x, y, 0), null);
+                    //Add that tile to the hit tiles list
+                    hitPos.Add(new Vector3Int(x, y, 0));
+                    tilesToDestroy.Add(new Vector3Int(x, y, 0));
+                    //Up the num tiles destroyed
+                    tilesDestroyed++;
+                }
+            }
+        }
+
+        //Goes through the tiles destroyed and applies shatter
+        for (int i = 0; i <= tilesDestroyed - 1; i++)
+        {
+            Vector3 shattterPos = tl.GetCellCenterWorld(hitPos[i]);
+            //Creates three smaller blocks that have the same sprite as tile destroyed at the hit pos
+            //Offsets each shatter spawn a small amount so that one shatter spawns per quadrant
+            for (int z = 0; z < 4; z++)
+            {
+                // resets to cell world center
+                shattterPos = tl.GetCellCenterWorld(hitPos[i]);
+                switch (z)
+                {
+                case 0:
+                    shattterPos.y = shattterPos.y + 0.5f;
+                    shattterPos.x = shattterPos.x - 0.5f;
+                    break;
+                case 1:
+                    shattterPos.y = shattterPos.y + 0.5f;
+                    shattterPos.x = shattterPos.x + 0.5f;
+                    break;
+                case 2:
+                    shattterPos.y = shattterPos.y - 0.5f;
+                    shattterPos.x = shattterPos.x - 0.5f;
+                    break;
+                case 3:
+                    shattterPos.y = shattterPos.y - 0.5f;
+                    shattterPos.x = shattterPos.x + 0.5f;
+                    break;
+                }
+
+                GameObject shatterTile = null;
+                if (GameManager.globalManager.isOnlineMode)
+                {
+                shatterTile = PhotonNetwork.Instantiate(tileType, shattterPos, Quaternion.identity);
+                }
+                else
+                {
+                shatterTile = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                }
+                shatterTile.AddComponent<shatterDestroy>();
+            }
+        }
+
+        // Sends over to the human what tiles to destroy
+        //   - sends positions and the photon view id to find the tilemap
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            canvasPhotonView.RPC("RPC_OnTilemapHit", RpcTarget.MasterClient, new object[] { tilesToDestroy.ToArray(), _addedTiles.ToArray(), GetComponent<PhotonView>().ViewID });
+        }
     }
     /*
      * Positive distance between two vector points
