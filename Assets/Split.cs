@@ -91,7 +91,7 @@ public class Split : MonoBehaviour
                     }
                     break;
                 case ("Magnet"):
-                    if (shatter.name != "MetalTile" && shatter.name != "FabricTile")
+                    if (shatter.name != "MetalTile")
                     {
                         // StartCoroutine(waiter(collision.gameObject));
                         return;
@@ -106,7 +106,7 @@ public class Split : MonoBehaviour
                     }
                     break;
                 case ("MineralExtractor"):
-                    if (shatter.name != "StoneTile" && shatter.name != "FabricTile")
+                    if (shatter.name != "StoneTile")
                     {
                         //StartCoroutine(waiter(collision.gameObject));  
                         return;
@@ -117,6 +117,12 @@ public class Split : MonoBehaviour
                     if (shatter.name == "GlassTile")
                     {
                         //StartCoroutine(waiter(collision.gameObject));  
+                        return;
+                    }
+                    break;
+                case "bumb":
+                    if (shatter.name == "MetalTile")
+                    {
                         return;
                     }
                     break;
