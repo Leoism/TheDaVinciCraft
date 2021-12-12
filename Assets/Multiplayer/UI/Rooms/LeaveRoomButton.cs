@@ -14,7 +14,7 @@ public class LeaveRoomButton : MonoBehaviour
   {
     if (PhotonNetwork.InRoom)
     {
-      PhotonNetwork.LeaveRoom(true);
+      PhotonNetwork.LeaveRoom(false);
       _roomCanvases.CurrentRoom.Hide();
       _roomCanvases.CreateOrJoin.Show();
     }

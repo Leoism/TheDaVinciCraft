@@ -118,6 +118,8 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
   public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
   {
     AddPlayerListing(newPlayer);
+    PhotonNetwork.CurrentRoom.IsOpen = false;
+    PhotonNetwork.CurrentRoom.IsVisible = false;
   }
 
   public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
@@ -128,5 +130,8 @@ public class PlayersListingMenu : MonoBehaviourPunCallbacks
       Destroy(_listings[idx].gameObject);
       _listings.RemoveAt(idx);
     }
+    PhotonNetwork.CurrentRoom.IsOpen = true;
+    PhotonNetwork.CurrentRoom.IsVisible = true;
+
   }
 }

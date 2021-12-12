@@ -6,7 +6,6 @@ using Photon.Pun;
 using Photon.Realtime;
 public class MultiplayerMenu : MonoBehaviourPunCallbacks
 {
-  TypedLobby defaultLobby = new TypedLobby("Default", LobbyType.Default);
   string version = "1";
   public InputField nameField = null;
 
@@ -57,12 +56,12 @@ public class MultiplayerMenu : MonoBehaviourPunCallbacks
   public void CreateRoom()
   {
     string roomID = GenerateRandomID(6);
-    PhotonNetwork.CreateRoom(roomID, new RoomOptions { MaxPlayers = 2 }, defaultLobby);
+    PhotonNetwork.CreateRoom(roomID, new RoomOptions { MaxPlayers = 2 });
   }
 
   public void LoadAvailableRooms()
   {
-    PhotonNetwork.JoinLobby(defaultLobby);
+    PhotonNetwork.JoinLobby();
   }
 
   private string GenerateRandomID(int length)

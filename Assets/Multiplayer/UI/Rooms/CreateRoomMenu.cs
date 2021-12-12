@@ -21,7 +21,7 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
   {
     if (!PhotonNetwork.IsConnected) return;
     RoomOptions options = new RoomOptions { MaxPlayers = 2, EmptyRoomTtl = 0, PlayerTtl = 60000 };
-    PhotonNetwork.JoinOrCreateRoom(_roomName.text, options, TypedLobby.Default);
+    PhotonNetwork.CreateRoom(_roomName.text, options);
   }
 
   public override void OnCreatedRoom()
