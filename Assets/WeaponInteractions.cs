@@ -39,4 +39,30 @@ public class WeaponInteractions : MonoBehaviour
       }
     }
   }
+
+  void OnCollisionEnter2D(Collision2D collision)
+  {
+    if (GetComponent<SpriteRenderer>().sprite.name == "bumb")
+    {
+      ParticleSystem particleSystem = GetComponent<ParticleSystem>();
+      particleSystem.Play();
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Bomb");
+      if (GameManager.globalManager.isOnlineMode)
+      {
+        Debug.Log("I am here");
+        PhotonView.Find(2)/* canvas photon view*/.RPC("RPC_OnCollisionPlayExplosion", RpcTarget.Others, new object[] { gameObject.GetPhotonView().ViewID, "Bomb" });
+        StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
+      }
+      else
+      {
+        Destroy(gameObject, particleSystem.main.duration);
+      }
+    }
+  }
+
+  IEnumerator WaitPhotonDestroy(float time)
+  {
+    yield return new WaitForSeconds(time);
+    PhotonNetwork.Destroy(gameObject.GetPhotonView());
+  }
 }

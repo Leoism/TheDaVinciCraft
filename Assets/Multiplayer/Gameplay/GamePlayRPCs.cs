@@ -40,6 +40,14 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
   }
 
   [PunRPC]
+  void RPC_OnCollisionPlayExplosion(int viewID, string name)
+  {
+    GameObject photonGameObj = PhotonView.Find(viewID).gameObject;
+    photonGameObj.GetComponent<ParticleSystem>().Play();
+    photonGameObj.GetComponent<ProjectileSFXHandler>().PlayClipByName(name);
+  }
+
+  [PunRPC]
   void RPC_PlayBoomerang()
   {
     networkSFXPlayer.PlayClip("Boomerang");
