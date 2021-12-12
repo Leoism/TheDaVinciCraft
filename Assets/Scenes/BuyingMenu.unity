@@ -10799,7 +10799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 668436187}
-  lerpTime: 1
+  lerpTime: 0.4
   timeStartedLerping: 0
   start: {x: 900, y: -160}
   end: {x: 900, y: 160}

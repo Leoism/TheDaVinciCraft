@@ -19,17 +19,10 @@ public class Tooltip : MonoBehaviour,
         TooltipManager._instance.HideToolTip();
     }
 
- /*   private void OnMouseEnter()
+    public void HideToolTip()
     {
-        Debug.Log("Hovering Object");
-        TooltipManager._instance.SetAndShowToolTip(message);
-    }
-
-    private void OnMouseExit()
-    {
-        Debug.Log("Exiting Hovering Object");
         TooltipManager._instance.HideToolTip();
-    }*/
+    }
     public void setMessage(string msg)
     {
         message = msg;
