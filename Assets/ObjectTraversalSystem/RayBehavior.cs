@@ -36,4 +36,23 @@ public class RayBehavior : MonoBehaviour
   {
     targetPosition = (Vector2)target;
   }
+
+  public void OnCollisionEnter2D(Collision2D collision)
+  {
+    string shatterType = collision.gameObject.tag;
+    // The Ray should not pass through glass
+    if (shatterType.Contains("GlassTile"))
+    {
+      if (GameManager.globalManager.isOnlineMode)
+      {
+        // Only the alien should destroy projectiles
+        if (!PhotonNetwork.IsMasterClient)
+          PhotonNetwork.Destroy(GetComponent<PhotonView>());
+      }
+      else
+      {
+        Destroy(gameObject);
+      }
+    }
+  }
 }
