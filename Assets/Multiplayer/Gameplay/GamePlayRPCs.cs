@@ -6,6 +6,8 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
 {
   [SerializeField]
   private Timer timer;
+  [SerializeField]
+  private NetworkSFXPlayer networkSFXPlayer;
   [PunRPC]
   void RPC_OnArtDestruction()
   {
@@ -23,5 +25,29 @@ public class GamePlayRPCs : MonoBehaviourPunCallbacks
   void RPC_AlienOutOfWeapons()
   {
     PhotonNetwork.LoadLevel("HumanWin");
+  }
+
+  [PunRPC]
+  void RPC_PlayBoomerang()
+  {
+    networkSFXPlayer.PlayClip("Boomerang");
+  }
+
+  [PunRPC]
+  void RPC_PlayRay()
+  {
+    networkSFXPlayer.PlayClip("Ray");
+  }
+
+  [PunRPC]
+  void RPC_PlayCatapult()
+  {
+    networkSFXPlayer.PlayClip("Catapult");
+  }
+
+  [PunRPC]
+  void RPC_StopAudio()
+  {
+    networkSFXPlayer.Stop();
   }
 }

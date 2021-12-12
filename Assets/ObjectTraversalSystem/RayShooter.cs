@@ -10,11 +10,16 @@ public class RayShooter : MonoBehaviour
     public Transform spawnPoint = null;
     public GameObject aimTarget = null;
     public Gameplay gameplayScene = null;
+    public AudioClip shootingSound = null;
+    public PhotonView canvasPhotonView = null;
+    private AudioSource audioSource = null;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(rayPrefab != null);
         Debug.Assert(spawnPoint != null);
+        Debug.Log("hi");
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,15 +53,26 @@ public class RayShooter : MonoBehaviour
             rb.SetTarget(mousePos);
         }
         gameplayScene.UseItem();
+        audioSource.Play();
+        // Only the alien can send audio
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
+        {
+            canvasPhotonView.RPC("RPC_PlayRay", RpcTarget.Others);
+        }
     }
 
     public void Deactivate()
     {
+        if (!enabled) return;
+        audioSource.clip = null;
         aimTarget.SetActive(false);
         enabled = false;
     }
     public void Activate()
     {
+        if (enabled) return;
+        audioSource.loop = false;
+        audioSource.clip = shootingSound;
         aimTarget.SetActive(true);
         enabled = true;
     }

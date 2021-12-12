@@ -15,6 +15,9 @@ public class BoomerangShooter : MonoBehaviour
     private int trajectoryPointCount = 15;
     public GameObject[] trajectoryPoints;
     public Gameplay gameplayScene = null;
+    public AudioClip shootingSound = null;
+    public PhotonView canvasPhotonView = null;
+    private AudioSource audioSource = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class BoomerangShooter : MonoBehaviour
         Debug.Assert(spawnPoint != null);
         Debug.Assert(trajectoryPointPrefab != null);
         trajectoryPoints = new GameObject[trajectoryPointCount];
+        audioSource = GetComponent<AudioSource>();
         for (int i = 0; i < trajectoryPointCount; i++)
         {
             trajectoryPoints[i] = Instantiate(trajectoryPointPrefab, spawnPoint.position, Quaternion.identity);
@@ -76,15 +80,26 @@ public class BoomerangShooter : MonoBehaviour
         }
         gameplayScene.UseItem();
         BoomerangBehavior bb = newProjectile.AddComponent<BoomerangBehavior>();
+        bb.audioSource = audioSource;
+        bb.canvasPhotonView = canvasPhotonView;
         bb.SetPoints(spawnPoint.position, firstClickPos, secondClickPos);
         bb.SetLifespan(5f * multiplier);
     }
 
     public void Deactivate()
     {
+        if (!enabled) return;
         SetTrajectoryPointStatus(false);
         isFirstClick = true;
         enabled = false;
+    }
+
+    public void Activate()
+    {
+        if (enabled) return;
+        audioSource.loop = false;
+        enabled = true;
+        audioSource.clip = shootingSound;
     }
 
     void SetTrajectoryPointStatus(bool isOn)
