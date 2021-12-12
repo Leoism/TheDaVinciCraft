@@ -10,16 +10,14 @@ public class GrappleBehavior : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    transform.localScale = new Vector3 (3,3,1);
-    transform.eulerAngles -= new Vector3 (0,0,60);
+    transform.localScale = new Vector3(3, 3, 1);
+    transform.eulerAngles -= new Vector3(0, 0, 60);
   }
 
   // Update is called once per frame
   void Update()
   {
-   // transform.LookAt(GameObject.Find("Art").transform);
     transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.smoothDeltaTime);
-    //transform.up = (targetPosition - transform.position).normalized;
     if (transform.position == targetPosition)
     {
       if (GameManager.globalManager.isOnlineMode)
@@ -39,4 +37,15 @@ public class GrappleBehavior : MonoBehaviour
     targetPosition = (Vector2)target;
   }
 
+  public void OnCollisionEnter2D(Collision2D collision)
+  {
+    if (GameManager.globalManager.isOnlineMode)
+    {
+      PhotonNetwork.Destroy(gameObject.GetPhotonView());
+    }
+    else
+    {
+      Destroy(gameObject);
+    }
+  }
 }
