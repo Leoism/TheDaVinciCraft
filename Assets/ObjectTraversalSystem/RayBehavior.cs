@@ -18,15 +18,17 @@ public class RayBehavior : MonoBehaviour
   {
     transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.smoothDeltaTime);
     transform.up = (targetPosition - transform.position).normalized;
-    if(transform.position == targetPosition)
+    if (transform.position == targetPosition)
     {
       if (GameManager.globalManager.isOnlineMode)
       {
-        PhotonNetwork.Destroy(GetComponent<PhotonView>());
-      } else
+        if (GetComponent<PhotonView>().IsMine)
+          PhotonNetwork.Destroy(GetComponent<PhotonView>());
+      }
+      else
       {
         Destroy(gameObject);
-      }      
+      }
     }
   }
 

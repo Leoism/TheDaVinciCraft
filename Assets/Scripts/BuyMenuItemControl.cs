@@ -26,10 +26,10 @@ public class BuyMenuItemControl : MonoBehaviour
 
     private void Awake() 
     {
-        if (GameManager.globalManager.GetCurrentRound() == 0) {
+        if (GameManager.globalManager.GetCurrentRound() == 1) {
             RoundOne();
         }
-        if (GameManager.globalManager.GetCurrentRound() == 1) {
+        if (GameManager.globalManager.GetCurrentRound() == 2) {
             RoundTwo();
         }
     }

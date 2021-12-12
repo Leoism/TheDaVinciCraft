@@ -29,19 +29,19 @@ public class BuyingSystem : MonoBehaviour
             materialCountEcho.text = "Material Buy Limit: " + (GetMaterialBuyLimit());
     }
 
-    public int GetCurrentRound()
+    public int GetCurrentRoundIdx()
     {
-        return GameManager.globalManager.GetCurrentRound();
+        return GameManager.globalManager.GetCurrentRound() - 1;
     }
 
     public int GetWeaponBuyLimit()
     {
-        return weaponBuyLimit[GetCurrentRound()];
+        return weaponBuyLimit[GetCurrentRoundIdx()];
     }
 
     public int GetMaterialBuyLimit()
     {
-        return materialBuyLimit[GetCurrentRound()];
+        return materialBuyLimit[GetCurrentRoundIdx()];
     }
 
     public void incrementAdded()
@@ -62,6 +62,5 @@ public class BuyingSystem : MonoBehaviour
     public void ResetRounds()
     {
         currentAdded = 0;
-        GameManager.globalManager.ResetRound();
     }
 }

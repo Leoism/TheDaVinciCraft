@@ -73,7 +73,6 @@ public class Timer : MonoBehaviour
                     secRemaining = 60f;
                     isTimerRunning = true;
                     isLastState = true;
-                    GameManager.globalManager.IncrementCurrRound();
                     break;
                 default: break;
             }
