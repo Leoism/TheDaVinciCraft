@@ -101,10 +101,13 @@ public class AddTilemap : MonoBehaviour
             }
                   
             placed = true;
-            _addedTiles.Add(newTilePos);
-            oldTilePos = newTilePos;
-            tempTilemap.SetTile(newTilePos, CurrentTileToAdd);
-            gameplayScene.UseItem();
+            if (!_addedTiles.Contains(newTilePos)) {
+                _addedTiles.Add(newTilePos);
+                 oldTilePos = newTilePos;
+                tempTilemap.SetTile(newTilePos, CurrentTileToAdd);
+                gameplayScene.UseItem();
+            }
+            
         }
     }
 
