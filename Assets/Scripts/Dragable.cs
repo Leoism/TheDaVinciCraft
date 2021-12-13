@@ -5,15 +5,20 @@ using UnityEngine.EventSystems;
 using Photon.Pun;
 public class Dragable : MonoBehaviour
 {   
-    private Vector3 screenPoint;
-    private Vector3 offset;
+    public Vector3 screenPoint;
+    public Vector3 offset;
+    public Vector3 firstMousePos;
+    
     void OnMouseDown()
     {
-        if (!GameManager.globalManager.currentPlayer.Equals("human")) return;
+        if (!GameManager.globalManager.currentPlayer.Equals("Human")) return;
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); 
-        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-        // offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        // Only the master client can be the human
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient) return;
+
+        // Only the master client can be the human
+        if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient) return;
+        firstMousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
     void OnMouseDrag()
     {
@@ -23,12 +28,15 @@ public class Dragable : MonoBehaviour
         // Only the master client can be the human
         if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient) return;
         // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        curPosition.x = Mathf.Clamp(curPosition.x, -70f, 16f);
-        curPosition.y = Mathf.Clamp(curPosition.y, -34f, 12f);
+        Vector3 currMousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 delta = currMousePos - firstMousePos;
+        offset = delta;
+        Vector3 newPos = gameObject.transform.position + delta;
+        newPos.x = Mathf.Clamp(newPos.x, -70f, 16f);
+        newPos.y = Mathf.Clamp(newPos.y, -34f, 12f);
+        firstMousePos = currMousePos;
         // -70-16 -30-12
-        transform.position = new Vector3(curPosition.x, curPosition.y, 0);
+        transform.position = new Vector3(newPos.x, newPos.y, 0);
     }
 
 }
