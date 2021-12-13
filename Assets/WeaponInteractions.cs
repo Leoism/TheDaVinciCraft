@@ -93,6 +93,12 @@ public class WeaponInteractions : MonoBehaviour
       GetComponent<ProjectileSFXHandler>().PlayClipByName("Deforestor");
       name = "Deforestor";
     }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "Ball" && (GetTileMapTag(collision.gameObject) == "StoneTile" || GetTileMapTag(collision.gameObject) == "GlassTile"))
+    {
+      destroyObj = false;
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Bowling Ball");
+      name = "Bowling Ball";
+    }
 
     if (name == "") return;
 

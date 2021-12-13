@@ -42,6 +42,9 @@ public class ProjectileSFXHandler : MonoBehaviour
       case "Deforestor":
         index = 1;
         break;
+      case "Bowling Ball":
+        index = 4;
+        break;
     }
 
     if (index >= 0)
