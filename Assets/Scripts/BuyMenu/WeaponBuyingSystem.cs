@@ -349,6 +349,17 @@ public class WeaponBuyingSystem : MonoBehaviour
                 break;
             case "MineralExtractorPanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref MECnt.meCnt, ref selectedWeapons, count);
+                // undo the total number input
+                selectedWeapons -= count;
+                // calculate whether to add 2 or 0
+                selectedWeapons += count >= 3 ? 3 : count;
+                MECnt.meCnt = count >= 3 ? 3 : count;
+                if (MECnt.meCnt > 3)
+                {
+                    bomb.interactable = false;
+                    bombAdd.interactable = false;
+                }
+                count = MECnt.meCnt;
                 break;
             case "ArrowPanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref ArrowCnt.arrCnt, ref selectedWeapons, count);
@@ -364,9 +375,31 @@ public class WeaponBuyingSystem : MonoBehaviour
                 break;
             case "BombPanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref BombCnt.bombCnt, ref selectedWeapons, count);
+                // undo the total number input
+                selectedWeapons -= count;
+                // calculate whether to add 2 or 0
+                selectedWeapons += count >= 4 ? 4 : count;
+                BombCnt.bombCnt = count >= 4 ? 4 : count;
+                if (BombCnt.bombCnt > 4)
+                {
+                    bomb.interactable = false;
+                    bombAdd.interactable = false;
+                }
+                count = BombCnt.bombCnt;
                 break;
             case "RayPanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref RayCnt.rayCnt, ref selectedWeapons, count);
+                // undo the total number input
+                selectedWeapons -= count;
+                // calculate whether to add 2 or 0
+                selectedWeapons += count >= 2 ? 2 : count;
+                RayCnt.rayCnt = count >= 2 ? 2 : count;
+                if (RayCnt.rayCnt > 2)
+                {
+                    ray.interactable = false;
+                    rayAdd.interactable = false;
+                }
+                count = RayCnt.rayCnt;
                 break;
             case "GrenadePanel":
                 count = setCount(displayButtons[0], displayButtons[1], displayButtons[2], totalWeapons, ref GrenadeCnt.grCnt, ref selectedWeapons, count);
