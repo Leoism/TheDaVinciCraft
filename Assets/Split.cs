@@ -205,11 +205,12 @@ public class Split : MonoBehaviour
                     GameObject shatterTile = null;
                     if (GameManager.globalManager.isOnlineMode)
                     {
-                        shatterTile = PhotonNetwork.Instantiate(tileType, shattterPos, Quaternion.identity);
+                        shatterTile = PhotonNetwork.Instantiate(tileType, shattterPos, Quaternion.identity, 0, new object[] { gameObject.tag });
                     }
                     else
                     {
                         shatterTile = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                        shatterTile.tag = gameObject.tag;
                     }
                     shatterTile.AddComponent<shatterDestroy>();
                 }

@@ -25,6 +25,9 @@ public class ParticleSystemHandler : MonoBehaviour
       case "Arrow":
         particleSystems[4].Play();
         return particleSystems[4];
+      case "Deforestor":
+        particleSystems[5].Play();
+        return particleSystems[5];
     }
     return null;
   }
