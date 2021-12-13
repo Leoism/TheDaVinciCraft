@@ -12730,7 +12730,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Architect, \nSelect your building materials.\nTip: Hover over materials\n"
+  m_Text: "Architect, \nSelect your building materials.\n\nTip: Hover over materials\n"
 --- !u!222 &1448102723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16076,6 +16076,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Choose your weapons ET!
+
 
     Tip: Hover over weapons
 
