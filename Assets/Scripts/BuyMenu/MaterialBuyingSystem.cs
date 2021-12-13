@@ -85,7 +85,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     //------------------------------ Wood -------------------------------------
     public void SelectWood()
     {
-        selectedMaterials += 1;
+        selectedMaterials += 2;
         WoodCnt.woodCnt = add(wood, woodAdd, woodRemove, totalMaterials, WoodCnt.woodCnt, selectedMaterials);
         // woodCnt.woodCnt = add(wood, woodAdd, woodRemove, totalWoodCnt, woodCnt.woodCnt);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("WoodInput"));
@@ -94,7 +94,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     public void RemoveWood()
     {
         WoodCnt.woodCnt = sub(wood, woodAdd, woodRemove, totalMaterials, WoodCnt.woodCnt, selectedMaterials);
-        selectedMaterials -= 1;
+        selectedMaterials -= 2;
         // woodCnt.woodCnt = sub(wood, woodAdd, woodRemove, totalWoodCnt, woodCnt.woodCnt);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("WoodInput"));
         inputField.SetTextWithoutNotify(WoodCnt.woodCnt.ToString());
@@ -102,7 +102,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     //------------------------------ Febric ----------------------------
     public void SelectFebric()
     {
-        selectedMaterials += 1;
+        selectedMaterials += 2;
         FebricCnt.febricCnt = add(febric, febricAdd, febricRemove, totalMaterials, FebricCnt.febricCnt, selectedMaterials);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("FabricInput"));
         inputField.SetTextWithoutNotify(FebricCnt.febricCnt.ToString());
@@ -110,7 +110,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     public void RemoveFebric()
     {
         FebricCnt.febricCnt = sub(febric, febricAdd, febricRemove, totalMaterials, FebricCnt.febricCnt, selectedMaterials);
-        selectedMaterials -= 1;
+        selectedMaterials -= 2;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("FabricInput"));
         inputField.SetTextWithoutNotify(FebricCnt.febricCnt.ToString());
     }
@@ -118,7 +118,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     //------------------------------ Stone -----------------------------
     public void SelectStone()
     {
-        selectedMaterials += 1;
+        selectedMaterials += 2;
         StoneCnt.stoneCnt = add(stone, stoneAdd, stoneRemove, totalMaterials, StoneCnt.stoneCnt, selectedMaterials);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("StoneInput"));
         inputField.SetTextWithoutNotify(StoneCnt.stoneCnt.ToString());
@@ -126,14 +126,14 @@ public class MaterialBuyingSystem : MonoBehaviour
     public void RemoveStone()
     {
         StoneCnt.stoneCnt = sub(stone, stoneAdd, stoneRemove, totalMaterials, StoneCnt.stoneCnt, selectedMaterials);
-        selectedMaterials -= 1;
+        selectedMaterials -= 2;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("StoneInput"));
         inputField.SetTextWithoutNotify(StoneCnt.stoneCnt.ToString());
     }
     //------------------------------ Glass -----------------------------
     public void SelectGlass()
     {
-        selectedMaterials += 1;
+        selectedMaterials += 2;
         GlassCnt.glassCnt = add(glass, glassAdd, glassRemove, totalMaterials, GlassCnt.glassCnt, selectedMaterials);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("GlassInput"));
         inputField.SetTextWithoutNotify(GlassCnt.glassCnt.ToString());
@@ -141,7 +141,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     public void RemoveGlass()
     {
         GlassCnt.glassCnt = sub(glass, glassAdd, glassRemove, totalMaterials, GlassCnt.glassCnt, selectedMaterials);
-        selectedMaterials -= 1;
+        selectedMaterials -= 2;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("GlassInput"));
         inputField.SetTextWithoutNotify(GlassCnt.glassCnt.ToString());
     }
@@ -149,7 +149,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     //------------------------------ Metal -----------------------------
     public void SelectMetal()
     {
-        selectedMaterials += 1;
+        selectedMaterials += 2;
         MetalCnt.metalCnt = add(metal, metalAdd, metalRemove, totalMaterials, MetalCnt.metalCnt, selectedMaterials);
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MetalInput"));
         inputField.SetTextWithoutNotify(MetalCnt.metalCnt.ToString());
@@ -157,21 +157,17 @@ public class MaterialBuyingSystem : MonoBehaviour
     public void RemoveMetal()
     {
         MetalCnt.metalCnt = sub(metal, metalAdd, metalRemove, totalMaterials, MetalCnt.metalCnt, selectedMaterials);
-        selectedMaterials -= 1;
+        selectedMaterials -= 2;
         InputField inputField = allInputFields.Find((inputField) => inputField.gameObject.name.Equals("MetalInput"));
         inputField.SetTextWithoutNotify(MetalCnt.metalCnt.ToString());
     }
 
-    //------------------------------ Getters ---------------------------
-    // public string GetwoodCnt()
-    // {
-    //     return WoodCnt.woodCnt.ToString();
-    // }
+
 
     //------------------------------ helper method ---------------------
     public int add(Button image, Button add, Button sub, int total, int count, int selected)
     {
-        count += 1;
+        count += 2;
         image.interactable = (selected < total);
         add.interactable = (selected < total);
         sub.interactable = (count > 0);
@@ -182,7 +178,7 @@ public class MaterialBuyingSystem : MonoBehaviour
     {
         image.interactable = (selected < total + 1);
         add.interactable = (selected < total + 1);
-        count -= 1;
+        count -= 2;
         sub.interactable = (count > 0);
         buySystem.decremenentAdded();
         return count;
