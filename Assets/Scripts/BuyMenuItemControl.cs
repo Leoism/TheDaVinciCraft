@@ -51,7 +51,6 @@ public class BuyMenuItemControl : MonoBehaviour
         glassPanel.SetActive(false);
         metalPanel.SetActive(false);
 
-        magnetPanel.SetActive(false);
         rayPanel.SetActive(false);
         grenadePanel.SetActive(false);
     }
