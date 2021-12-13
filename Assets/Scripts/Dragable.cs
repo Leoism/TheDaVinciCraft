@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Photon.Pun;
 public class Dragable : MonoBehaviour
 {   
@@ -9,6 +10,7 @@ public class Dragable : MonoBehaviour
     void OnMouseDown()
     {
         if (!GameManager.globalManager.currentPlayer.Equals("human")) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); 
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
         // offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
@@ -16,6 +18,8 @@ public class Dragable : MonoBehaviour
     void OnMouseDrag()
     {
         if (!GameManager.globalManager.currentPlayer.Equals("Human")) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         // Only the master client can be the human
         if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient) return;
         // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);

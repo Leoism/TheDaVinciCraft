@@ -6713,7 +6713,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Select your weapons
+  m_Text: Select your weapons!
 --- !u!222 &699502001
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11008,7 +11008,7 @@ MonoBehaviour:
   m_Text: '
 
 
-    Choose one art'
+    Choose one art piece'
 --- !u!222 &1255941142
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12724,20 +12724,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 60
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Human Protector,
-
-    Let''s select our building materials.
-
-    Tip:
-    Hover over materials
-
-'
+  m_Text: "Architect, \nselect your building materials.\nTip: Hover over materials\n"
 --- !u!222 &1448102723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13119,18 +13112,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 60
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Human Protector,
-
-    Let''s select the art to protect!
-
-
-'
+  m_Text: Which art piece will you protect?
 --- !u!222 &1474250326
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16081,15 +16069,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 60
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'The Great Invader,
-
-    Choose your weapons.
+  m_Text: 'Choose your weapons ET!
 
     Tip: Hover over weapons
 
@@ -17483,7 +17469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.013216423, g: 0.9339623, b: 0.8260835, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17492,20 +17478,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
-    m_FontSize: 80
+    m_FontSize: 60
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 80
-    m_Alignment: 6
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Let''s Rock
-
-'
+  m_Text: May the best one win!
 --- !u!222 &2084731677
 CanvasRenderer:
   m_ObjectHideFlags: 0
