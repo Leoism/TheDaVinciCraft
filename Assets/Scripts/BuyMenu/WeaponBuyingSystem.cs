@@ -477,6 +477,8 @@ public class WeaponBuyingSystem : MonoBehaviour
         boomAdd.interactable = condition;
         ball.interactable = condition;
         ballAdd.interactable = condition;
+        magnet.interactable = condition;
+        magAdd.interactable = condition;
 
         if(BombCnt.bombCnt < 4){
             bomb.interactable = condition;
