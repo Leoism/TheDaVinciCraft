@@ -20,7 +20,7 @@ public class NetworkSFXPlayer : MonoBehaviour
   {
     audioSource.Stop();
     audioSource.loop = false;
-// Only the human should be playing network audio
+    // Only the human should be playing network audio
     if (!GameManager.globalManager.isOnlineMode || !PhotonNetwork.IsMasterClient) return;
     switch (clipName)
     {
@@ -40,6 +40,6 @@ public class NetworkSFXPlayer : MonoBehaviour
 
   public void Stop()
   {
-      audioSource.Stop();
+    audioSource.Stop();
   }
 }

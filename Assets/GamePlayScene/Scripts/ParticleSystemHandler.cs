@@ -16,6 +16,9 @@ public class ParticleSystemHandler : MonoBehaviour
       case "Alien Grenade":
         particleSystems[1].Play();
         return particleSystems[1];
+      case "Mineral Extractor":
+        particleSystems[2].Play();
+        return particleSystems[2];
     }
     return null;
   }
