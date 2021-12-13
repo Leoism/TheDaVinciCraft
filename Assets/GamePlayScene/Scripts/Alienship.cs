@@ -11,6 +11,10 @@ public class Alienship : MonoBehaviour
     public ShootingBehavior shootingBehavior = null;
     public PhotonView canvasPhotonView = null;
     public GameObject grid = null;
+    public Transform start = null;
+    public Transform end = null;
+    public float speed = 1.5f;
+    private bool goUp = true;
     
     void Start()
     {
@@ -44,6 +48,7 @@ public class Alienship : MonoBehaviour
     }
     void Update()
     {
+        Bobble();
         // for addressing  the timer ran out for the alien 
         // but they were able to keep shooting and win.
         if (Timer.secRemaining <= 0)
@@ -69,6 +74,19 @@ public class Alienship : MonoBehaviour
                 CountTenSec();
             }
         }
+    }
+
+    private void Bobble()
+    {
+        if (transform.position == start.position)
+        {
+            goUp = false;
+        }
+        else if (transform.position == end.position)
+        {
+            goUp = true;
+        }
+        transform.position = Vector3.MoveTowards(transform.position, (goUp ? start.position : end.position), speed * Time.smoothDeltaTime);
     }
     private void CountTenSec()
     {

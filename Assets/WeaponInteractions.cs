@@ -86,7 +86,7 @@ public class WeaponInteractions : MonoBehaviour
       GetComponent<ProjectileSFXHandler>().PlayClipByName("Arrow");
       name = "Arrow";
     }
-    else if (GetComponent<SpriteRenderer>().sprite.name == "deforestor" && GetTileMapTag(collision.gameObject) == "WoodTile")
+    else if (GetComponent<SpriteRenderer>().sprite.name == "deforestor" && (GetTileMapTag(collision.gameObject) == "WoodTile" || GetTileMapTag(collision.gameObject) == "FabricTile"))
     {
       destroyObj = false;
       particleSystem = particleSystemHandler.PlayByName("Deforestor");

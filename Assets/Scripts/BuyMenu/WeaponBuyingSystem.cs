@@ -81,7 +81,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         BombCnt.bombCnt = 0;
         RayCnt.rayCnt = 0;
         GrenadeCnt.grCnt = 0;
-        GrappleCnt.grappleCnt = 3;
+        GrappleCnt.grappleCnt = 1;
     }
 
     // Update is called once per frame
