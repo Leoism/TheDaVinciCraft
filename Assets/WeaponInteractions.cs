@@ -79,6 +79,13 @@ public class WeaponInteractions : MonoBehaviour
       GetComponent<ProjectileSFXHandler>().PlayClipByName("Oregon Man");
       name = "Oregon Man";
     }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "Arrow" && GetTileMapTag(collision.gameObject) == "FabricTile")
+    {
+      destroyObj = false;
+      particleSystem = particleSystemHandler.PlayByName("Arrow");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Arrow");
+      name = "Arrow";
+    }
 
     if (name == "") return;
 

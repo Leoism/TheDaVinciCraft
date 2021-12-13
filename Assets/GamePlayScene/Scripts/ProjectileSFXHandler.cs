@@ -36,6 +36,9 @@ public class ProjectileSFXHandler : MonoBehaviour
       case "Oregon Man":
         index = 2;
         break;
+      case "Arrow":
+        index = 3;
+        break;
     }
 
     if (index >= 0)
