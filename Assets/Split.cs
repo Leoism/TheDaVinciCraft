@@ -90,8 +90,8 @@ public class Split : MonoBehaviour
                         return;
                     }
                     break;
-                case ("Magnet"):
-                    if (shatter.name != "MetalTile")
+                case ("oregon_man"):
+                    if (shatter.name != "WoodTile" && shatter.name != "FabricTile" && shatter.name != "GlassTile")
                     {
                         // StartCoroutine(waiter(collision.gameObject));
                         return;
