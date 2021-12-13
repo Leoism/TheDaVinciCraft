@@ -90,8 +90,8 @@ public class Split : MonoBehaviour
                         return;
                     }
                     break;
-                case ("Magnet"):
-                    if (shatter.name != "MetalTile")
+                case ("oregon_man"):
+                    if (shatter.name != "WoodTile" && shatter.name != "FabricTile" && shatter.name != "GlassTile")
                     {
                         // StartCoroutine(waiter(collision.gameObject));
                         return;
@@ -205,11 +205,12 @@ public class Split : MonoBehaviour
                     GameObject shatterTile = null;
                     if (GameManager.globalManager.isOnlineMode)
                     {
-                        shatterTile = PhotonNetwork.Instantiate(tileType, shattterPos, Quaternion.identity);
+                        shatterTile = PhotonNetwork.Instantiate(tileType, shattterPos, Quaternion.identity, 0, new object[] { gameObject.tag });
                     }
                     else
                     {
                         shatterTile = Instantiate(shatter, shattterPos, Quaternion.identity) as GameObject;
+                        shatterTile.tag = gameObject.tag;
                     }
                     shatterTile.AddComponent<shatterDestroy>();
                 }

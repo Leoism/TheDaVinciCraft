@@ -6,7 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 public class MultiplayerMenu : MonoBehaviourPunCallbacks
 {
-  string version = "1";
+  string version = "2.0";
   public InputField nameField = null;
 
   public override void OnConnectedToMaster()

@@ -7,6 +7,11 @@ public class NetworkGrapple : MonoBehaviourPunCallbacks, IPunInstantiateMagicCal
   public void OnPhotonInstantiate(PhotonMessageInfo info)
   {
     GameObject photonGameObj = info.photonView.gameObject;
-    photonGameObj.AddComponent<GrappleBehavior>().SetTarget((Vector3)info.photonView.InstantiationData[0]);
+    if (!PhotonNetwork.IsMasterClient)
+      photonGameObj.AddComponent<GrappleBehavior>().SetTarget((Vector3)info.photonView.InstantiationData[0]);
+    if (!info.photonView.IsMine)
+    {
+      Destroy(photonGameObj.GetComponent<BoxCollider2D>());
+    }
   }
 }

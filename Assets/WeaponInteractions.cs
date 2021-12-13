@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.Tilemaps;
 public class WeaponInteractions : MonoBehaviour
 {
   bool isCoroutineRunning = false;
@@ -45,6 +46,7 @@ public class WeaponInteractions : MonoBehaviour
     ParticleSystemHandler particleSystemHandler = GetComponent<ParticleSystemHandler>();
     ParticleSystem particleSystem = null;
     string name = "";
+    bool destroyObj = true;
     if (GetComponent<SpriteRenderer>().sprite.name == "bumb")
     {
       particleSystem = particleSystemHandler.PlayByName("Bomb");
@@ -64,18 +66,54 @@ public class WeaponInteractions : MonoBehaviour
       GetComponent<ProjectileSFXHandler>().PlayClipAtIndex(0);
       name = "Ray";
     }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "MineralExtractor" && GetTileMapTag(collision.gameObject) == "StoneTile")
+    {
+      particleSystem = particleSystemHandler.PlayByName("Mineral Extractor");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Mineral Extractor");
+      name = "Mineral Extractor";
+    }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "oregon_man" && (GetTileMapTag(collision.gameObject) == "WoodTile" || GetTileMapTag(collision.gameObject) == "FabricTile" || GetTileMapTag(collision.gameObject) == "GlassTile"))
+    {
+      destroyObj = false;
+      particleSystem = particleSystemHandler.PlayByName("Oregon Man");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Oregon Man");
+      name = "Oregon Man";
+    }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "Arrow" && GetTileMapTag(collision.gameObject) == "FabricTile")
+    {
+      destroyObj = false;
+      particleSystem = particleSystemHandler.PlayByName("Arrow");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Arrow");
+      name = "Arrow";
+    }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "deforestor" && GetTileMapTag(collision.gameObject) == "WoodTile")
+    {
+      destroyObj = false;
+      particleSystem = particleSystemHandler.PlayByName("Deforestor");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Deforestor");
+      name = "Deforestor";
+    }
 
     if (name == "") return;
 
     if (GameManager.globalManager.isOnlineMode)
     {
       PhotonView.Find(2)/* canvas photon view*/.RPC("RPC_OnCollisionPlayExplosion", RpcTarget.Others, new object[] { gameObject.GetPhotonView().ViewID, name });
-      StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
+      if (destroyObj)
+        StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
     }
     else
     {
-      Destroy(gameObject, particleSystem.main.duration);
+      if (destroyObj)
+        Destroy(gameObject, particleSystem.main.duration);
     }
+  }
+
+  private string GetTileMapTag(GameObject gameObject)
+  {
+    string splitComponent = gameObject.tag;
+    if (splitComponent == null) return "";
+    return splitComponent;
   }
 
   IEnumerator WaitPhotonDestroy(float time)

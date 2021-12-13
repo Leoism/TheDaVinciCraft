@@ -16,6 +16,18 @@ public class ParticleSystemHandler : MonoBehaviour
       case "Alien Grenade":
         particleSystems[1].Play();
         return particleSystems[1];
+      case "Mineral Extractor":
+        particleSystems[2].Play();
+        return particleSystems[2];
+      case "Oregon Man":
+        particleSystems[3].Play();
+        return particleSystems[3];
+      case "Arrow":
+        particleSystems[4].Play();
+        return particleSystems[4];
+      case "Deforestor":
+        particleSystems[5].Play();
+        return particleSystems[5];
     }
     return null;
   }
