@@ -529,7 +529,7 @@ public class WeaponBuyingSystem : MonoBehaviour
         }
         if (MagnetCnt.magCnt > 0)
         {
-            alienInventory.Add(CreateSprite(MagnetCnt.magCnt, "magnet"));
+            alienInventory.Add(CreateSprite(MagnetCnt.magCnt, "oregon"));
         }
         if (BombCnt.bombCnt > 0)
         {
@@ -580,10 +580,10 @@ public class WeaponBuyingSystem : MonoBehaviour
                 newItem.SetItemName("Boomerang");
                 newItem.SetMessage("Boomerang - Strong against glass & fabric! ");
                 break;
-            case "magnet":
+            case "oregon":
                 itemButton = magnet;
-                newItem.SetItemName("Magnet");
-                newItem.SetMessage("Magnet - Attracts metals! ");
+                newItem.SetItemName("Oregon Man");
+                newItem.SetMessage("Oregon Man - Greediness destroys wood, fabrics, and glass");
                 break;
             case "bomb":
                 itemButton = bomb;

@@ -46,6 +46,7 @@ public class WeaponInteractions : MonoBehaviour
     ParticleSystemHandler particleSystemHandler = GetComponent<ParticleSystemHandler>();
     ParticleSystem particleSystem = null;
     string name = "";
+    bool destroyObj = true;
     if (GetComponent<SpriteRenderer>().sprite.name == "bumb")
     {
       particleSystem = particleSystemHandler.PlayByName("Bomb");
@@ -71,18 +72,26 @@ public class WeaponInteractions : MonoBehaviour
       GetComponent<ProjectileSFXHandler>().PlayClipByName("Mineral Extractor");
       name = "Mineral Extractor";
     }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "oregon_man" && (GetTileMapTag(collision.gameObject) == "WoodTile" || GetTileMapTag(collision.gameObject) == "FabricTile" || GetTileMapTag(collision.gameObject) == "GlassTile"))
+    {
+      destroyObj = false;
+      particleSystem = particleSystemHandler.PlayByName("Oregon Man");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Oregon Man");
+      name = "Oregon Man";
+    }
 
     if (name == "") return;
 
     if (GameManager.globalManager.isOnlineMode)
     {
-      Debug.LogError("YOOO");
       PhotonView.Find(2)/* canvas photon view*/.RPC("RPC_OnCollisionPlayExplosion", RpcTarget.Others, new object[] { gameObject.GetPhotonView().ViewID, name });
-      StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
+      if (destroyObj)
+        StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
     }
     else
     {
-      Destroy(gameObject, particleSystem.main.duration);
+      if (destroyObj)
+        Destroy(gameObject, particleSystem.main.duration);
     }
   }
 

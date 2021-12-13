@@ -33,6 +33,9 @@ public class ProjectileSFXHandler : MonoBehaviour
       case "Mineral Extractor":
         index = 1;
         break;
+      case "Oregon Man":
+        index = 2;
+        break;
     }
 
     if (index >= 0)

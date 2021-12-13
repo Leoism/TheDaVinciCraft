@@ -43,8 +43,8 @@ public class NetworkProjectile : MonoBehaviourPunCallbacks, IPunInstantiateMagic
       case "Deforestor":
         spritePrefab = (GameObject)Resources.Load("Weapons/Deforestor");
         break;
-      case "Magnet":
-        spritePrefab = (GameObject)Resources.Load("Weapons/Magnet");
+      case "Oregon Man":
+        spritePrefab = (GameObject)Resources.Load("Weapons/OregonMan");
         break;
       case "Mineral Extractor":
         spritePrefab = (GameObject)Resources.Load("Weapons/MineralExtractor");

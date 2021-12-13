@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 153438699862861672}
   - component: {fileID: -3705056844102174693}
   m_Layer: 0
-  m_Name: oregon_man
+  m_Name: OregonMan
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
