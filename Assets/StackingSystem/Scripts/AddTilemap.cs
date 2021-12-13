@@ -99,13 +99,17 @@ public class AddTilemap : MonoBehaviour
             }
                   
             placed = true;
-            if (!_addedTiles.Contains(newTilePos)) {
-                _addedTiles.Add(newTilePos);
-                 oldTilePos = newTilePos;
-                tempTilemap.SetTile(newTilePos, CurrentTileToAdd);
-                gameplayScene.UseItem();
+            // set the oldTile so manhatan distance can stay around 1
+            if (_addedTiles.Contains(newTilePos))
+            {
+                oldTilePos = newTilePos;
+                return;
             }
-            
+
+            _addedTiles.Add(newTilePos);
+            oldTilePos = newTilePos;
+            tempTilemap.SetTile(newTilePos, CurrentTileToAdd);
+            gameplayScene.UseItem();            
         }
     }
 
