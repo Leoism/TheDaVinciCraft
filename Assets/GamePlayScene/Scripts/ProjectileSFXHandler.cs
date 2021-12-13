@@ -30,6 +30,9 @@ public class ProjectileSFXHandler : MonoBehaviour
       case "Bomb":
         index = 0;
         break;
+      case "Mineral Extractor":
+        index = 1;
+        break;
     }
 
     if (index >= 0)

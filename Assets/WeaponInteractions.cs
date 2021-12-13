@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.Tilemaps;
 public class WeaponInteractions : MonoBehaviour
 {
   bool isCoroutineRunning = false;
@@ -64,11 +65,18 @@ public class WeaponInteractions : MonoBehaviour
       GetComponent<ProjectileSFXHandler>().PlayClipAtIndex(0);
       name = "Ray";
     }
+    else if (GetComponent<SpriteRenderer>().sprite.name == "MineralExtractor" && GetTileMapTag(collision.gameObject) == "StoneTile")
+    {
+      particleSystem = particleSystemHandler.PlayByName("Mineral Extractor");
+      GetComponent<ProjectileSFXHandler>().PlayClipByName("Mineral Extractor");
+      name = "Mineral Extractor";
+    }
 
     if (name == "") return;
 
     if (GameManager.globalManager.isOnlineMode)
     {
+      Debug.LogError("YOOO");
       PhotonView.Find(2)/* canvas photon view*/.RPC("RPC_OnCollisionPlayExplosion", RpcTarget.Others, new object[] { gameObject.GetPhotonView().ViewID, name });
       StartCoroutine(WaitPhotonDestroy(particleSystem.main.duration));
     }
@@ -76,6 +84,13 @@ public class WeaponInteractions : MonoBehaviour
     {
       Destroy(gameObject, particleSystem.main.duration);
     }
+  }
+
+  private string GetTileMapTag(GameObject gameObject)
+  {
+    string splitComponent = gameObject.tag;
+    if (splitComponent == null) return "";
+    return splitComponent;
   }
 
   IEnumerator WaitPhotonDestroy(float time)
