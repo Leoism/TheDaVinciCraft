@@ -118,7 +118,7 @@ public class GameManager
   public List<int> GetMaterialCountForRound()
   {
     List<int> materialBuyingCount = new List<int>();
-    int materialCount = 30;
+    int materialCount = 40;
     for (int i = 0; i < 13; i++)
     {
       materialBuyingCount.Add(materialCount);

@@ -27,7 +27,7 @@ public class ShootingBehavior : MonoBehaviour
     private Vector3 beginDrag;
     private Vector3 endDrag;
     private Vector3 direction;
-    private float shootStrength = 64f;
+    private float shootStrength = 100f;
     private float dragStrength = 1f;
     private float dragCap = 40f;
     private AudioSource audioSource = null;

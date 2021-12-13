@@ -4287,8 +4287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1e3535f8769ff4abb0f0268cc312ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Magnet:<br> - Greediness destroys Fabrics, Wood, and Glass.<br>- Why
-    is he helping Aliens?!
+  description: Oregon Man:<br> - Greediness destroys Fabrics, Wood, and Glass.<br>-
+    Why is he helping Aliens?!
 --- !u!1 &452740637
 GameObject:
   m_ObjectHideFlags: 0
