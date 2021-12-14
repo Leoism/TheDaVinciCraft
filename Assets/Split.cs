@@ -36,7 +36,6 @@ public class Split : MonoBehaviour
                 {
                     String shatterType = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite.name;
                     shatterType += "Tile";
-                    Debug.Log(shatter);
                     shatter = Resources.Load(shatterType) as GameObject;
                     tileType = shatter.name;
                     shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);

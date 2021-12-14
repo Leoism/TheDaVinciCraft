@@ -12409,7 +12409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1e3535f8769ff4abb0f0268cc312ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 'Boomerang: <br>- Strong against glass'
+  description: 'Boomerang: <br>- Tears through glass and fabric <br>- It always comes
+    back... or does it'
 --- !u!1 &1436111212
 GameObject:
   m_ObjectHideFlags: 0
