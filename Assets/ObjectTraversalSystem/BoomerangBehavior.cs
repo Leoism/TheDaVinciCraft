@@ -13,6 +13,8 @@ public class BoomerangBehavior : MonoBehaviour
     // boomerang settings
     private float startTime = 0f;
     private float lifeSpan = 5f; // 5 seconds
+    private bool keepBoomeranging = true;
+    private bool isDying = false;
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class BoomerangBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!keepBoomeranging) return;
         float currTime = (Time.time - startTime) / lifeSpan;
         if (currTime >= 1)
         {
@@ -81,6 +84,32 @@ public class BoomerangBehavior : MonoBehaviour
         if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
         {
             canvasPhotonView.RPC("RPC_StopAudio", RpcTarget.Others);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("GlassTile") || collision.gameObject.CompareTag("FabricTile")) return;
+        keepBoomeranging = false;
+        StopPlaying();
+
+        if (!isDying)
+        {
+            isDying = true;
+            StartCoroutine(WaitDestroy(5f));
+        }
+    }
+
+    IEnumerator WaitDestroy(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (GameManager.globalManager.isOnlineMode)
+        {
+            PhotonNetwork.Destroy(gameObject.GetPhotonView());
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

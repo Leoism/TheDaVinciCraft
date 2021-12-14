@@ -36,6 +36,7 @@ public class Split : MonoBehaviour
                 {
                     String shatterType = tl.GetTile<Tile>(new Vector3Int(x, y, 0)).sprite.name;
                     shatterType += "Tile";
+                    Debug.Log(shatter);
                     shatter = Resources.Load(shatterType) as GameObject;
                     tileType = shatter.name;
                     shatter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -382,6 +383,7 @@ public class Split : MonoBehaviour
             Tilemap newTilemap = Instantiate(((GameObject)Resources.Load("Tilemap_Build"))).GetComponent<Tilemap>();
             // if you don't clear them, then the tilemap gets prebuilt tiles
             newTilemap.ClearAllTiles();
+            newTilemap.tag = tileType;
             newTilemap.transform.position = transform.position;
             newTilemap.transform.rotation = transform.rotation;
             newTilemap.transform.localScale = transform.localScale;
