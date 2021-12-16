@@ -13,8 +13,11 @@ public class Alienship : MonoBehaviour
     public GameObject grid = null;
     public Transform start = null;
     public Transform end = null;
+    public Transform allTransforms = null;
     public float speed = 1.5f;
     private bool goUp = true;
+    private int ticks = 0;
+    private Vector3 oldPos; 
     
     void Start()
     {
@@ -25,10 +28,12 @@ public class Alienship : MonoBehaviour
     public void Init()
     {
         if (isInitialized) return;
+        oldPos = allTransforms.position;
         powerBar.SetActive(true);
         gameObject.SetActive(true);
         Vector3 windowCorner = Camera.main.ViewportToWorldPoint(new Vector3(0.8f, 0.85f, 1));
         transform.position = windowCorner;
+        allTransforms.position = windowCorner;
         if (GameManager.globalManager.isOnlineMode && !PhotonNetwork.IsMasterClient)
         {
             PhotonView[] tilemapPhotonViews = grid.GetComponentsInChildren<PhotonView>();
@@ -36,6 +41,14 @@ public class Alienship : MonoBehaviour
             {
                 tilemapPhotonView.RequestOwnership();
             }
+        }
+        if (oldPos.Equals(allTransforms.position))
+        {
+        ticks++;
+        }
+        if (ticks >= 5)
+        {
+        isInitialized = true;
         }
     }
 

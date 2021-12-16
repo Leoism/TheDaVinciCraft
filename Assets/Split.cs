@@ -382,6 +382,7 @@ public class Split : MonoBehaviour
             Tilemap newTilemap = Instantiate(((GameObject)Resources.Load("Tilemap_Build"))).GetComponent<Tilemap>();
             // if you don't clear them, then the tilemap gets prebuilt tiles
             newTilemap.ClearAllTiles();
+            newTilemap.tag = tileType;
             newTilemap.transform.position = transform.position;
             newTilemap.transform.rotation = transform.rotation;
             newTilemap.transform.localScale = transform.localScale;
