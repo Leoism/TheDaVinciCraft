@@ -41,6 +41,7 @@ public class GrappleBehavior : MonoBehaviour
   {
     if (GameManager.globalManager.isOnlineMode)
     {
+      PhotonView.Find(2).RPC("RPC_StopAudio", RpcTarget.MasterClient);
       PhotonNetwork.Destroy(gameObject.GetPhotonView());
     }
     else

@@ -9,9 +9,12 @@ public class NetworkGrapple : MonoBehaviourPunCallbacks, IPunInstantiateMagicCal
     GameObject photonGameObj = info.photonView.gameObject;
     if (!PhotonNetwork.IsMasterClient)
       photonGameObj.AddComponent<GrappleBehavior>().SetTarget((Vector3)info.photonView.InstantiationData[0]);
-    if (!info.photonView.IsMine)
+    if (PhotonNetwork.IsMasterClient)
     {
-      Destroy(photonGameObj.GetComponent<BoxCollider2D>());
+      transform.localScale = new Vector3(3, 3, 1);
+      transform.eulerAngles -= new Vector3(0, 0, 60);
+      photonGameObj.tag = "";
+      Destroy(photonGameObj.GetComponent<PolygonCollider2D>());
     }
   }
 }
